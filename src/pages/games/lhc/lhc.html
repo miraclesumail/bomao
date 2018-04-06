@@ -1,0 +1,28 @@
+<ion-header>
+    <ion-navbar>
+      <ion-title>
+        <span>Lhc</span>
+        <div class="header-r" style="float:right;margin-right:30px;border:1px solid green;padding:5px">{{choosen}}</div>
+      </ion-title>
+
+      
+    </ion-navbar>
+</ion-header>
+  
+  <ion-content padding>
+  <button (click)="toggle()">toggle</button>
+<div ></div>
+  
+  </ion-content>
+  <div class="choose-game alert-con" [@fading]="visible" style=""> 
+        <div>
+            玩法选择
+            <ul>
+                <li *ngFor="let item of data.list" style="width:25%;height:30px;display:inline-block;border:1px solid lightblue" [class.active]="method == item.name" (click)="changeMethod(item.name)">{{item.name}}</li>
+            </ul>
+        </div>
+        <div>
+            <span>{{method}}: </span><div style="display:inline-block;width:20%;" *ngFor="let name of small" (click)="confirm(name)">{{name}}</div>
+        </div>
+        <div style="margin-top:10px;text-align:center"><button>确定</button></div>
+    </div>

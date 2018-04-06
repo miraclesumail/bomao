@@ -26,6 +26,16 @@ export class HomePage {
     "bbbbbbbbbb"
   ]
 
+  lotterys:Array<any> = [
+    {name:'香港六合彩',src:'assets/imgs/lottery1.png',url:'LhcPage'},
+    {name:'香港六合彩',src:'assets/imgs/lottery2.png',url:'SscPage'},
+    {name:'香港六合彩',src:'assets/imgs/lottery3.png',url:'SscPage'},
+    {name:'香港六合彩',src:'assets/imgs/lottery4.png',url:'SscPage'},
+    {name:'香港六合彩',src:'assets/imgs/lottery5.png',url:'SscPage'},
+    {name:'香港六合彩',src:'assets/imgs/lottery6.png',url:'SscPage'},
+    {name:'香港六合彩',src:'assets/imgs/lottery7.png',url:'SscPage'},
+    {name:'香港六合彩',src:'assets/imgs/lottery8.png',url:'SscPage'}
+  ]
   
   private get headerSlideData() {
     return [
@@ -47,6 +57,7 @@ export class HomePage {
       }
     ]
   }
+
 
   constructor(public navCtrl: NavController,public storage: Storage) {
      this.updateLate()
@@ -108,5 +119,7 @@ export class HomePage {
     }, 2000);
   }
 
-  
+  goPage(name){
+     this.navCtrl.push(name)
+  }
 }
