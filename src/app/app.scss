@@ -15,9 +15,20 @@
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
 ul,li{padding: 0;margin: 0}
-li{list-style: none}
+li{list-style: none;display: inline-block}
 .toolbar-title-md{text-align: center}
+.scroll-content{padding: 0 0}
 
+.body-bg {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 1100;
+  display: none;
+}
 // .alert-con {
 //     width: 100%;
 //     position: absolute;

@@ -2,7 +2,7 @@
     <ion-navbar>
       <ion-title>
         <span>Lhc</span>
-        <div class="header-r" style="float:right;margin-right:30px;border:1px solid green;padding:5px">{{choosen}}</div>
+        <div class="header-r" (click)="toggle()" style="float:right;margin-right:30px;position:relative;z-index:1200;border:1px solid green;padding:5px">{{choosen}}</div>
       </ion-title>
 
       
@@ -10,10 +10,25 @@
 </ion-header>
   
   <ion-content padding>
-  <button (click)="toggle()">toggle</button>
-<div ></div>
+  <!--<button (click)="toggle()">toggle</button>-->
+  <div style="display:flex;">
+       <div style="width:70%">
+            <div>第{{record.number}}期开奖</div>
+            <div>
+                <ul>
+                    <li *ngFor="let number of record.result">{{number}}</li>
+                </ul>
+                <ul>
+                    <li *ngFor="let number of record.axiba">{{number}}</li>
+                </ul>
+            </div>
+       </div>
+  </div>
   
   </ion-content>
+<!--透明背景-->
+<div class="body-bg"></div>
+
   <div class="choose-game alert-con" [@fading]="visible" style=""> 
         <div>
             玩法选择
@@ -24,5 +39,5 @@
         <div>
             <span>{{method}}: </span><div style="display:inline-block;width:20%;" *ngFor="let name of small" (click)="confirm(name)">{{name}}</div>
         </div>
-        <div style="margin-top:10px;text-align:center"><button>确定</button></div>
+        <div style="margin-top:10px;text-align:center"><button (click)="toggle()">确定</button></div>
     </div>
