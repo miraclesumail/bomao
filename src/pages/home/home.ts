@@ -1,6 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
 import { NavController,IonicPage} from 'ionic-angular';
 import { Storage } from '@ionic/storage';
+import {Observable} from 'rxjs/Observable';
+
 //import {KSSwiperContainer, KSSwiperSlide} from 'angular2-swiper';
 import * as $ from 'jquery'
 declare let Swiper:any;
@@ -16,6 +18,7 @@ export class HomePage {
   data:Array<number>;
   swipeOptions:any;
   index = 0;
+  shake:boolean = false;
 
   notification:Array<any> = [
     "qqqqqqqqqqq",
@@ -27,15 +30,17 @@ export class HomePage {
   ]
 
   lotterys:Array<any> = [
-    {name:'香港六合彩',src:'assets/imgs/lottery1.png',url:'LhcPage'},
-    {name:'香港六合彩',src:'assets/imgs/lottery2.png',url:'SscPage'},
-    {name:'香港六合彩',src:'assets/imgs/lottery3.png',url:'SscPage'},
-    {name:'香港六合彩',src:'assets/imgs/lottery4.png',url:'SscPage'},
-    {name:'香港六合彩',src:'assets/imgs/lottery5.png',url:'SscPage'},
-    {name:'香港六合彩',src:'assets/imgs/lottery6.png',url:'SscPage'},
-    {name:'香港六合彩',src:'assets/imgs/lottery7.png',url:'SscPage'},
-    {name:'香港六合彩',src:'assets/imgs/lottery8.png',url:'SscPage'}
+    {name:'香港六合彩',src:'assets/imgs/lottery1.png',url:'LhcPage',number:[3,5,7,6,4]},
+    {name:'重庆时时彩',src:'assets/imgs/lottery2.png',url:'SscPage',number:[4,8,9,3,2]},
+    {name:'你是傻逼彩',src:'assets/imgs/lottery3.png',url:'SscPage',number:[2,5,3,9,4]},
+    {name:'日了狗子彩',src:'assets/imgs/lottery4.png',url:'SscPage',number:[1,6,3,4,7]},
+    {name:'鸡吧神马彩',src:'assets/imgs/lottery5.png',url:'SscPage',number:[3,8,7,2,4]},
+    {name:'去你妈逼彩',src:'assets/imgs/lottery6.png',url:'SscPage',number:[9,3,6,1,4]},
+    {name:'阿西吧的彩',src:'assets/imgs/lottery7.png',url:'SscPage',number:[8,5,2,6,3]},
+    {name:'么比较死彩',src:'assets/imgs/lottery8.png',url:'SscPage',number:[3,1,7,2,6]}
   ]
+
+  lottery:any;
   
   private get headerSlideData() {
     return [
@@ -62,7 +67,35 @@ export class HomePage {
   constructor(public navCtrl: NavController,public storage: Storage) {
      this.updateLate()
      console.log(Swiper)
-    
+     this.lottery = this.lotterys[Math.floor(Math.random()*this.lotterys.length)]
+
+    var speed = 25;    // 用来判定的加速度阈值，太大了则很难触发
+    var x, y, z, lastX, lastY, lastZ;
+    x = y = z = lastX = lastY = lastZ = 0;
+     window.addEventListener('devicemotion', function(event){
+        var acceleration = event.accelerationIncludingGravity;
+        x = acceleration.x;
+        y = acceleration.y;
+        if((Math.abs(x-lastX) > speed || Math.abs(y-lastY) > speed) && !this.shake)  {
+            // 用户设备摇动了，触发响应操作
+            // 此处的判断依据是用户设备的加速度大于我们设置的阈值
+            //alert('摇了');
+            this.shake = true;
+            new Observable(observer => {
+                setTimeout(() => {
+                  observer.next();
+                   }, 500);
+            }).subscribe(value => {
+                  this.lottery = this.lotterys[Math.floor(Math.random()*this.lotterys.length)]
+                  this.shake = false
+            })
+            //this.lottery = this.lotterys[Math.floor(Math.random()*this.lotterys.length)]
+
+            
+        }
+        lastX = x;
+        lastY = y;
+    }.bind(this), false);
   }
 
   ionViewDidEnter(){

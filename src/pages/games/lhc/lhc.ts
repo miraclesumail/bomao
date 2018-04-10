@@ -48,14 +48,7 @@ export class LhcPage {
       [12,24,36,48]
   ]
   timer:any;
-  countTime:any = {
-    'total': '',
-    'days': '',
-    'hours': '',
-    'minutes': '',
-    'seconds': ''
-  };
-
+  
   total:any = [
       [1,2,3,4,5,6,7],
       [8,9,10,11,12,13,14],
@@ -79,7 +72,7 @@ export class LhcPage {
 
   constructor(public navCtrl: NavController, public common:CommonProvider, public http:HttpClientProvider,public modalCtrl: ModalController) {
       this.common.setActiveTheme('lhc');
-      this.produce()
+      this.record = this.mockData();
       this.initData();
       this.kinds = this.allData.map(item => Object.keys(item));
       //let aa = async this.http.fetchData('/assets/lhc.json');
@@ -119,11 +112,6 @@ export class LhcPage {
                     for(let i =0;i < arr.length;i++){
                         this.toggleChoose(arr[i])
                     }
-                // }else{
-                //     for(let i =0;i < arr.length;i++){
-                //         this.toogleChoose(arr[i])
-                //     }
-                // }
            }
            
       });
@@ -173,11 +161,6 @@ export class LhcPage {
       return choose[key].choose
   }
 
-  produce(){
-      this.record = this.mockData();
-      this.countDown(Math.floor(Math.random()*60)*1000)
-  }
-
   confirm(name){
       this.choosen = this.method + name
   }
@@ -223,32 +206,4 @@ export class LhcPage {
           axiba
       }
   }
-
-  countDown(time){
-    
-    this.timer = setInterval(()=> {
-       if(time <1000){
-          clearInterval(this.timer)
-          this.produce()
-       } 
-       this.countTime = this.getTimeRemaining(time)
-       time -= 1000
-    },1000)
-  }
-
-  getTimeRemaining(t) {
-    let seconds = Math.floor((t / 1000) % 60);
-    let minutes = Math.floor((t / 1000 / 60) % 60);
-    let hours = Math.floor((t / (1000 * 60 * 60)) % 24);
-    let days = Math.floor(t / (1000 * 60 * 60 * 24));
-
-    return {
-      'total': t,
-      'days': days,
-      'hours': ('0' + hours).slice(-2),
-      'minutes': ('0' + minutes).slice(-2),
-      'seconds': ('0' + seconds).slice(-2)
-    };
-  }
-
 }

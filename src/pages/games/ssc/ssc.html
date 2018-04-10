@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      ssc
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <div style="text-align:center">
+      距下一期开奖 <span>{{common.countTime.minutes}}</span>:<span>{{common.countTime.seconds}}</span>
+  </div>
+
+  <div class="qwe">
+     <div style="width:22%;">期次</div><div style="width:30%">开奖号码</div>
+     <div style="width:13%">十位</div><div style="width:13%">个位</div><div style="width:13%">后三</div>
+     
+     <ul *ngFor="let item of record">
+        <li>{{item.number}}</li><li>{{item.balls}}</li><li>{{item.shiwei}}</li><li>{{item.gewei}}</li><li>{{item.housan}}</li>
+     </ul>
+
+     <button swipeAll style="width:20%;height:50px;margin:0 auto;text-align:center;border:1px solid blue;display:block" (swipedown)="onDragDown($event)">more</button>
+  </div>
+</ion-content>

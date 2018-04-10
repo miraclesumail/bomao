@@ -1,6 +1,8 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
+import { IonicSwipeAllModule } from 'ionic-swipe-all';
+
 // ngmodel 绑定
 import { FormsModule } from '@angular/forms';
 import { MyApp } from './app.component';
@@ -32,6 +34,7 @@ import { HttpClientProvider } from '../providers/http-client/http-client';
     BrowserModule,
     KSSwiperModule,
     NoopAnimationsModule,
+    IonicSwipeAllModule,
     FormsModule,
     HttpClientModule,
     IonicModule.forRoot(MyApp),
