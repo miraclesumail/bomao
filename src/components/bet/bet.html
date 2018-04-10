@@ -1,0 +1,8 @@
+<!-- Generated template for the BetComponent component -->
+<div>
+  <ul>
+      <li *ngFor="let aa of betInfo" [class.active]="aa.default" (click)="change(aa)" style="width:33.3%;text-align:center;border:1px solid pink;margin-bottom:10px">{{aa.name}}</li>
+  </ul>
+  <div><input type="text" [ngModel]="price" (ngModelChange)="valueChange($event)" >元</div>
+  <div>{{betOrder.number}}注共 {{betOrder.total}}元</div>
+</div>

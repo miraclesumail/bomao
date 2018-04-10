@@ -1,9 +1,11 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
+// ngmodel 绑定
+import { FormsModule } from '@angular/forms';
 import { MyApp } from './app.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-
+import { BetComponent } from '../components/bet/bet';
 import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
@@ -23,12 +25,14 @@ import { HttpClientProvider } from '../providers/http-client/http-client';
     AboutPage,
     ContactPage,
     HomePage,
-    TabsPage
+    TabsPage,
+    BetComponent
   ],
   imports: [
     BrowserModule,
     KSSwiperModule,
     NoopAnimationsModule,
+    FormsModule,
     HttpClientModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot()
@@ -40,7 +44,8 @@ import { HttpClientProvider } from '../providers/http-client/http-client';
     AboutPage,
     ContactPage,
     HomePage,
-    TabsPage
+    TabsPage,
+    BetComponent
   ],
   providers: [
     StatusBar,

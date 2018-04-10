@@ -16,14 +16,43 @@
             <div>第{{record.number}}期开奖</div>
             <div>
                 <ul>
-                    <li *ngFor="let number of record.result">{{number}}</li>
+                    <li *ngFor="let number of record.result" style="margin-right:20px;width:20px">{{number}}</li>
                 </ul>
                 <ul>
-                    <li *ngFor="let number of record.axiba">{{number}}</li>
+                    <li *ngFor="let number of record.axiba" style="margin-right:20px;width:20px">{{number}}</li>
                 </ul>
             </div>
        </div>
-  </div>
+
+       <div style="width:30%">
+               <div>第22112333期截止</div>
+               <div><span>{{countTime.hours}}</span>:<span>{{countTime.minutes}}</span>:<span>{{countTime.seconds}}</span></div>
+       </div>
+    </div>
+
+
+    <div [ngSwitch]="game-sort" style="margin-top:30px">
+            <div *ngSwitchCase="qqq">qqqq</div>
+            <div *ngSwitchCase="www">eeee</div>
+            <div *ngSwitchCase="eee">wwww</div>
+            <div *ngSwitchDefault>
+                 <div>
+
+                     <ul *ngFor="let item of total" style="display:flex;justify-content:space-around;width:100%">
+                         <li *ngFor="let ii of item" [class.active]="check(ii)" (click)="toggleChoose(ii)" style="width:30px;height:30px;text-align:center;line-height:30px;border-radius:50%;border:1px solid pink;margin-bottom:15px">
+                             {{ii}}
+                        </li>
+                     </ul>
+                 </div>
+                 <div>
+                     <ul style="display:flex;justify-content:space-around;width:100%;">
+                         <li *ngFor="let item of kinds" [class.active]="checkSort(item)" style="width:30px;border:1px solid lightblue;height:20px" (click)="switch(item)">{{item}}</li>
+                     </ul>
+                 </div>
+
+                 <div><button (click)="bet()">下注</button></div>
+            </div>
+   </div>
   
   </ion-content>
 <!--透明背景-->
