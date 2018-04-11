@@ -1,0 +1,6 @@
+<!-- Generated template for the RightmenuComponent component -->
+<div [style.height]="open? '400px':'0px'" style="overflow:hidden;transition:all .5s">
+   <ul id="menu">
+      <li class="small-menu" *ngFor="let aa of menus" (click)="switch(aa)">{{aa}}</li>
+   </ul>
+</div>

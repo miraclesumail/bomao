@@ -2,27 +2,14 @@ import { Component } from '@angular/core';
 import { NavController,IonicPage,ModalController } from 'ionic-angular';
 import { CommonProvider } from "../../../providers/common/common";
 import { HttpClientProvider } from "../../../providers/http-client/http-client";
-import { trigger ,state,transition,animate,style} from "@angular/animations";
 import { BetComponent } from '../../../components/bet/bet';
 import * as $ from 'jquery';
 
 @IonicPage()
 @Component({
   selector: 'lhc',
-  templateUrl: 'lhc.html',
-  animations:[
-    trigger('fading',[
-       state('visable',style({
-         opacity: 1,
-         transform:'translate3d(0, 0, 0)'
-       })),
-       state('invisable', style({
-         opacity: 0,
-         transform:'translate3d(0, 100%, 0)'
-       })),
-       transition('* => *',animate('1s'))
-    ])
-   ]
+  templateUrl: 'lhc.html'
+ 
 })
 export class LhcPage {
   data:any = 3;  
@@ -78,15 +65,15 @@ export class LhcPage {
       //let aa = async this.http.fetchData('/assets/lhc.json');
   }
 
-  changeMethod(name){
-      this.method = name;
-      this.small = this.data.list.filter(item => item.name == name)[0].children;
-  }
-
   toggle(){
       this.visible = this.visible == 'invisable' ? 'visable':'invisable'
       this.visible == 'visable' ? $('.body-bg').fadeIn(1000) : $('.body-bg').fadeOut(1000)
       //$('.choose-game').toggleClass('alert-show')
+  }
+
+  turnVisible($event){
+      this.visible = $event
+      this.visible == 'visable' ? $('.body-bg').fadeIn(1000) : $('.body-bg').fadeOut(1000)
   }
 
   switch(item){
@@ -168,7 +155,7 @@ export class LhcPage {
   async initData(){
       this.data = await this.http.fetchData('./assets/lhc.json');
       this.choosen =  this.data.list[0].name + this.data.list[0].children[0];
-      this.changeMethod(this.data.list[0].name);
+      //this.changeMethod(this.data.list[0].name);
       console.log(this.data)
   }
 

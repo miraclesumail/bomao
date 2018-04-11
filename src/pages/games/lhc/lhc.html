@@ -58,7 +58,9 @@
 <!--透明背景-->
 <div class="body-bg"></div>
 
-  <div class="choose-game alert-con" [@fading]="visible" style=""> 
+<gamemenu [data]="data" [visible]="visible" (change)="turnVisible($event)"> </gamemenu>    
+
+  <!-- <div class="choose-game alert-con" [@fading]="visible"> 
         <div>
             玩法选择
             <ul>
@@ -69,4 +71,4 @@
             <span>{{method}}: </span><div style="display:inline-block;width:20%;" *ngFor="let name of small" (click)="confirm(name)">{{name}}</div>
         </div>
         <div style="margin-top:10px;text-align:center"><button (click)="toggle()">确定</button></div>
-    </div>
+    </div> -->
