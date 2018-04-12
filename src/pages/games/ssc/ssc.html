@@ -1,14 +1,17 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      ssc
-
+      <div class="header-r" (click)="common.toggle()" style="float:right;margin-right:30px;position:relative;z-index:1200;border:1px solid green;padding:5px">{{common.method}} {{common.smallMethod}}</div>
+        
+      
       <span style="float:right" (click)="$event.stopPropagation();open = !open">toggle</span>
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <rightmenu [menus]="menus" (switch)="change($event)" [open]="open"></rightmenu>
+<gamemenu> </gamemenu>    
+<div class="body-bg"></div>
 
 <ion-content padding>
   <div [ngSwitch]="content">
@@ -36,7 +39,24 @@
      <button id="qq" [style.display]="over ? 'none' : 'block' "style="width:20%;height:50px;margin:0 auto;text-align:center;border:1px solid blue;">more</button>
   </div>
 
+  <div *ngFor="let data of common.ballData;let ii = index" style="display:flex;margin-top:20px">
+       <div style="width:20%">
+            {{data.name}}
+       </div>
+       <div style="width:80%">
+            <ul class="balls-data">
+                <li *ngFor="let item of data.ball.slice(0,5);let i = index" >{{i}}</li>
+            </ul>
 
+            <ul class="balls-data">
+                <li *ngFor="let item of data.ball.slice(-5);let i = index" >{{qqq(i)}}</li>
+            </ul>
+            <ul class="choose-kind">
+                <li *ngFor="let detail of data.btn" [class.active]="detail.flag" style="margin-right:30px" (click)="">{{detail.name}}</li>
+            </ul>
+       </div>
+  </div>
 
+<!-- <div class="touch" style="padding:20px;background:pink;" (touchstart)="touchStartEvent($event)" (touchmove)="touchMoveEvent($event)">touch</div> -->
 
 </ion-content>

@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { NavController,IonicPage} from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import {Observable} from 'rxjs/Observable';
+import { CommonProvider } from "../../providers/common/common";
 
 //import {KSSwiperContainer, KSSwiperSlide} from 'angular2-swiper';
 import * as $ from 'jquery'
@@ -30,14 +31,14 @@ export class HomePage {
   ]
 
   lotterys:Array<any> = [
-    {name:'香港六合彩',src:'assets/imgs/lottery1.png',url:'LhcPage',number:[3,5,7,6,4]},
-    {name:'重庆时时彩',src:'assets/imgs/lottery2.png',url:'SscPage',number:[4,8,9,3,2]},
-    {name:'你是傻逼彩',src:'assets/imgs/lottery3.png',url:'SscPage',number:[2,5,3,9,4]},
-    {name:'日了狗子彩',src:'assets/imgs/lottery4.png',url:'SscPage',number:[1,6,3,4,7]},
-    {name:'鸡吧神马彩',src:'assets/imgs/lottery5.png',url:'SscPage',number:[3,8,7,2,4]},
-    {name:'去你妈逼彩',src:'assets/imgs/lottery6.png',url:'SscPage',number:[9,3,6,1,4]},
-    {name:'阿西吧的彩',src:'assets/imgs/lottery7.png',url:'SscPage',number:[8,5,2,6,3]},
-    {name:'么比较死彩',src:'assets/imgs/lottery8.png',url:'SscPage',number:[3,1,7,2,6]}
+    {name:'香港六合彩',src:'assets/imgs/lottery1.png',url:'LhcPage',number:[3,5,7,6,4],json:"./assets/lhc.json"},
+    {name:'重庆时时彩',src:'assets/imgs/lottery2.png',url:'SscPage',number:[4,8,9,3,2],json:"./assets/ssc.json"},
+    {name:'你是傻逼彩',src:'assets/imgs/lottery3.png',url:'SscPage',number:[2,5,3,9,4],json:"./assets/ssc.json"},
+    {name:'日了狗子彩',src:'assets/imgs/lottery4.png',url:'SscPage',number:[1,6,3,4,7],json:"./assets/ssc.json"},
+    {name:'鸡吧神马彩',src:'assets/imgs/lottery5.png',url:'SscPage',number:[3,8,7,2,4],json:"./assets/ssc.json"},
+    {name:'去你妈逼彩',src:'assets/imgs/lottery6.png',url:'SscPage',number:[9,3,6,1,4],json:"./assets/ssc.json"},
+    {name:'阿西吧的彩',src:'assets/imgs/lottery7.png',url:'SscPage',number:[8,5,2,6,3],json:"./assets/ssc.json"},
+    {name:'么比较死彩',src:'assets/imgs/lottery8.png',url:'SscPage',number:[3,1,7,2,6],json:"./assets/ssc.json"}
   ]
 
   lottery:any;
@@ -64,7 +65,7 @@ export class HomePage {
   }
 
 
-  constructor(public navCtrl: NavController,public storage: Storage) {
+  constructor(public navCtrl: NavController,public storage: Storage, public common:CommonProvider) {
      this.updateLate()
      console.log(Swiper)
      this.lottery = this.lotterys[Math.floor(Math.random()*this.lotterys.length)]
@@ -153,6 +154,7 @@ export class HomePage {
   }
 
   goPage(name){
-     this.navCtrl.push(name)
+     this.common.pid.next(name.json);
+     this.navCtrl.push(name.url)
   }
 }

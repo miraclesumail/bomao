@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController,IonicPage } from 'ionic-angular';
 import { CommonProvider } from "../../../providers/common/common";
+import { HttpClientProvider } from "../../../providers/http-client/http-client";
+
 import * as $ from 'jquery'
 import * as Hammer from 'hammerjs';
 
@@ -10,6 +12,11 @@ import * as Hammer from 'hammerjs';
   templateUrl: 'ssc.html'
 })
 export class SscPage {
+  data:any;
+  method:string;
+  smallMethod:string;
+  small:any;
+  visible:string = 'invisable';
   record:any = [
     {number:23057,balls:'12345',shiwei:'大单',gewei:'小双',housan:'组六'},
     {number:23056,balls:'34567',shiwei:'大单',gewei:'小双',housan:'组六'},
@@ -18,7 +25,7 @@ export class SscPage {
   over:boolean = false;
   open:boolean = false;
 
-  constructor(public navCtrl: NavController,public common:CommonProvider) {
+  constructor(public navCtrl: NavController,public common:CommonProvider,public http:HttpClientProvider) {
       this.common.setActiveTheme('ssc')
       document.body.addEventListener('click',(e)=>{
          
@@ -45,8 +52,41 @@ export class SscPage {
     })
   }
 
+  toggle(){
+    this.visible = this.visible == 'invisable' ? 'visable':'invisable'
+    this.visible == 'visable' ? $('.body-bg').fadeIn(1000) : $('.body-bg').fadeOut(1000)
+    //$('.choose-game').toggleClass('alert-show')
+  }
+
+  turnVisible($event){
+    this.visible = $event.visible
+    this.visible == 'visable' ? $('.body-bg').fadeIn(1000) : $('.body-bg').fadeOut(1000)
+    this.method = $event.method[0];
+    console.log(this.method);
+    this.smallMethod = $event.method[1];
+    this.small = this.data.filter(item => item.name == this.method)[0].children;
+  }
+
   change(val){
     console.log(val)
-
   }
+
+  qqq(number){
+    return number + 5
+  } 
+  // touchStartEvent(event){
+  //   event.stopPropagation();
+  //   event.preventDefault();
+    
+  //   console.log(event)
+  //   console.log(event.changedTouches[0].pageX)
+  // }
+
+  // touchMoveEvent(event){
+  //   event.stopPropagation();
+  //   event.preventDefault();
+    
+  //   console.log(event)
+  //   console.log(event.changedTouches[0].pageX)
+  // }
 }

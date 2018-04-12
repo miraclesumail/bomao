@@ -20,6 +20,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { CommonProvider } from '../providers/common/common';
 import { HttpClientProvider } from '../providers/http-client/http-client';
+import { UtilProvider } from '../providers/util/util';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { HttpClientProvider } from '../providers/http-client/http-client';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     CommonProvider,
-    HttpClientProvider
+    HttpClientProvider,
+    UtilProvider
   ]
 })
 export class AppModule {}

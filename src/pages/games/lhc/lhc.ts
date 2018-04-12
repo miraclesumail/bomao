@@ -12,11 +12,11 @@ import * as $ from 'jquery';
  
 })
 export class LhcPage {
-  data:any;  
+//   data:any;  
   choosen:string;
-  method:string;
-  smallMethod:string;
-  small:any;
+//   method:string;
+//   smallMethod:string;
+//   small:any;
   visible:string = 'invisable';
   number:number;
   record:any;
@@ -61,24 +61,24 @@ export class LhcPage {
   constructor(public navCtrl: NavController, public common:CommonProvider, public http:HttpClientProvider,public modalCtrl: ModalController) {
       this.common.setActiveTheme('lhc');
       this.record = this.mockData();
-      this.initData();
+      //this.initData();
       this.kinds = this.allData.map(item => Object.keys(item));
       //let aa = async this.http.fetchData('/assets/lhc.json');
   }
 
-  toggle(){
-      this.visible = this.visible == 'invisable' ? 'visable':'invisable'
-      this.visible == 'visable' ? $('.body-bg').fadeIn(1000) : $('.body-bg').fadeOut(1000)
-      //$('.choose-game').toggleClass('alert-show')
-  }
+//   toggle(){
+//       this.visible = this.visible == 'invisable' ? 'visable':'invisable'
+//       this.visible == 'visable' ? $('.body-bg').fadeIn(1000) : $('.body-bg').fadeOut(1000)
+//       //$('.choose-game').toggleClass('alert-show')
+//   }
 
   turnVisible($event){
-      this.visible = $event.visible
-      this.visible == 'visable' ? $('.body-bg').fadeIn(1000) : $('.body-bg').fadeOut(1000)
-      this.method = $event.method[0];
-      console.log(this.method);
-      this.smallMethod = $event.method[1];
-      this.small = this.data.filter(item => item.name == this.method)[0].children;
+      this.common.visible = $event.visible
+      this.common.visible == 'visable' ? $('.body-bg').fadeIn(1000) : $('.body-bg').fadeOut(1000)
+      this.common.method = $event.method[0];
+      console.log(this.common.method);
+      this.common.smallMethod = $event.method[1];
+      this.common.small = this.common.data.filter(item => item.name == this.common.method)[0].children;
   }
 
   switch(item){
@@ -156,16 +156,6 @@ export class LhcPage {
 //   confirm(name){
 //       this.choosen = this.method + name
 //   }
-
-  async initData(){
-      this.data = (await this.http.fetchData('./assets/lhc.json')).list;
-      this.method = this.data[0].name;
-      this.small = this.data.filter(item => item.name == this.method)[0].children;
-      this.smallMethod = this.data[0].children[0];
-      this.choosen =  this.data[0].name + this.data[0].children[0];
-      //this.changeMethod(this.data.list[0].name);
-      console.log(this.data)
-  }
 
   mockData(){
       let random = Math.floor(Math.random()*100)

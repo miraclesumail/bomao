@@ -2,7 +2,7 @@
     <ion-navbar>
       <ion-title>
         <span>Lhc</span>
-        <div class="header-r" (click)="toggle()" style="float:right;margin-right:30px;position:relative;z-index:1200;border:1px solid green;padding:5px">{{method}} {{smallMethod}}</div>
+        <div class="header-r" (click)="common.toggle()" style="float:right;margin-right:30px;position:relative;z-index:1200;border:1px solid green;padding:5px">{{common.method}} {{common.smallMethod}}</div>
       </ion-title>
 
       
@@ -58,7 +58,7 @@
 <!--透明背景-->
 <div class="body-bg"></div>
 
-<gamemenu [data]="data" [visible]="visible" (change)="turnVisible($event)" [small]="small" [method]="method" [smallMethod]="smallMethod"> </gamemenu>    
+<gamemenu (change)="turnVisible($event)"> </gamemenu>    
 
   <!-- <div class="choose-game alert-con" [@fading]="visible"> 
         <div>

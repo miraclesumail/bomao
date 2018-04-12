@@ -1,6 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {BehaviorSubject} from "rxjs/BehaviorSubject";
+import { HttpClientProvider } from "../http-client/http-client";
+import * as $ from 'jquery'
+import { Subject } from 'rxjs/Subject';
 
 /*
   Generated class for the CommonProvider provider.
@@ -11,7 +14,7 @@ import {BehaviorSubject} from "rxjs/BehaviorSubject";
 @Injectable()
 export class CommonProvider {
   theme: BehaviorSubject<boolean>; 
-  pid:string;
+  pid = new Subject();
   timer:any;
   countTime:any = {
     'total': '',
@@ -21,10 +24,53 @@ export class CommonProvider {
     'seconds': ''
   };
 
-  constructor(public http: HttpClient) {
+  data:any;
+  method:string;
+  smallMethod:string;
+  small:any;
+  visible:string = 'invisable';
+
+  ballData = [];
+
+  constructor(public http: HttpClientProvider) {
     console.log('Hello CommonProvider Provider');
     this.theme = new BehaviorSubject(false);
-    this.produce()
+    this.produce();
+    this.pid.subscribe((val:any) =>{
+      this.initData(val);
+      this.ballData = [
+        {name:"万位", ball:[0,0,0,0,0,0,0,0,0,0],
+           btn:[{name:"全",flag:false},{name:"大",flag:false},{name:"小",flag:false},{name:"奇",flag:false},{name:"偶",flag:false},{name:"清",flag:false}]
+        },
+        {name:"千位", ball:[0,0,0,0,0,0,0,0,0,0],
+           btn:[{name:"全",flag:false},{name:"大",flag:false},{name:"小",flag:false},{name:"奇",flag:false},{name:"偶",flag:false},{name:"清",flag:false}]
+        },
+        {name:"百位", ball:[0,0,0,0,0,0,0,0,0,0],
+           btn:[{name:"全",flag:false},{name:"大",flag:false},{name:"小",flag:false},{name:"奇",flag:false},{name:"偶",flag:false},{name:"清",flag:false}]
+        },
+        {name:"十位", ball:[0,0,0,0,0,0,0,0,0,0],
+           btn:[{name:"全",flag:false},{name:"大",flag:false},{name:"小",flag:false},{name:"奇",flag:false},{name:"偶",flag:false},{name:"清",flag:false}]
+        },
+        {name:"个位", ball:[0,0,0,0,0,0,0,0,0,0],
+           btn:[{name:"全",flag:false},{name:"大",flag:false},{name:"小",flag:false},{name:"奇",flag:false},{name:"偶",flag:false},{name:"清",flag:false}]
+        }
+      ]
+    })
+   
+  }
+
+  async initData(name){
+    this.data = (await this.http.fetchData(name)).list;
+    this.method = this.data[0].name;
+    this.small = this.data.filter(item => item.name == this.method)[0].children;
+    this.smallMethod = this.small[0].children[0];
+    //this.changeMethod(this.data.list[0].name);
+    console.log(this.data)
+  }
+
+  toggle(){
+    this.visible = this.visible == 'invisable' ? 'visable':'invisable'
+    this.visible == 'visable' ? $('.body-bg').fadeIn(1000) : $('.body-bg').fadeOut(1000)
   }
 
   setActiveTheme(theme) {

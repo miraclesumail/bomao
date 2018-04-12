@@ -1,5 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { trigger ,state,transition,animate,style} from "@angular/animations";
+import { CommonProvider } from "../../providers/common/common";
+
 import * as $ from 'jquery';
 
 /**
@@ -31,49 +33,46 @@ import * as $ from 'jquery';
 export class GamemenuComponent {
   private _data;
   
-  @Input()
-  set data(val:any){
-      console.log(val);
-      this._data = val
-      // if(val)
-      //   this.small = val.filter(item => item.name == this.method)[0];
-  }
+  // @Input()
+  // set data(val:any){
+  //     console.log(val);
+  //     this._data = val
+  // }
 
-  get data(){
-      return this._data
-  }
-  @Input('visible')visible:string;
-  @Input('small')small:any;
-  @Output('change')change :EventEmitter<any> = new EventEmitter<any>();
-  @Input('method')method:string;
-  @Input('smallMethod')smallMethod:string;
+  // get data(){
+  //     return this._data
+  // }
+
+  // @Input('visible')visible:string;
+  // @Input('small')small:any;
+  // @Input('method')method:string;
+  // @Input('smallMethod')smallMethod:string;
+  //@Output('change')change :EventEmitter<any> = new EventEmitter<any>();
   
   choosen:any;
-  //visible:string = 'invisable';
 
-  constructor() {
+  constructor(public common:CommonProvider) {
     console.log('Hello GamemenuComponent Component');
     //this.getSmall()
   }
 
   ngAfterViewInit(){
     console.log('ddwd')
-    console.log(this.data)
-
   }
 
   changeMethod(name){
-    this.method = name;
-    this.small = this.data.filter(item => item.name == name)[0].children;
-    this.smallMethod = this.small[0]
+    this.common.method = name;
+    this.common.small = this.common.data.filter(item => item.name == name)[0].children;
+    this.common.smallMethod = this.common.small[0].children[0]
   }
 
   confirm(name){
-    this.smallMethod = name
+    this.common.smallMethod = name
   }
 
   toggle(){
     console.log('dddd')
-    this.change.emit({visible:'invisable',method:[this.method,this.smallMethod]})
+    this.common.visible = 'invisable';
+    $('.body-bg').fadeOut(1000)
   }
 }
