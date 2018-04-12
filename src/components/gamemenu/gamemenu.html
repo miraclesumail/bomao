@@ -3,11 +3,11 @@
     <div>
         玩法选择
         <ul>
-            <li *ngFor="let item of data.list" style="width:25%;height:30px;display:inline-block;border:1px solid lightblue" [class.active]="method == item.name" (click)="changeMethod(item.name)">{{item.name}}</li>
+            <li *ngFor="let item of data" style="width:25%;height:30px;display:inline-block;border:1px solid lightblue" [class.active]="method == item.name" (click)="changeMethod(item.name)">{{item.name}}</li>
         </ul>
     </div>
     <div>
-        <span>{{method}}: </span><div style="display:inline-block;width:20%;" *ngFor="let name of small" (click)="confirm(name)">{{name}}</div>
+        <span>{{method}}: </span><div style="display:inline-block;width:20%;" *ngFor="let name of small" [class.active]="smallMethod == name" (click)="confirm(name)">{{name}}</div>
     </div>
     <div style="margin-top:10px;text-align:center"><button (click)="toggle()">确定</button></div>
 </div>

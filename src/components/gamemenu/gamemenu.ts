@@ -29,30 +29,51 @@ import * as $ from 'jquery';
 })
 
 export class GamemenuComponent {
-  @Input('data')data:any;
-  @Input('visible')visible:string;
+  private _data;
   
+  @Input()
+  set data(val:any){
+      console.log(val);
+      this._data = val
+      // if(val)
+      //   this.small = val.filter(item => item.name == this.method)[0];
+  }
+
+  get data(){
+      return this._data
+  }
+  @Input('visible')visible:string;
+  @Input('small')small:any;
   @Output('change')change :EventEmitter<any> = new EventEmitter<any>();
-  method:any;
-  small:any;
+  @Input('method')method:string;
+  @Input('smallMethod')smallMethod:string;
+  
   choosen:any;
   //visible:string = 'invisable';
 
   constructor() {
     console.log('Hello GamemenuComponent Component');
+    //this.getSmall()
+  }
+
+  ngAfterViewInit(){
+    console.log('ddwd')
+    console.log(this.data)
+
   }
 
   changeMethod(name){
     this.method = name;
-    this.small = this.data.list.filter(item => item.name == name)[0].children;
+    this.small = this.data.filter(item => item.name == name)[0].children;
+    this.smallMethod = this.small[0]
   }
 
   confirm(name){
-    this.choosen = this.method + name
+    this.smallMethod = name
   }
 
   toggle(){
     console.log('dddd')
-    this.change.emit('invisable')
+    this.change.emit({visible:'invisable',method:[this.method,this.smallMethod]})
   }
 }

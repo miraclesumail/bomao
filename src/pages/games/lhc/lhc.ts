@@ -12,9 +12,10 @@ import * as $ from 'jquery';
  
 })
 export class LhcPage {
-  data:any = 3;  
+  data:any;  
   choosen:string;
   method:string;
+  smallMethod:string;
   small:any;
   visible:string = 'invisable';
   number:number;
@@ -72,8 +73,12 @@ export class LhcPage {
   }
 
   turnVisible($event){
-      this.visible = $event
+      this.visible = $event.visible
       this.visible == 'visable' ? $('.body-bg').fadeIn(1000) : $('.body-bg').fadeOut(1000)
+      this.method = $event.method[0];
+      console.log(this.method);
+      this.smallMethod = $event.method[1];
+      this.small = this.data.filter(item => item.name == this.method)[0].children;
   }
 
   switch(item){
@@ -148,13 +153,16 @@ export class LhcPage {
       return choose[key].choose
   }
 
-  confirm(name){
-      this.choosen = this.method + name
-  }
+//   confirm(name){
+//       this.choosen = this.method + name
+//   }
 
   async initData(){
-      this.data = await this.http.fetchData('./assets/lhc.json');
-      this.choosen =  this.data.list[0].name + this.data.list[0].children[0];
+      this.data = (await this.http.fetchData('./assets/lhc.json')).list;
+      this.method = this.data[0].name;
+      this.small = this.data.filter(item => item.name == this.method)[0].children;
+      this.smallMethod = this.data[0].children[0];
+      this.choosen =  this.data[0].name + this.data[0].children[0];
       //this.changeMethod(this.data.list[0].name);
       console.log(this.data)
   }
