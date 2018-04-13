@@ -4,6 +4,7 @@ import {BehaviorSubject} from "rxjs/BehaviorSubject";
 import { HttpClientProvider } from "../http-client/http-client";
 import * as $ from 'jquery'
 import { Subject } from 'rxjs/Subject';
+import { Events } from 'ionic-angular';
 
 /*
   Generated class for the CommonProvider provider.
@@ -31,8 +32,15 @@ export class CommonProvider {
   visible:string = 'invisable';
 
   ballData = [];
+  //形成的注单数
+  count:number = 0;
 
-  constructor(public http: HttpClientProvider) {
+  cartNumber:number = 0;
+  betPrice:number = 0;
+  tabYuan:string = "元";
+  tabVisible:string = 'invisable'
+
+  constructor(public http: HttpClientProvider, public events:Events) {
     console.log('Hello CommonProvider Provider');
     this.theme = new BehaviorSubject(false);
     this.produce();
@@ -57,6 +65,10 @@ export class CommonProvider {
       ]
     })
    
+    this.events.subscribe('changeYuan',(val) => {
+        let percent = val == '元' ? 1 : this.tabYuan == '角' ? 0.1 : 0.01
+        this.betPrice = this.count*2*percent
+    })
   }
 
   async initData(name){
@@ -66,6 +78,22 @@ export class CommonProvider {
     this.smallMethod = this.small[0].children[0];
     //this.changeMethod(this.data.list[0].name);
     console.log(this.data)
+  }
+
+  //计算注单
+  calculate(){
+     let count = 1;
+     this.ballData.forEach((item,index) => {
+         count *=  item.ball.filter(ele => ele == 1).length
+     })
+     this.count = count
+     let percent = this.tabYuan == '元' ? 1 : this.tabYuan == '角' ? 0.1 : 0.01
+     this.betPrice = this.count*2*percent
+  }
+
+  openTab(){
+    console.log('asss')
+    this.tabVisible = 'visible'
   }
 
   toggle(){

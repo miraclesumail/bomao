@@ -69,8 +69,9 @@ export class HomePage {
      this.updateLate()
      console.log(Swiper)
      this.lottery = this.lotterys[Math.floor(Math.random()*this.lotterys.length)]
-
-    var speed = 25;    // 用来判定的加速度阈值，太大了则很难触发
+     //$('body').append('<audio id="betsvoice1"><source src="/assets/betsvoice.mp3" type="audio/mpeg"/></audio>')
+    
+    var speed = 15;    // 用来判定的加速度阈值，太大了则很难触发
     var x, y, z, lastX, lastY, lastZ;
     x = y = z = lastX = lastY = lastZ = 0;
      window.addEventListener('devicemotion', function(event){
@@ -90,9 +91,6 @@ export class HomePage {
                   this.lottery = this.lotterys[Math.floor(Math.random()*this.lotterys.length)]
                   this.shake = false
             })
-            //this.lottery = this.lotterys[Math.floor(Math.random()*this.lotterys.length)]
-
-            
         }
         lastX = x;
         lastY = y;

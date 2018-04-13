@@ -45,14 +45,14 @@
        </div>
        <div style="width:80%">
             <ul class="balls-data">
-                <li *ngFor="let item of data.ball.slice(0,5);let i = index" >{{i}}</li>
+                <li *ngFor="let item of data.ball.slice(0,5);let i = index" [class.active]="item == 1" (click)="util.changeToggle(ii,i)">{{i}}</li>
             </ul>
 
             <ul class="balls-data">
-                <li *ngFor="let item of data.ball.slice(-5);let i = index" >{{qqq(i)}}</li>
+                <li *ngFor="let item of data.ball.slice(-5);let i = index" [class.active]="item == 1" (click)="util.changeToggle(ii,i+5)">{{qqq(i)}}</li>
             </ul>
             <ul class="choose-kind">
-                <li *ngFor="let detail of data.btn" [class.active]="detail.flag" style="margin-right:30px" (click)="">{{detail.name}}</li>
+                <li *ngFor="let detail of data.btn" [class.active]="detail.flag" style="margin-right:30px" (click)="util.changeActive(ii,detail.name)">{{detail.name}}</li>
             </ul>
        </div>
   </div>
@@ -60,3 +60,18 @@
 <!-- <div class="touch" style="padding:20px;background:pink;" (touchstart)="touchStartEvent($event)" (touchmove)="touchMoveEvent($event)">touch</div> -->
 
 </ion-content>
+
+<ion-footer style="position:fixed;height:50px;background:yellowgreen;bottom:0;display:flex;" >
+  <div id="ball" style="width:20px;height:20px;background:yellow;position:absolute;top:0px;left:150px;border-radius:50%;"></div>
+<tab-yuan ></tab-yuan>  
+<div style="width:10%" >清空</div>
+<div style="width:10%" (click)="common.openTab()">fff元</div>
+<div style="width:40%;border:1px solid pink;" [class.can] = "common.count > 0" (click)="addToCart()">
+   <div>已选{{common.count}}注</div>
+   <div>共{{common.betPrice}}元</div>
+</div>
+<div style="width:40%">
+   购彩篮
+   {{}}
+</div>
+</ion-footer>

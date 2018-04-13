@@ -2,9 +2,30 @@ import { Component } from '@angular/core';
 import { NavController,IonicPage } from 'ionic-angular';
 import { CommonProvider } from "../../../providers/common/common";
 import { HttpClientProvider } from "../../../providers/http-client/http-client";
-
+import { UtilProvider } from '../../../providers/util/util'
 import * as $ from 'jquery'
 import * as Hammer from 'hammerjs';
+
+let tt = 0;
+
+function easeOutCubic(t, b, c, d) {
+  return c*((t=t/d-1)*t*t + 1) + b;
+}
+
+function move(){
+  tt += 1000/60;
+  
+  let ball = document.getElementById('ball');
+  if(tt < 500){
+     let left = Math.ceil(easeOutCubic(tt,150,350,500))
+     ball.style.left = left + 'px'
+     ball.style.top =  -(350*(left - 150 ) -((left - 150)*(left - 150)))/1000  + 'px'
+     requestAnimationFrame(move)
+  }else{
+     console.log('wwww')
+  }
+}
+
 
 @IonicPage()
 @Component({
@@ -13,6 +34,7 @@ import * as Hammer from 'hammerjs';
 })
 export class SscPage {
   data:any;
+  
   method:string;
   smallMethod:string;
   small:any;
@@ -25,8 +47,13 @@ export class SscPage {
   over:boolean = false;
   open:boolean = false;
 
-  constructor(public navCtrl: NavController,public common:CommonProvider,public http:HttpClientProvider) {
+  /*
+     x*2 + 50x
+  */
+
+  constructor(public navCtrl: NavController,public common:CommonProvider,public http:HttpClientProvider,public util:UtilProvider) {
       this.common.setActiveTheme('ssc')
+    
       document.body.addEventListener('click',(e)=>{
          
           if(e.target == document.getElementById('menu') || $(e.target).hasClass('small-menu') || !this.open) {
@@ -35,10 +62,6 @@ export class SscPage {
           this.open = !this.open
           console.log('ddff')
       },false)
-  }
-
-  onDragDown(){
-    console.log('eee')
   }
 
   ionViewDidLoad(){
@@ -51,6 +74,12 @@ export class SscPage {
       this.over = true
     })
   }
+
+  addToCart(){
+    if(this.common.count == 0){return}
+    move()
+    this.common.cartNumber++
+  }  
 
   toggle(){
     this.visible = this.visible == 'invisable' ? 'visable':'invisable'
