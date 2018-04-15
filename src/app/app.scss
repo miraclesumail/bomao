@@ -29,6 +29,14 @@ li{list-style: none;display: inline-block}
   z-index: 1100;
   display: none;
 }
+  .segment-md .segment-button{background: pink}
+  .segment-md .segment-button.segment-activated{  border-bottom: 5px solid #488aff;
+}
+
+  ion-segment-button.segment-activated{  border-bottom: 5px solid #488aff;
+}
+
+ion-slides{padding: 20px 0 20px 0;height: auto}
 
 @media only screen and (min-width: 150px){
     .modal-wrapper {

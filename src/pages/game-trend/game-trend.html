@@ -1,0 +1,42 @@
+<!--
+  Generated template for the GameTrendPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>game-trend</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+<div class="segment">
+     <ion-segment [(ngModel)]="choose" (ionChange)="segmentChanged($event)">
+       <ion-segment-button *ngFor="let name of menus" value="{{name}}">{{name}}</ion-segment-button>  
+     </ion-segment>
+</div>
+
+<ion-slides #contentSlides (ionSlideDidChange)="slideChanged()">
+  <ion-slide>
+     <div id="trend-container">
+        <ul *ngFor="let item of util.fakeData" style="display:flex;padding:0 20px 0 20px;justify-content:space-between">
+            <li *ngFor="let ele of item" style="margin-bottom:25px;width:28px;height:28px;border-radius:50%"[class.highlight]="ele.choose">{{ele.number}}</li>
+        </ul>
+
+     </div>
+  </ion-slide>
+  <ion-slide>
+     <div>www</div>
+  </ion-slide>
+  <ion-slide>
+    <div>eee</div>
+  </ion-slide>
+  <ion-slide>
+    <div>fff</div>
+  </ion-slide>
+</ion-slides>
+</ion-content>

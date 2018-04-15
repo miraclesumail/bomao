@@ -3,25 +3,40 @@ import { NavController,IonicPage } from 'ionic-angular';
 import { CommonProvider } from "../../../providers/common/common";
 import { HttpClientProvider } from "../../../providers/http-client/http-client";
 import { UtilProvider } from '../../../providers/util/util'
+import { BasketDataProvider } from '../../../providers/basket-data/basket-data'
 import * as $ from 'jquery'
 import * as Hammer from 'hammerjs';
 
 let tt = 0;
+let top = 0;
 
 function easeOutCubic(t, b, c, d) {
   return c*((t=t/d-1)*t*t + 1) + b;
 }
 
+// 小球达到最高点开始变小
 function move(){
   tt += 1000/60;
   
   let ball = document.getElementById('ball');
-  if(tt < 500){
-     let left = Math.ceil(easeOutCubic(tt,150,350,500))
+  if(tt < 1500){
+     let left = Math.ceil(easeOutCubic(tt,150,350,1500))
      ball.style.left = left + 'px'
-     ball.style.top =  -(350*(left - 150 ) -((left - 150)*(left - 150)))/1000  + 'px'
+     let high = -(350*(left - 150 ) -((left - 150)*(left - 150)))/500;
+     ball.style.top =  -(350*(left - 150 ) -((left - 150)*(left - 150)))/300  + 'px'
+     if(Math.abs(high)<top){
+        let time = 1500 - tt
+        $('#ball').animate({width:0,height:0},time,function(){
+           
+           // $(this).remove()
+            console.log('finish')
+        })
+     }
+     top = Math.abs(high)
      requestAnimationFrame(move)
   }else{
+     $('#ball').remove()
+     tt = 0
      console.log('wwww')
   }
 }
@@ -51,9 +66,10 @@ export class SscPage {
      x*2 + 50x
   */
 
-  constructor(public navCtrl: NavController,public common:CommonProvider,public http:HttpClientProvider,public util:UtilProvider) {
+  constructor(public navCtrl: NavController,public common:CommonProvider,public http:HttpClientProvider,public util:UtilProvider,public basket:BasketDataProvider) {
       this.common.setActiveTheme('ssc')
     
+      this.util.shakePhone(this.util.randomChoose)
       document.body.addEventListener('click',(e)=>{
          
           if(e.target == document.getElementById('menu') || $(e.target).hasClass('small-menu') || !this.open) {
@@ -77,7 +93,11 @@ export class SscPage {
 
   addToCart(){
     if(this.common.count == 0){return}
+    // 把数据放进购彩蓝
+    this.basket.addBetData()
+    $('<div id="ball"></div>').appendTo($('.ion-footer'));
     move()
+    this.util.resetData()
     this.common.cartNumber++
   }  
 
@@ -103,7 +123,16 @@ export class SscPage {
   qqq(number){
     return number + 5
   } 
-  // touchStartEvent(event){
+
+  goToBasket(){
+    if(this.common.cartNumber > 0 )
+       this.navCtrl.push('BasketPage')
+  }
+
+  goToTrend(){
+       this.navCtrl.push('GameTrendPage')
+  }
+  // touchStartEvent(event ){
   //   event.stopPropagation();
   //   event.preventDefault();
     

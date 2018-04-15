@@ -2,8 +2,6 @@
   <ion-navbar>
     <ion-title>
       <div class="header-r" (click)="common.toggle()" style="float:right;margin-right:30px;position:relative;z-index:1200;border:1px solid green;padding:5px">{{common.method}} {{common.smallMethod}}</div>
-        
-      
       <span style="float:right" (click)="$event.stopPropagation();open = !open">toggle</span>
     </ion-title>
   </ion-navbar>
@@ -38,7 +36,7 @@
 
      <button id="qq" [style.display]="over ? 'none' : 'block' "style="width:20%;height:50px;margin:0 auto;text-align:center;border:1px solid blue;">more</button>
   </div>
-
+  <div (click)="goToTrend()">摇一摇选号</div>
   <div *ngFor="let data of common.ballData;let ii = index" style="display:flex;margin-top:20px">
        <div style="width:20%">
             {{data.name}}
@@ -61,8 +59,7 @@
 
 </ion-content>
 
-<ion-footer style="position:fixed;height:50px;background:yellowgreen;bottom:0;display:flex;" >
-  <div id="ball" style="width:20px;height:20px;background:yellow;position:absolute;top:0px;left:150px;border-radius:50%;"></div>
+<ion-footer class="ion-footer" style="position:fixed;height:50px;background:yellowgreen;bottom:0;display:flex;" >
 <tab-yuan ></tab-yuan>  
 <div style="width:10%" >清空</div>
 <div style="width:10%" (click)="common.openTab()">fff元</div>
@@ -70,8 +67,8 @@
    <div>已选{{common.count}}注</div>
    <div>共{{common.betPrice}}元</div>
 </div>
-<div style="width:40%">
+<div style="width:40%" (click)="goToBasket()">
    购彩篮
-   {{}}
+   {{common.cartNumber}}
 </div>
 </ion-footer>

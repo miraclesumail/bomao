@@ -2,6 +2,7 @@ import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { IonicSwipeAllModule } from 'ionic-swipe-all';
+import { LazyLoadImageModule } from 'ng-lazyload-image';
 
 // ngmodel 绑定
 import { FormsModule } from '@angular/forms';
@@ -21,6 +22,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { CommonProvider } from '../providers/common/common';
 import { HttpClientProvider } from '../providers/http-client/http-client';
 import { UtilProvider } from '../providers/util/util';
+import { BasketDataProvider } from '../providers/basket-data/basket-data';
 
 @NgModule({
   declarations: [
@@ -38,6 +40,7 @@ import { UtilProvider } from '../providers/util/util';
     IonicSwipeAllModule,
     FormsModule,
     HttpClientModule,
+    LazyLoadImageModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot()
     
@@ -57,7 +60,8 @@ import { UtilProvider } from '../providers/util/util';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     CommonProvider,
     HttpClientProvider,
-    UtilProvider
+    UtilProvider,
+    BasketDataProvider
   ]
 })
 export class AppModule {}

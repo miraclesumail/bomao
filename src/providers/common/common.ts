@@ -17,6 +17,8 @@ export class CommonProvider {
   theme: BehaviorSubject<boolean>; 
   pid = new Subject();
   timer:any;
+
+  lhcData:any;
   countTime:any = {
     'total': '',
     'days': '',
@@ -111,6 +113,7 @@ export class CommonProvider {
 
   produce(){
       this.countDown(Math.floor(Math.random()*60)*1000)
+      
   }
 
   countDown(time){

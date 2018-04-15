@@ -1,0 +1,25 @@
+page-game-trend {
+ .segment {
+      width: 100%;
+      height: 44px;
+    }
+    .swiper-slide {
+      background: #fff;
+      color: #333;
+    }
+
+    ion-slides {
+    background-color: white;
+    
+    div{color:blue};
+  }
+ 
+  .highlight{background: pink}
+
+  canvas{position: absolute;top:0;left:0}
+
+  ion-segment-button.segment-activated{
+      border-bottom: 5px solid #488aff;
+
+  }
+}

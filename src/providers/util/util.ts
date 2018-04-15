@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CommonProvider } from '../common/common'
+import {Observable} from 'rxjs/Observable';
+
 /*
   Generated class for the UtilProvider provider.
 
@@ -9,9 +11,82 @@ import { CommonProvider } from '../common/common'
 */
 @Injectable()
 export class UtilProvider {
+  shake:boolean = false;
+
+  fakeTrend:Array<number> = [5,3,9,8,6,2,9,1,8,6,4]
+  fakeData:Array<any> = []
 
   constructor(public http: HttpClient,public common:CommonProvider) {
     console.log('Hello UtilProvider Provider');
+    this.generateFake()
+  }
+
+  generateFake(){
+    let arr = []
+    for(let i = 1; i<=this.fakeTrend.length; i++){
+        let inner = []
+        for(let j = 0; j<=9;j++){
+            if(j == this.fakeTrend[i-1]){
+               inner.push({number:this.fakeTrend[i-1], choose:true})
+            }else{
+               if(i == 1){
+                 inner.push({number:1,choose:false})
+               }else{
+                 if(arr[i-2][j].choose){
+                    inner.push({number:1, choose:false})
+                 }else{
+                    inner.push({number:arr[i-2][j].number+1, choose:false})
+                 }
+               }
+            }  
+        }  
+        arr.push(inner)
+    }
+    this.fakeData = arr
+    console.log(arr)
+  }
+
+  beginCanvas(){
+    
+  }
+  
+  processOrder(){
+    let dataArr = []
+    this.common.ballData.forEach(item => {
+         let arr = []
+         item.ball.forEach((ele,index) => {
+              ele == 1 ? arr.push(index):''
+         })
+         dataArr.push(arr)
+    })
+    dataArr = dataArr.map(item => item.join(''))
+    return {
+         betData:dataArr,
+         gameName:this.common.method + this.common.smallMethod,
+         count:this.common.count,
+         price:this.common.betPrice
+    }
+  }
+
+  // 机选注单
+  randomChoose(){
+    this.common.ballData = this.common.ballData.map(item => {
+        let random = Math.floor(Math.random()*10)
+        let balls = item.ball.map((ele,index) => index == random ? 1 : 0)
+        item.ball = balls
+        return item
+    })
+    this.common.calculate()
+  }
+  
+  // 重置数据
+  resetData(){
+    this.common.ballData = this.common.ballData.map(item => {
+         let balls = item.ball.map(ele => 0)
+         item.ball = balls
+         return item
+    })
+    this.common.calculate()
   }
 
   changeActive(index,name){
@@ -107,5 +182,35 @@ export class UtilProvider {
         return item
       }
    })
+  }
+
+  shakePhone(func:Function){
+     var speed = 15;    // 用来判定的加速度阈值，太大了则很难触发
+     var x, y, z, lastX, lastY, lastZ;
+     x = y = z = lastX = lastY = lastZ = 0;
+
+     window.addEventListener('devicemotion', (event) => {
+        var acceleration = event.accelerationIncludingGravity;
+        x = acceleration.x;
+        y = acceleration.y;
+        //alert(this.shake)
+        if((Math.abs(x-lastX) > speed || Math.abs(y-lastY) > speed) && !this.shake)  {
+            // 用户设备摇动了，触发响应操作
+            // 此处的判断依据是用户设备的加速度大于我们设置的阈值
+            //alert('摇了');
+            this.shake = true;
+            new Observable(observer => {
+                setTimeout(() => {
+                  observer.next();
+                   }, 500);
+            }).subscribe(value => {
+                  func.bind(this)()
+                  this.shake = false
+                  
+            })
+        }
+        lastX = x;
+        lastY = y;
+    }, false);
   }
 }
