@@ -53,7 +53,9 @@ function move(){
 })
 export class SscPage {
   data:any;
-  
+
+  shadow:boolean = true
+  author:string='fwwwgwg';
   method:string;
   smallMethod:string;
   small:any;

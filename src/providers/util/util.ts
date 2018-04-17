@@ -126,6 +126,7 @@ export class UtilProvider {
   }
 
   changeToggle(row,column){
+      console.log('wcnmbg')
       this.common.ballData = this.common.ballData.map((item,index) => {
            if(index == row){
                item.value = item.value.map((ele,index) => {

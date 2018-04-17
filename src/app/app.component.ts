@@ -12,13 +12,17 @@ export class MyApp {
   rootPage:any = TabsPage;
   theme:any;
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, public common:CommonProvider) {
-    platform.ready().then(() => {
+  constructor(public platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, public common:CommonProvider) {
+    this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       statusBar.styleDefault();
       splashScreen.hide();
+       
     });
+
+      this.platform.registerBackButtonAction(() => {alert
+        ('u press back')})
 
     this.common.getActiveTheme().subscribe(theme => {
       if (theme) {

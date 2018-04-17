@@ -27,27 +27,27 @@ export class GameTrendPage {
     
   }
 
-  ionViewWillEnter(){
-     let container = document.getElementById('trend-container')
-     let canvas = document.createElement('canvas')
-     canvas.width = container.offsetWidth
-     canvas.height = container.offsetHeight
-     container.appendChild(canvas)
-     let ctx = canvas.getContext('2d')
-     ctx.strokeStyle = "#f5d300"
-     ctx.lineWidth = 2
-     ctx.beginPath();
-     let nodes = document.querySelectorAll('.highlight')
-    //  for(let i=0; i< nodes.length; i++){
-    //      console.log(nodes.length)
-    //      if(i == 0)
-    //         ctx.moveTo(nodes[i].offsetLeft + 14,nodes[i].offsetTop + 14)
-    //      else
-    //         ctx.lineTo(nodes[i].offsetLeft + 14,nodes[i].offsetTop + 14)
-    //  }
-     ctx.stroke()
-     ctx.closePath()
-  }
+  // ionViewWillEnter(){
+  //    let container = document.getElementById('trend-container')
+  //    let canvas = document.createElement('canvas')
+  //    canvas.width = container.offsetWidth
+  //    canvas.height = container.offsetHeight
+  //    container.appendChild(canvas)
+  //    let ctx = canvas.getContext('2d')
+  //    ctx.strokeStyle = "#f5d300"
+  //    ctx.lineWidth = 2
+  //    ctx.beginPath();
+  //    let nodes = document.querySelectorAll('.highlight')
+  //    for(let i=0; i< nodes.length; i++){
+  //        console.log(nodes.length)
+  //        if(i == 0)
+  //           ctx.moveTo(nodes[i].offsetLeft + 14,nodes[i].offsetTop + 14)
+  //        else
+  //           ctx.lineTo(nodes[i].offsetLeft + 14,nodes[i].offsetTop + 14)
+  //    }
+  //    ctx.stroke()
+  //    ctx.closePath()
+  // }
 
   ionViewWillLeave(){
      
