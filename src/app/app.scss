@@ -16,6 +16,8 @@
 // automatically applied to the <body> element in the app.
 ul,li{padding: 0;margin: 0}
 li{list-style: none;display: inline-block}
+
+textarea,select,input{-webkit-appearance: none; -moz-appearance: none; -o-appearance: none; appearance: none;background-color:transparent; border-color:transparent;}
 .toolbar-title-md{text-align: center}
 .scroll-content{padding: 0 0}
 

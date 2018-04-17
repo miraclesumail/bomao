@@ -19,7 +19,7 @@
        <ul>
           <li *ngFor="let item of basket.betData;let i = index" style="display:block;padding:10px;margin-bottom:10px;background:#f0f0f0">
               <div> <span *ngFor="let detail of item.betData">{{detail}} |</span></div>
-              <div><span>{{common.method}}{{common.smallMethod}}</span>    共{{item.count}}注 {{item.price}}元
+              <div><span>{{item.gameName}}</span>    共{{item.count}}注 {{item.price}}元
                  <span style="float:right" (click)="basket.removeByIndex(i)">delete</span>   
               </div>
           </li>

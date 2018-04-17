@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef } from '@angular/core';
 import { NavController,IonicPage } from 'ionic-angular';
 import { CommonProvider } from "../../../providers/common/common";
 import { HttpClientProvider } from "../../../providers/http-client/http-client";
@@ -17,15 +17,19 @@ function easeOutCubic(t, b, c, d) {
 // 小球达到最高点开始变小
 function move(){
   tt += 1000/60;
-  
+  let width = document.getElementById('bet-statistic').offsetWidth
   let ball = document.getElementById('ball');
-  if(tt < 1500){
-     let left = Math.ceil(easeOutCubic(tt,150,350,1500))
+  if(tt < 1000){
+     let left = Math.ceil(easeOutCubic(tt,150,width,1000))
      ball.style.left = left + 'px'
-     let high = -(350*(left - 150 ) -((left - 150)*(left - 150)))/500;
-     ball.style.top =  -(350*(left - 150 ) -((left - 150)*(left - 150)))/300  + 'px'
-     if(Math.abs(high)<top){
-        let time = 1500 - tt
+
+     // let high = -(width*(left - 150 ) -((left - 150)*(left - 150)))/500;
+     let high = width*width/1200
+     let top = -(width - left + 150)*(left -150)/300
+     // y = -(x- width)x/300 = (width - left + 150)(left -150)/300   high = width*width/1200
+     ball.style.top =  top  + 'px'
+     if(Math.abs(top)>=high){
+        let time = 1000 - tt
         $('#ball').animate({width:0,height:0},time,function(){
            
            // $(this).remove()
@@ -57,6 +61,12 @@ export class SscPage {
   record:any = [
     {number:23057,balls:'12345',shiwei:'大单',gewei:'小双',housan:'组六'},
     {number:23056,balls:'34567',shiwei:'大单',gewei:'小双',housan:'组六'},
+    {number:23057,balls:'12345',shiwei:'大单',gewei:'小双',housan:'组六'},
+    {number:23056,balls:'34567',shiwei:'大单',gewei:'小双',housan:'组六'},
+    {number:23057,balls:'12345',shiwei:'大单',gewei:'小双',housan:'组六'},
+    {number:23056,balls:'34567',shiwei:'大单',gewei:'小双',housan:'组六'},
+    {number:23057,balls:'12345',shiwei:'大单',gewei:'小双',housan:'组六'},
+    {number:23056,balls:'34567',shiwei:'大单',gewei:'小双',housan:'组六'}
   ]
   menus:any =  ['走势图','近期开奖','号码统计','玩法说明']
   over:boolean = false;
@@ -81,21 +91,22 @@ export class SscPage {
   }
 
   ionViewDidLoad(){
-    console.log(document.getElementById('qq'))
-    let mc = new Hammer(document.getElementById('qq'));
-    mc.get('swipe').set({ direction: Hammer.DIRECTION_VERTICAL });
-    mc.on('swipedown',()=>{
-      console.log('axiba')
-      this.record.push( {number:23056,balls:'34567',shiwei:'大单',gewei:'小双',housan:'组六'})
-      this.over = true
-    })
+    // console.log(document.getElementById('qq'))
+    // let mc = new Hammer(document.getElementById('qq'));
+    // mc.get('swipe').set({ direction: Hammer.DIRECTION_VERTICAL });
+    // mc.on('swipedown',()=>{
+    //   console.log('axiba')
+    //   this.record.push( {number:23056,balls:'34567',shiwei:'大单',gewei:'小双',housan:'组六'})
+    //   this.over = true
+    // })
   }
 
-  addToCart(){
+  addToCart(dom){
+    console.log(dom.innerText)
     if(this.common.count == 0){return}
     // 把数据放进购彩蓝
-    this.basket.addBetData()
-    $('<div id="ball"></div>').appendTo($('.ion-footer'));
+    this.basket.addBetData(dom.innerText)
+    $('<div id="ball"></div>').appendTo($('#bet-statistic'));
     move()
     this.util.resetData()
     this.common.cartNumber++
@@ -123,6 +134,10 @@ export class SscPage {
   qqq(number){
     return number + 5
   } 
+
+  say(ss){
+    console.log(ss)
+  }
 
   goToBasket(){
     if(this.common.cartNumber > 0 )

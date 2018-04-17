@@ -3,14 +3,14 @@
     <div>
         玩法选择
         <ul>
-            <li *ngFor="let item of common.data" style="width:25%;height:30px;display:inline-block;border:1px solid lightblue" [class.active]="common.method == item.name" (click)="changeMethod(item.name)">{{item.name}}</li>
+            <li *ngFor="let item of common.data;let i = index" style="width:25%;height:30px;display:inline-block;border:1px solid lightblue" [class.active]="method == item.name" (click)="setMethodIndex(i)">{{item.name}}</li>
         </ul>
     </div>
     <div>
-        <div *ngFor="let item of common.small">
-            <span>{{item.name}}: </span><div style="display:inline-block;width:20%;" *ngFor="let name of item.children" [class.active]="common.smallMethod == name" (click)="confirm(name)">{{name}}</div>
+        <div *ngFor="let item of small;let j = index">
+            <span>{{item.name}}: </span><div style="display:inline-block;width:20%;" *ngFor="let ele of item.children;let k = index" (click)="setSmallIndex(j,ele.name)">{{ele.name}}</div>
                 
         </div>
     </div>
-    <div style="margin-top:10px;text-align:center"><button (click)="toggle()">确定</button></div>
+    <!-- <div style="margin-top:10px;text-align:center"><button (click)="toggle()">确定</button></div> -->
 </div>

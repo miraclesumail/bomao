@@ -1,0 +1,66 @@
+page-login {
+    .form-wrap {
+        margin-top: 13%;
+      }
+      .form-login {
+        margin-top: 5%;
+      }
+      .member-password {
+        color: #c6c6c6;
+        display: inline-block;
+        margin: 0;
+        vertical-align: middle;
+      }
+      .remember-password {
+        padding: 12px 6px;
+      }
+      .check-box {
+        vertical-align: middle;
+        .checkbox-checked {
+          background: #fff;
+          border-color: #C6C6C6;
+        }
+        .checkbox-checked .checkbox-inner {
+          border-color: #707070;
+        }
+      }
+      .check-box > div {
+        border: 2px solid #c6c6c6 !important;
+      }
+      .forget-password {
+        color: #c6c6c6;
+        float: right;
+      }
+      @media screen and (orientation: portrait) {
+        //竖屏
+      }
+      //横屏样式
+      //@media screen and (orientation: landscape) {
+      //}
+      .form-item{margin-bottom: 15px}
+
+      
+
+      @media screen and (max-height: 500px) {
+        .form-item {
+          border: 1px solid #999;
+        }
+        .copy-right {
+          display: none;
+        }
+        .logo {
+          display: none;
+        }
+      }
+      .form-remind {
+        color: red;
+      }
+      ion-icon {
+        position: absolute;
+        right: -20px;
+        top: 50%;
+        left: auto;
+        margin-top: -0.6em;
+        color: green;
+      }
+}

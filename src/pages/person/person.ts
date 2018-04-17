@@ -22,4 +22,8 @@ export class PersonPage {
     console.log('ionViewDidLoad PersonPage');
   }
 
+  login(){
+    this.navCtrl.push('LoginPage')
+
+  }
 }

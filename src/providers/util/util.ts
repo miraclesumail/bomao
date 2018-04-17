@@ -16,6 +16,7 @@ export class UtilProvider {
   fakeTrend:Array<number> = [5,3,9,8,6,2,9,1,8,6,4]
   fakeData:Array<any> = []
 
+
   constructor(public http: HttpClient,public common:CommonProvider) {
     console.log('Hello UtilProvider Provider');
     this.generateFake()
@@ -50,19 +51,21 @@ export class UtilProvider {
     
   }
   
-  processOrder(){
+  processOrder(name?){
     let dataArr = []
     this.common.ballData.forEach(item => {
          let arr = []
-         item.ball.forEach((ele,index) => {
+         item.value.forEach((ele,index) => {
               ele == 1 ? arr.push(index):''
          })
          dataArr.push(arr)
     })
+    console.log(dataArr)
     dataArr = dataArr.map(item => item.join(''))
+   
     return {
          betData:dataArr,
-         gameName:this.common.method + this.common.smallMethod,
+         gameName:name?name:this.common.method + this.common.smallMethod,
          count:this.common.count,
          price:this.common.betPrice
     }
@@ -72,8 +75,8 @@ export class UtilProvider {
   randomChoose(){
     this.common.ballData = this.common.ballData.map(item => {
         let random = Math.floor(Math.random()*10)
-        let balls = item.ball.map((ele,index) => index == random ? 1 : 0)
-        item.ball = balls
+        let balls = item.value.map((ele,index) => index == random ? 1 : 0)
+        item.value = balls
         return item
     })
     this.common.calculate()
@@ -82,14 +85,15 @@ export class UtilProvider {
   // 重置数据
   resetData(){
     this.common.ballData = this.common.ballData.map(item => {
-         let balls = item.ball.map(ele => 0)
-         item.ball = balls
+         let balls = item.value.map(ele => 0)
+         item.value = balls
          return item
     })
     this.common.calculate()
   }
 
-  changeActive(index,name){
+  changeActive(index,choice,name){
+    this.changeChooseStatus(index,choice)
     switch(name){
        case "全":
            this.changeAll(index)
@@ -110,10 +114,21 @@ export class UtilProvider {
     }
   }
 
+  changeChooseStatus(index1,index2){
+      this.common.btn = this.common.btn.map((item,index) => {
+           if(index == index1){
+              let ele = item.map((todo,order) => order == index2 ? {...todo,flag:true}:{...todo,flag:false})
+              return ele
+           }else{
+              return item
+           }
+      })
+  }
+
   changeToggle(row,column){
       this.common.ballData = this.common.ballData.map((item,index) => {
            if(index == row){
-               item.ball = item.ball.map((ele,index) => {
+               item.value = item.value.map((ele,index) => {
                     if(index == column){
                        return ele == 1 ? 0 : 1
                     }else{
@@ -130,9 +145,11 @@ export class UtilProvider {
   }
 
   changeAll(line){
+     //this.ballData
+     console.log(line)
      this.common.ballData = this.common.ballData.map((item,index) => {
          if(index == line){
-           item.ball = item.ball.map(ele => 1)
+           item.value = item.value.map(ele => 1)
            return item
          }else{
            return item
@@ -143,7 +160,7 @@ export class UtilProvider {
   changeBig(line){
     this.common.ballData = this.common.ballData.map((item,index) => {
         if(index == line){
-          item.ball = item.ball.map((ele,index) => index > 4? 1:0)
+          item.value = item.value.map((ele,index) => index > 4? 1:0)
           return item
         }else{
           return item
@@ -154,7 +171,7 @@ export class UtilProvider {
   changeSmall(line){
     this.common.ballData = this.common.ballData.map((item,index) => {
         if(index == line){
-          item.ball = item.ball.map((ele,index) => index > 4? 0:1)
+          item.value = item.value.map((ele,index) => index > 4? 0:1)
           return item
         }else{
           return item
@@ -165,7 +182,7 @@ export class UtilProvider {
   changeOdd(line){
     this.common.ballData = this.common.ballData.map((item,index) => {
       if(index == line){
-        item.ball = item.ball.map((ele,index) => index %2 == 0? 0 : 1)
+        item.value = item.value.map((ele,index) => index %2 == 0? 0 : 1)
         return item
       }else{
         return item
@@ -176,7 +193,7 @@ export class UtilProvider {
   changeEven(line){
     this.common.ballData = this.common.ballData.map((item,index) => {
       if(index == line){
-        item.ball = item.ball.map((ele,index) => index %2 == 0? 1 : 0)
+        item.value = item.value.map((ele,index) => index %2 == 0? 1 : 0)
         return item
       }else{
         return item

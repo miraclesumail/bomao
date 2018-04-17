@@ -1,7 +1,7 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      <div class="header-r" (click)="common.toggle()" style="float:right;margin-right:30px;position:relative;z-index:1200;border:1px solid green;padding:5px">{{common.method}} {{common.smallMethod}}</div>
+      <div class="header-r" #methodName (click)="common.toggle()" style="float:right;margin-right:30px;position:relative;z-index:1200;border:1px solid green;padding:5px">{{common.method}} {{common.smallMethod}}</div>
       <span style="float:right" (click)="$event.stopPropagation();open = !open">toggle</span>
     </ion-title>
   </ion-navbar>
@@ -12,49 +12,52 @@
 <div class="body-bg"></div>
 
 <ion-content padding>
-  <div [ngSwitch]="content">
+  <!-- <div [ngSwitch]="content">
        <div *ngSwitchCase="history">
          
        </div>
        <div *ngSwitchDefault>
            
        </div> 
-  </div>
-
-
-  <div style="text-align:center">
-      距下一期开奖 <span>{{common.countTime.minutes}}</span>:<span>{{common.countTime.seconds}}</span>
-  </div>
-
+  </div> -->
+  
   <div class="qwe">
-     <div style="width:22%;">期次</div><div style="width:30%">开奖号码</div>
-     <div style="width:13%">十位</div><div style="width:13%">个位</div><div style="width:13%">后三</div>
-     
-     <ul *ngFor="let item of record">
-        <li>{{item.number}}</li><li>{{item.balls}}</li><li>{{item.shiwei}}</li><li>{{item.gewei}}</li><li>{{item.housan}}</li>
-     </ul>
+      <div style="width:22%;">期次</div><div style="width:30%">开奖号码</div>
+      <div style="width:13%">十位</div><div style="width:13%">个位</div><div style="width:13%">后三</div>
+      
+      <ul *ngFor="let item of record">
+         <li>{{item.number}}</li><li>{{item.balls}}</li><li>{{item.shiwei}}</li><li>{{item.gewei}}</li><li>{{item.housan}}</li>
+      </ul>
+ 
+      <!-- <button id="qq" [style.display]="over ? 'none' : 'block' "style="width:20%;height:50px;margin:0 auto;text-align:center;border:1px solid blue;">more</button> -->
+   </div>
+   
+   <div class="inner-content" scrolldown [change]="'jjjjjj'" style="position:absolute;top:10px;left:16px;width:calc(100% - 32px);background:#f0f0f0;">
+     <div >收起</div>  
+    <div style="text-align:center">
+        距下一期开奖 <span>{{common.countTime.minutes}}</span>:<span>{{common.countTime.seconds}}</span>
+    </div>
 
-     <button id="qq" [style.display]="over ? 'none' : 'block' "style="width:20%;height:50px;margin:0 auto;text-align:center;border:1px solid blue;">more</button>
-  </div>
-  <div (click)="goToTrend()">摇一摇选号</div>
-  <div *ngFor="let data of common.ballData;let ii = index" style="display:flex;margin-top:20px">
-       <div style="width:20%">
-            {{data.name}}
-       </div>
-       <div style="width:80%">
-            <ul class="balls-data">
-                <li *ngFor="let item of data.ball.slice(0,5);let i = index" [class.active]="item == 1" (click)="util.changeToggle(ii,i)">{{i}}</li>
-            </ul>
+    
+    <div (click)="goToTrend()">摇一摇选号</div>
+    <div *ngFor="let data of common.ballData;let ii = index" style="display:flex;margin-top:20px">
+        <div style="width:20%">
+              {{data.key}}
+        </div>
+        <div style="width:80%">
+              <ul class="balls-data">
+                  <li *ngFor="let item of data.value.slice(0,5);let i = index" [class.active]="item == 1" (click)="util.changeToggle(ii,i)">{{i}}</li>
+              </ul>
 
-            <ul class="balls-data">
-                <li *ngFor="let item of data.ball.slice(-5);let i = index" [class.active]="item == 1" (click)="util.changeToggle(ii,i+5)">{{qqq(i)}}</li>
-            </ul>
-            <ul class="choose-kind">
-                <li *ngFor="let detail of data.btn" [class.active]="detail.flag" style="margin-right:30px" (click)="util.changeActive(ii,detail.name)">{{detail.name}}</li>
-            </ul>
-       </div>
-  </div>
-
+              <ul class="balls-data">
+                  <li *ngFor="let item of data.value.slice(-5);let i = index" [class.active]="item == 1" (click)="util.changeToggle(ii,i+5)">{{qqq(i)}}</li>
+              </ul>
+              <ul class="choose-kind">
+                  <li *ngFor="let detail of common.btn[ii];let j = index" [class.active]="detail.flag" style="margin-right:30px" (click)="util.changeActive(ii,j,detail.name)">{{detail.name}}</li>
+              </ul>
+        </div>
+      </div>
+    </div>
 <!-- <div class="touch" style="padding:20px;background:pink;" (touchstart)="touchStartEvent($event)" (touchmove)="touchMoveEvent($event)">touch</div> -->
 
 </ion-content>
@@ -63,7 +66,7 @@
 <tab-yuan ></tab-yuan>  
 <div style="width:10%" >清空</div>
 <div style="width:10%" (click)="common.openTab()">fff元</div>
-<div style="width:40%;border:1px solid pink;" [class.can] = "common.count > 0" (click)="addToCart()">
+<div style="width:40%;border:1px solid pink;position:relative" id="bet-statistic" [class.can] = "common.count > 0" (click)="addToCart(methodName)">
    <div>已选{{common.count}}注</div>
    <div>共{{common.betPrice}}元</div>
 </div>

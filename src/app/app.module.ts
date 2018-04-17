@@ -23,6 +23,9 @@ import { CommonProvider } from '../providers/common/common';
 import { HttpClientProvider } from '../providers/http-client/http-client';
 import { UtilProvider } from '../providers/util/util';
 import { BasketDataProvider } from '../providers/basket-data/basket-data';
+import { GlobalShareProvider } from '../providers/global-share/global-share';
+import { LoginServiceProvider } from '../providers/login-service/login-service';
+import { HomeServiceProvider } from '../providers/home-service/home-service';
 
 @NgModule({
   declarations: [
@@ -61,7 +64,10 @@ import { BasketDataProvider } from '../providers/basket-data/basket-data';
     CommonProvider,
     HttpClientProvider,
     UtilProvider,
-    BasketDataProvider
+    BasketDataProvider,
+    GlobalShareProvider,
+    LoginServiceProvider,
+    HomeServiceProvider
   ]
 })
 export class AppModule {}

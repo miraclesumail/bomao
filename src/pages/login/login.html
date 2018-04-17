@@ -1,0 +1,51 @@
+<!--
+  Generated template for the LoginPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>login</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <div class="login-wrap" hide-tabs>
+    <div class="logo"><img src="assets/imgs/logo.svg" alt=""></div>
+    <div class="form-wrap">
+      <form class="input-wrap" [formGroup]="LoginForm" style="width:100%">
+        <div class="input-item">
+          <div class="form-item mb0">
+            <label for=""><img src="/assets/imgs/login/username.png" width=15 height=15 alt=""></label>
+            <input type="text" placeholder="手机/用户名/邮箱" maxlength="40" formControlName="username" class="form-input login-user" required>
+            <ion-icon text-right name="checkmark-circle" *ngIf="LoginForm.controls.username.dirty && LoginForm.controls.username.valid"></ion-icon>
+          </div>
+          <div class="form-remind">
+            <div *ngIf="(!LoginForm.controls.username.valid)  && (LoginForm.controls.username.dirty)">用户名格式不对，请重新输入</div>
+          </div>
+        </div>
+        <div class="input-item">
+          <div class="form-item mb0">
+            <label for=""><img src="/assets/imgs/login/password.png" width=15 height=15 alt=""></label>
+            <input type="password" placeholder="密码6-16位" maxlength="20" formControlName="password" class="form-input login-password" autocomplete="off" required>
+            <ion-icon text-right name="checkmark-circle" *ngIf="LoginForm.controls.password.dirty && LoginForm.controls.password.valid"></ion-icon>
+          </div>
+          <div class="form-remind">
+            <div *ngIf="(!LoginForm.controls.password.valid) && (LoginForm.controls.password.dirty)">请输入6-16位密码</div>
+          </div>
+        </div>
+      </form>
+      <div class="form-login">
+        <button (click)="formLogin()" ion-button round full>立即登陆</button>
+      </div>
+      <div class="remember-password clear"></div>
+    </div>
+    <div class="copy-right">
+      © 2014 博猫游戏版权所有 菲律宾政府合法博彩牌照认证<br>博猫游戏郑重提示：彩票有风险，投注需谨慎，不向未满18周岁的青少年出售彩票
+    </div>
+  </div>
+</ion-content>

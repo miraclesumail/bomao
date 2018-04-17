@@ -5,7 +5,7 @@ import { HttpClientProvider } from "../http-client/http-client";
 import * as $ from 'jquery'
 import { Subject } from 'rxjs/Subject';
 import { Events } from 'ionic-angular';
-
+import { UtilProvider } from '../util/util'
 /*
   Generated class for the CommonProvider provider.
 
@@ -31,6 +31,7 @@ export class CommonProvider {
   method:string;
   smallMethod:string;
   small:any;
+  bigIndex:number;
   visible:string = 'invisable';
 
   ballData = [];
@@ -42,29 +43,39 @@ export class CommonProvider {
   tabYuan:string = "元";
   tabVisible:string = 'invisable'
 
+  //用于存储现在游戏所有的玩法
+  gameMethodConfig:Array<any> = [];
+
+  btn:Array<any> = [
+    {name:"全",flag:false},{name:"大",flag:false},{name:"小",flag:false},{name:"奇",flag:false},{name:"偶",flag:false},{name:"清",flag:false}
+  ]
+
   constructor(public http: HttpClientProvider, public events:Events) {
     console.log('Hello CommonProvider Provider');
     this.theme = new BehaviorSubject(false);
     this.produce();
     this.pid.subscribe((val:any) =>{
       this.initData(val);
-      this.ballData = [
-        {name:"万位", ball:[0,0,0,0,0,0,0,0,0,0],
-           btn:[{name:"全",flag:false},{name:"大",flag:false},{name:"小",flag:false},{name:"奇",flag:false},{name:"偶",flag:false},{name:"清",flag:false}]
-        },
-        {name:"千位", ball:[0,0,0,0,0,0,0,0,0,0],
-           btn:[{name:"全",flag:false},{name:"大",flag:false},{name:"小",flag:false},{name:"奇",flag:false},{name:"偶",flag:false},{name:"清",flag:false}]
-        },
-        {name:"百位", ball:[0,0,0,0,0,0,0,0,0,0],
-           btn:[{name:"全",flag:false},{name:"大",flag:false},{name:"小",flag:false},{name:"奇",flag:false},{name:"偶",flag:false},{name:"清",flag:false}]
-        },
-        {name:"十位", ball:[0,0,0,0,0,0,0,0,0,0],
-           btn:[{name:"全",flag:false},{name:"大",flag:false},{name:"小",flag:false},{name:"奇",flag:false},{name:"偶",flag:false},{name:"清",flag:false}]
-        },
-        {name:"个位", ball:[0,0,0,0,0,0,0,0,0,0],
-           btn:[{name:"全",flag:false},{name:"大",flag:false},{name:"小",flag:false},{name:"奇",flag:false},{name:"偶",flag:false},{name:"清",flag:false}]
-        }
-      ]
+      
+      
+
+      // this.ballData = [
+      //   {name:"万位", ball:[0,0,0,0,0,0,0,0,0,0],
+      //      btn:[{name:"全",flag:false},{name:"大",flag:false},{name:"小",flag:false},{name:"奇",flag:false},{name:"偶",flag:false},{name:"清",flag:false}]
+      //   },
+      //   {name:"千位", ball:[0,0,0,0,0,0,0,0,0,0],
+      //      btn:[{name:"全",flag:false},{name:"大",flag:false},{name:"小",flag:false},{name:"奇",flag:false},{name:"偶",flag:false},{name:"清",flag:false}]
+      //   },
+      //   {name:"百位", ball:[0,0,0,0,0,0,0,0,0,0],
+      //      btn:[{name:"全",flag:false},{name:"大",flag:false},{name:"小",flag:false},{name:"奇",flag:false},{name:"偶",flag:false},{name:"清",flag:false}]
+      //   },
+      //   {name:"十位", ball:[0,0,0,0,0,0,0,0,0,0],
+      //      btn:[{name:"全",flag:false},{name:"大",flag:false},{name:"小",flag:false},{name:"奇",flag:false},{name:"偶",flag:false},{name:"清",flag:false}]
+      //   },
+      //   {name:"个位", ball:[0,0,0,0,0,0,0,0,0,0],
+      //      btn:[{name:"全",flag:false},{name:"大",flag:false},{name:"小",flag:false},{name:"奇",flag:false},{name:"偶",flag:false},{name:"清",flag:false}]
+      //   }
+      // ]
     })
    
     this.events.subscribe('changeYuan',(val) => {
@@ -73,20 +84,93 @@ export class CommonProvider {
     })
   }
 
+  isObject(val){
+    return Object.prototype.toString.call(val).slice(8, -1) == 'Object';
+  }
+
+  isArray(val){
+    return Object.prototype.toString.call(val).slice(8, -1) == 'Array';
+  }
+
+  isFunction(val){
+    return Object.prototype.toString.call(val).slice(8, -1) == 'Function';
+  }
+
+  copy(obj:any,deep){ 
+    if (obj === null || (typeof obj !== "object" && !this.isFunction(obj))) { 
+        return obj; 
+    } 
+
+    if (this.isFunction(obj)) {
+    	return new Function("return " + obj.toString())();
+    }
+    else {
+        var name, target = this.isArray(obj) ? [] : {}, value; 
+
+        for (name in obj) { 
+            value = obj[name]; 
+
+            if (value === obj) {
+            	continue;
+            }
+
+            if (deep) {
+                if (this.isArray(value) || this.isObject(value)) {
+                    target[name] = this.copy(value,deep);
+                } else if (this.isFunction(value)) {
+                    target[name] = new Function("return " + value.toString())();
+                } else {
+            	    target[name] = value;
+                } 
+            } else {
+            	target[name] = value;
+            } 
+        } 
+        return target;
+    }　        
+}
+
   async initData(name){
     this.data = (await this.http.fetchData(name)).list;
-    this.method = this.data[0].name;
-    this.small = this.data.filter(item => item.name == this.method)[0].children;
-    this.smallMethod = this.small[0].children[0];
+    this.gameMethodConfig = this.data;
+
+    // let bet_numberArrObj = this.gameMethodConfig[0].children[0].children[0].bet_numberArrObj
+    // let arr = []
+    // bet_numberArrObj.forEach(ele => arr.push(ele))
+    this.ballData = this.copy(this.gameMethodConfig[0].children[0].children[0].bet_numberArrObj, true)
+    //this.ballData = arr
+    this.method = this.gameMethodConfig[0].name;
+    this.bigIndex = 0
+    this.small = this.gameMethodConfig[0].children;
+    this.smallMethod = this.small[0].children[0].name;
     //this.changeMethod(this.data.list[0].name);
-    console.log(this.data)
+    this.btn = this.ballData.map(ele => [{name:"全",flag:false},{name:"大",flag:false},{name:"小",flag:false},{name:"奇",flag:false},{name:"偶",flag:false},{name:"清",flag:false}])
+    console.log(this.ballData)
+    console.log(this.btn)
+  }
+
+  setGameConfig(index,index2,name){
+    if(this.bigIndex!=index || name!=this.smallMethod){
+      this.ballData = this.copy(this.gameMethodConfig[index].children[index2].children.filter(ele => ele.name == name)[0].bet_numberArrObj, true)
+      
+      this.btn = this.ballData.map(ele => [{name:"全",flag:false},{name:"大",flag:false},{name:"小",flag:false},{name:"奇",flag:false},{name:"偶",flag:false},{name:"清",flag:false}])
+      
+      console.log(this.ballData)
+      console.log(this.btn)
+    }
+    console.log(index)
+    console.log(name)
+    this.bigIndex = index
+    this.method = this.gameMethodConfig[index].name
+    this.small = this.gameMethodConfig[0].children
+    this.smallMethod = name
   }
 
   //计算注单
   calculate(){
      let count = 1;
      this.ballData.forEach((item,index) => {
-         count *=  item.ball.filter(ele => ele == 1).length
+         count *=  item.value.filter(ele => ele == 1).length
      })
      this.count = count
      let percent = this.tabYuan == '元' ? 1 : this.tabYuan == '角' ? 0.1 : 0.01

@@ -38,13 +38,13 @@ export class GameTrendPage {
      ctx.lineWidth = 2
      ctx.beginPath();
      let nodes = document.querySelectorAll('.highlight')
-     for(let i=0; i< nodes.length; i++){
-         console.log(nodes.length)
-         if(i == 0)
-            ctx.moveTo(nodes[i].offsetLeft + 14,nodes[i].offsetTop + 14)
-         else
-            ctx.lineTo(nodes[i].offsetLeft + 14,nodes[i].offsetTop + 14)
-     }
+    //  for(let i=0; i< nodes.length; i++){
+    //      console.log(nodes.length)
+    //      if(i == 0)
+    //         ctx.moveTo(nodes[i].offsetLeft + 14,nodes[i].offsetTop + 14)
+    //      else
+    //         ctx.lineTo(nodes[i].offsetLeft + 14,nodes[i].offsetTop + 14)
+    //  }
      ctx.stroke()
      ctx.closePath()
   }

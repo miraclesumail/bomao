@@ -16,8 +16,8 @@ export class BasketDataProvider {
     console.log('Hello BasketDataProvider Provider');
   }
 
-  addBetData(){
-    this.betData.push(this.util.processOrder())
+  addBetData(name){
+    this.betData.push(this.util.processOrder(name))
   }
 
   removeByIndex(index:number){
