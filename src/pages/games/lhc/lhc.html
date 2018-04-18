@@ -31,10 +31,27 @@
     </div>
 
 
-    <div [ngSwitch]="game-sort" style="margin-top:30px">
-            <div *ngSwitchCase="qqq">qqqq</div>
-            <div *ngSwitchCase="www">eeee</div>
-            <div *ngSwitchCase="eee">wwww</div>
+    <div [ngSwitch]="lhc.gameSort" style="margin-top:30px">
+            <div *ngSwitchCase="'半波'">
+                    <ion-segment [(ngModel)]="lhc.banbo" (ionChange)="lhc.changeBanbo($event)" style="margin-bottom:10px">
+                            <ion-segment-button  value="红波">红波</ion-segment-button>
+                            <ion-segment-button  value="绿波">绿波</ion-segment-button>
+                            <ion-segment-button  value="蓝波">蓝波</ion-segment-button>
+                    </ion-segment>
+               
+                 <div >
+                     <div *ngFor="let item of lhc.banboData;let i = index" [ngClass]="banbo" style="padding:15px;background:#ffffff;margin-bottom:10px">
+                         <div style="margin-bottom:10px">{{item.name}}   {{item.betNum}}</div>
+                         <ul>
+                            <li *ngFor="let ele of item.number;let j = index" [class.choose]="ele.choose" (click)="lhc.changeToggle(i,j)">{{ele.number}}</li>
+                         </ul>
+                        
+                     </div>
+                 </div>
+            </div>
+            <div *ngSwitchCase="'正码'">eeee</div>
+            <div *ngSwitchCase="'特肖'">wwww</div>
+
             <div *ngSwitchDefault>
                  <div>
 
@@ -57,7 +74,7 @@
   </ion-content>
 <!--透明背景-->
 <div class="body-bg"></div>
-<aaa></aaa>
+
 <gamemenu (change)="turnVisible($event)"> </gamemenu>    
 
   <!-- <div class="choose-game alert-con" [@fading]="visible"> 

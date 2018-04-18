@@ -26,6 +26,7 @@ import { BasketDataProvider } from '../providers/basket-data/basket-data';
 import { GlobalShareProvider } from '../providers/global-share/global-share';
 import { LoginServiceProvider } from '../providers/login-service/login-service';
 import { HomeServiceProvider } from '../providers/home-service/home-service';
+import { LhcServiceProvider } from '../providers/lhc-service/lhc-service';
 
 @NgModule({
   declarations: [
@@ -67,7 +68,8 @@ import { HomeServiceProvider } from '../providers/home-service/home-service';
     BasketDataProvider,
     GlobalShareProvider,
     LoginServiceProvider,
-    HomeServiceProvider
+    HomeServiceProvider,
+    LhcServiceProvider
   ]
 })
 export class AppModule {}

@@ -47,14 +47,14 @@
         </div>
         <div style="width:80%">
               <ul class="balls-data">
-                  <li *ngFor="let item of data.value.slice(0,5);let i = index" [class.active]="item == 1" (click)="$event.stopPropagation();util.changeToggle(ii,i)">{{i}}</li>
+                  <li *ngFor="let item of data.value.slice(0,5);let i = index" [class.active]="item == 1" (touchstart)="util.changeToggle(ii,i)">{{i}}</li>
               </ul>
 
               <ul class="balls-data">
-                  <li *ngFor="let item of data.value.slice(-5);let i = index" [class.active]="item == 1" (click)="$event.stopPropagation();util.changeToggle(ii,i+5)">{{qqq(i)}}</li>
+                  <li *ngFor="let item of data.value.slice(-5);let i = index" [class.active]="item == 1" (touchstart)="util.changeToggle(ii,i+5)">{{qqq(i)}}</li>
               </ul>
               <ul class="choose-kind">
-                  <li *ngFor="let detail of common.btn[ii];let j = index" [class.active]="detail.flag" style="margin-right:30px" (click)="util.changeActive(ii,j,detail.name)">{{detail.name}}</li>
+                  <li *ngFor="let detail of common.btn[ii];let j = index" [class.active]="detail.flag" style="margin-right:30px" (touchstart)="util.changeActive(ii,j,detail.name)">{{detail.name}}</li>
               </ul>
         </div>
       </div>
@@ -63,16 +63,21 @@
 
 </ion-content>
 
-<ion-footer class="ion-footer" style="position:fixed;height:50px;background:yellowgreen;bottom:0;display:flex;" >
+<ion-footer class="ion-footer" style="position:fixed;height:50px;bottom:0;display:flex;" >
 <tab-yuan ></tab-yuan>  
-<div style="width:10%" >清空</div>
-<div style="width:10%" (click)="common.openTab()">fff元</div>
-<div style="width:40%;border:1px solid pink;position:relative" id="bet-statistic" [class.can] = "common.count > 0" (click)="addToCart(methodName)">
-   <div>已选{{common.count}}注</div>
-   <div>共{{common.betPrice}}元</div>
+<div class="clear" ></div>
+<div class="tab-mode" (click)="common.openTab()">
+     <div>元</div><div>模式</div>
 </div>
-<div style="width:40%" (click)="goToBasket()">
-   购彩篮
-   {{common.cartNumber}}
+<div id="bet-statistic" [class.can] = "common.count > 0" (click)="addToCart(methodName)">
+   <div style="width:30px;padding-left:20px;line-height:50px;font-size:18px">+</div>
+   <div style="padding-left:10px">
+        <div style="height:25px;line-height:25px">已选{{common.count}}注</div>
+        <div style="height:25px;line-height:25px">共{{common.betPrice}}元</div>
+   </div>
+</div>
+<div class="basket" (click)="goToBasket()">
+   <div class="bet-number" *ngIf="common.cartNumber"> {{common.cartNumber}}</div>
+  
 </div>
 </ion-footer>

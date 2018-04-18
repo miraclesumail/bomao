@@ -62,7 +62,20 @@ ion-slides{padding: 20px 0 20px 0;height: auto}
       }  
   }
 
- 
+
+// toast 样式修改 
+.toast-wrapper{background: pink;width:200px} 
+.toast-ios .toast-wrapper{background: pink; color:#f0f0f0}
+.toast-md .toast-wrapper{width:200px;background: pink;color:#f0f0f0}
+.toast-md .toast-message{color:#f0f0f0}
+.toast-ios .toast-message{color:black}
+
+// segment
+.segment-ios .segment-button.segment-activated {
+  color: #fff;
+  background-color: #488aff;
+} 
+
 // .alert-con {
 //     width: 100%;
 //     position: absolute;

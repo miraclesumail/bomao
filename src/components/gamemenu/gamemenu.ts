@@ -1,4 +1,5 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ViewChild,  } from '@angular/core';
+import { Nav} from 'ionic-angular';
 import { trigger ,state,transition,animate,style} from "@angular/animations";
 import { CommonProvider } from "../../providers/common/common";
 
@@ -32,7 +33,7 @@ import * as $ from 'jquery';
 
 export class GamemenuComponent {
   private _data;
-  
+  //@ViewChild(Nav) nav: Nav;
   // @Input()
   // set data(val:any){
   //     console.log(val);
@@ -59,8 +60,9 @@ export class GamemenuComponent {
 
   bigIndex:number;
 
-  constructor(public common:CommonProvider) {
+  constructor(public common:CommonProvider, public nav:Nav) {
     console.log('Hello GamemenuComponent Component');
+    
     //this.getSmall()
     this.method = this.common.method
     this.small = this.common.small
@@ -70,6 +72,8 @@ export class GamemenuComponent {
 
   ngAfterViewInit(){
     console.log('ddwd')
+    console.log(this.nav.getActive().name)
+    
   }
 
   // changeMethod(name){
@@ -89,6 +93,10 @@ export class GamemenuComponent {
       this.common.setGameConfig(this.bigIndex,j,name)
       this.common.visible = 'invisable';
       $('.body-bg').fadeOut(1000)
+      console.log(name)
+      if(this.nav.getActive().name == "LhcPage"){
+          this.common.setLhcGame(name)
+      }
   }
 
   confirm(name){

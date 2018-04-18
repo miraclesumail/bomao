@@ -1,7 +1,17 @@
 .qwe div{display: inline-block}
+
+#bet-statistic{width:calc(100% - 232px);position:relative;display:flex;background:#f0f0f0}
 .balls-data{display:flex;justify-content:space-between;margin-bottom: 20px}
 .balls-data li{width:30px;height:30px;border:1px solid pink;border-radius:50%;text-align:center;line-height:30px}
-#ball{width:20px;height:20px;background:yellow;position:absolute;top:0px;left:150px;border-radius:50%;}
-div.can{background: lightblue}
+#ball{width:20px;height:20px;background:yellow;position:absolute;top:0px;left:50px;border-radius:50%;}
+#bet-statistic.can{background: lightblue}
 div.shadow{background: #f0f0f0}
 .none{display: none}
+
+.tab-mode{width:70px;display:flex;flex-direction:column;align-items:center;justify-content:space-around;background:#ffffff}
+
+.clear{width:10%;background:url('/assets/imgs/games/clear.png') center center no-repeat;width:70px;border-right:1px solid #f0f0f0;background-color:#ffffff}
+
+.basket{width:92px;background:url('/assets/imgs/games/basket.png') center center no-repeat;position: relative}
+
+.bet-number{width:18px;height:18px;background: #ffffff;text-align: center;line-height: 18px;position: absolute;top:15px;left:15px;border-radius: 50%}

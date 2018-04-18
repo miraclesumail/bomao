@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController,IonicPage,ModalController } from 'ionic-angular';
 import { CommonProvider } from "../../../providers/common/common";
 import { HttpClientProvider } from "../../../providers/http-client/http-client";
+import { LhcServiceProvider } from "../../../providers/lhc-service/lhc-service"
 import { BetComponent } from '../../../components/bet/bet';
 import * as $ from 'jquery';
 
@@ -17,6 +18,19 @@ export class LhcPage {
 //   method:string;
 //   smallMethod:string;
 //   small:any;
+  get banbo(){
+      //console.log(this.lhc.banbo) get
+      switch (this.lhc.banbo){
+          case '红波':
+               return 'red'
+          case '绿波':
+               return 'green'
+          case '蓝波':
+               return  'blue'          
+      }
+ }
+  
+
   visible:string = 'invisable';
   number:number;
   record:any;
@@ -58,7 +72,7 @@ export class LhcPage {
 
   hasChoose:any = [];
 
-  constructor(public navCtrl: NavController, public common:CommonProvider, public http:HttpClientProvider,public modalCtrl: ModalController) {
+  constructor(public navCtrl: NavController, public common:CommonProvider, public lhc:LhcServiceProvider,public http:HttpClientProvider,public modalCtrl: ModalController) {
       this.common.setActiveTheme('lhc');
       this.record = this.mockData();
       //this.initData();
@@ -71,6 +85,11 @@ export class LhcPage {
 //       this.visible == 'visable' ? $('.body-bg').fadeIn(1000) : $('.body-bg').fadeOut(1000)
 //       //$('.choose-game').toggleClass('alert-show')
 //   }
+
+  changeBanbo($event){
+      
+      this.lhc.changeBanbo($event)
+  }
 
   turnVisible($event){
       this.common.visible = $event.visible

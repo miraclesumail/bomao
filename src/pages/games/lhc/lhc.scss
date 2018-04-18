@@ -1,3 +1,22 @@
 .active{background: pink}
 
 // .choose-game{display:flex;flex-direction:column;width:100%;position:fixed;bottom:67px;background:orange;z-index:1200;transition:1s}
+
+// .segment-ios .segment-button.segment-activated {
+//     color: #fff;
+    
+//   } 
+
+.segment-ios ion-segment-button:nth-of-type(1).segment-activated {background-color: #FF7C48;} 
+.segment-ios ion-segment-button:nth-of-type(2).segment-activated {background-color: #4BFF48;} 
+.segment-ios ion-segment-button:nth-of-type(3).segment-activated {background-color: #5048FF;} 
+
+li{width:30px;height:30px;border-radius:50%;border:1px solid yellow;text-align:center;line-height:30px;margin-right:10px}
+
+.red li{border:1px solid #FF7C48}
+.blue li{border:1px solid #5048FF}
+.green li{border:1px solid #4BFF48}
+
+.red li.choose{background:#FF7C48 }
+.blue li.choose{background:#5048FF }
+.green li.choose{background:#4BFF48 }

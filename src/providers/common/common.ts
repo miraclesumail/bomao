@@ -6,6 +6,8 @@ import * as $ from 'jquery'
 import { Subject } from 'rxjs/Subject';
 import { Events } from 'ionic-angular';
 import { UtilProvider } from '../util/util'
+import { GlobalShareProvider } from '../global-share/global-share'
+import { LhcServiceProvider } from '../lhc-service/lhc-service'
 /*
   Generated class for the CommonProvider provider.
 
@@ -50,7 +52,7 @@ export class CommonProvider {
     {name:"全",flag:false},{name:"大",flag:false},{name:"小",flag:false},{name:"奇",flag:false},{name:"偶",flag:false},{name:"清",flag:false}
   ]
 
-  constructor(public http: HttpClientProvider, public events:Events) {
+  constructor(public http: HttpClientProvider, public events:Events, public global:GlobalShareProvider,public lhc:LhcServiceProvider) {
     console.log('Hello CommonProvider Provider');
     this.theme = new BehaviorSubject(false);
     this.produce();
@@ -204,6 +206,7 @@ export class CommonProvider {
     this.timer = setInterval(()=> {
        if(time <1000){
           clearInterval(this.timer)
+          this.global.showToast('进入新一期开奖',2000)
           this.produce()
        } 
        this.countTime = this.getTimeRemaining(time)
@@ -226,5 +229,7 @@ export class CommonProvider {
     };
   }
 
-   
+   setLhcGame(name){
+      this.lhc.setGameKind(name) 
+   }
 }

@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController,IonicPage} from 'ionic-angular';
+import { NavController,IonicPage, App} from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import {Observable} from 'rxjs/Observable';
 import { CommonProvider } from "../../providers/common/common";
@@ -65,7 +65,7 @@ export class HomePage {
   }
 
 
-  constructor(public navCtrl: NavController,public storage: Storage, public common:CommonProvider) {
+  constructor(public navCtrl: NavController,public storage: Storage, public common:CommonProvider, public app:App) {
      this.updateLate()
      console.log(Swiper)
      this.lottery = this.lotterys[Math.floor(Math.random()*this.lotterys.length)]
@@ -153,6 +153,7 @@ export class HomePage {
 
   goPage(name){
      this.common.pid.next(name.json);
-     this.navCtrl.push(name.url)
+     //this.navCtrl.getRoot().push(name.url)
+     this.app.getRootNav().push(name.url)
   }
 }

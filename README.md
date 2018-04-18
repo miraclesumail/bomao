@@ -42,8 +42,13 @@
 
 17. 进入游戏获取默认玩法 '/mobile-lotteries-h5/load-data/1/${+this.share.pid}?_=${Math.random()'  post  {_token: this.share.user.token}
 
+18. 修改登录密码 /mobileh5-users/password-management/0 post
+
+19. 修改资金密码 /mobileh5-users/password-management/1 post
+
 ### 需增加接口
-1. 单个游戏历史开奖记录 
+1. 单个游戏历史开奖记录 (走势图需要)
 2. 注册接口
 3. 追号记录  追号详情
-4. 
+4. 积分中心(用户积分查询 和记录)
+5. 用户彩金卡详情
