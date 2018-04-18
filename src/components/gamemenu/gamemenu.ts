@@ -2,6 +2,7 @@ import { Component, Input, Output, EventEmitter, ViewChild,  } from '@angular/co
 import { Nav} from 'ionic-angular';
 import { trigger ,state,transition,animate,style} from "@angular/animations";
 import { CommonProvider } from "../../providers/common/common";
+import { LhcServiceProvider } from '../../providers/lhc-service/lhc-service'
 
 import * as $ from 'jquery';
 
@@ -60,7 +61,7 @@ export class GamemenuComponent {
 
   bigIndex:number;
 
-  constructor(public common:CommonProvider, public nav:Nav) {
+  constructor(public common:CommonProvider, public nav:Nav, public lhc:LhcServiceProvider) {
     console.log('Hello GamemenuComponent Component');
     
     //this.getSmall()
@@ -95,7 +96,8 @@ export class GamemenuComponent {
       $('.body-bg').fadeOut(1000)
       console.log(name)
       if(this.nav.getActive().name == "LhcPage"){
-          this.common.setLhcGame(name)
+          this.lhc.resetData()
+          this.lhc.setGameKind(name)
       }
   }
 

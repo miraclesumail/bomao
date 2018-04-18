@@ -16,10 +16,12 @@ export class BetComponent {
   yuan:any = {};
   choosen:string;
   betOrder:any ={};
- 
-  get price(){
-      return this.yuan[this.choosen]
-  }
+  price:number = 0;
+  total:number = 0
+  count:number;
+  // get price(){
+  //     return this.yuan[this.choosen]
+  // }
   // price:any = 
 
   // set price(val){
@@ -31,10 +33,15 @@ export class BetComponent {
     console.log('Hello BetComponent Component');
     this.betInfo = this.params.get('data')
     this.choosen = this.betInfo[0].name
+    this.count = this.betInfo.length
     //this.betMoney
-    this.betInfo.forEach(element => {
-         this.yuan[element.name] = ''
-    });
+    // this.betInfo.forEach(element => {
+    //      this.yuan[element.name] = ''
+    // });
+  }
+
+  calculate($event){
+       this.total = this.count*$event
   }
 
   valueChange(val){

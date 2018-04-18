@@ -1,8 +1,16 @@
 <!-- Generated template for the BetComponent component -->
-<div>
-  <ul>
+<div class="betContainer">
+  <!--<ul>
       <li *ngFor="let aa of betInfo" [class.active]="aa.default" (click)="change(aa)" style="width:33.3%;text-align:center;border:1px solid pink;margin-bottom:10px">{{aa.name}}</li>
   </ul>
   <div><input type="text" [ngModel]="price" (ngModelChange)="valueChange($event)" >元</div>
-  <div>{{betOrder.number}}注共 {{betOrder.total}}元</div>
+  <div>{{betOrder.number}}注共 {{betOrder.total}}元</div>-->
+  <div >
+    <ul style="min-height:60px">
+      <li *ngFor="let aa of betInfo"  style="width:30%;float:left;margin-left:3%;text-align:center;border:1px solid pink;margin-bottom:10px">{{aa.name}}</li>
+   </ul>
+  </div>
+   
+  <div style="margin:0 auto;background:#f0f0f0;width:200px"><input type="text" [ngModel]="price" (ngModelChange)="calculate($event)" placeholder="输入购买金额">元</div>
+  <div style="margin:10px auto;width:100%;background:pink">{{count}}注共 {{total}}元</div>
 </div>

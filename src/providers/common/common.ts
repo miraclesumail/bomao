@@ -7,7 +7,6 @@ import { Subject } from 'rxjs/Subject';
 import { Events } from 'ionic-angular';
 import { UtilProvider } from '../util/util'
 import { GlobalShareProvider } from '../global-share/global-share'
-import { LhcServiceProvider } from '../lhc-service/lhc-service'
 /*
   Generated class for the CommonProvider provider.
 
@@ -52,7 +51,7 @@ export class CommonProvider {
     {name:"全",flag:false},{name:"大",flag:false},{name:"小",flag:false},{name:"奇",flag:false},{name:"偶",flag:false},{name:"清",flag:false}
   ]
 
-  constructor(public http: HttpClientProvider, public events:Events, public global:GlobalShareProvider,public lhc:LhcServiceProvider) {
+  constructor(public http: HttpClientProvider, public events:Events, public global:GlobalShareProvider) {
     console.log('Hello CommonProvider Provider');
     this.theme = new BehaviorSubject(false);
     this.produce();
@@ -229,7 +228,4 @@ export class CommonProvider {
     };
   }
 
-   setLhcGame(name){
-      this.lhc.setGameKind(name) 
-   }
 }

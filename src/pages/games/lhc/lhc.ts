@@ -158,9 +158,22 @@ export class LhcPage {
   }
 
   bet(){
-    let data = this.hasChoose.map((item,index) => {return {'name':this.choosen + '' + item, 'default':index==0?true:false}});
+    let data = this.hasChoose.map((item,index) => {return {'name':this.common.smallMethod + '' + item}});
     let contactModal = this.modalCtrl.create(BetComponent,{data:data})
     contactModal.present()
+  }
+
+  newBet(){
+     let data:Array<Object> = []
+     if(this.lhc.gameSort == '半波'){
+           for(let ii in this.lhc.banboPlay){
+               this.lhc.banboPlay[ii].forEach(ele => {
+                    ele.allChoose ? data.push({name:ele.name}):''
+               })
+           }
+           let contactModal = this.modalCtrl.create(BetComponent,{data:data})
+           contactModal.present()
+     }   
   }
 
   check(ii){
