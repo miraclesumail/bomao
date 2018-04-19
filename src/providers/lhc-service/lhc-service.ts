@@ -41,22 +41,38 @@ export class LhcServiceProvider {
 
 // 生肖数据
 allData:any = [
-  {'大':{choose:false,numbers:[25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49]}},
-  {'小':{choose:false,numbers:[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24]}},
-  {'单':{choose:false,numbers:[1,3,5,7,9,11,13,15,17,19,21,23,25,27,29,31,33,35,37,39,41,43,45,47,49]}},
-  {'双':{choose:false,numbers:[2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36,38,40,42,44,46,48]}},
-  {'鼠':{choose:false,numbers:[11,23,35,47]}},
-  {'牛':{choose:false,numbers:[10,22,34,46]}},
-  {'虎':{choose:false,numbers:[9,21,33,45]}},
-  {'兔':{choose:false,numbers:[8,20,32,44]}},
-  {'龙':{choose:false,numbers:[7,19,31,43]}},
-  {'蛇':{choose:false,numbers:[6,18,30,42]}},
-  {'马':{choose:false,numbers:[5,17,29,41]}},
-  {'羊':{choose:false,numbers:[4,16,28,40]}},
-  {'猴':{choose:false,numbers:[3,15,27,39]}},
-  {'鸡':{choose:false,numbers:[2,14,26,38]}},
-  {'狗':{choose:false,numbers:[1,13,25,37,49]}},
-  {'猪':{choose:false,numbers:[12,24,36,48]}},
+  {'name':'大',choose:false,numbers:[25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49]},
+  {'name':'小',choose:false,numbers:[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24]},
+  {'name':'单',choose:false,numbers:[1,3,5,7,9,11,13,15,17,19,21,23,25,27,29,31,33,35,37,39,41,43,45,47,49]},
+  {'name':'双',choose:false,numbers:[2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36,38,40,42,44,46,48]},
+  {'name':'鼠',choose:false,numbers:[11,23,35,47],betNum:12.12},
+  {'name':'牛',choose:false,numbers:[10,22,34,46],betNum:12.12},
+  {'name':'虎',choose:false,numbers:[9,21,33,45],betNum:12.12},
+  {'name':'兔',choose:false,numbers:[8,20,32,44],betNum:12.12},
+  {'name':'龙',choose:false,numbers:[7,19,31,43],betNum:12.12},
+  {'name':'蛇',choose:false,numbers:[6,18,30,42],betNum:12.12},
+  {'name':'马',choose:false,numbers:[5,17,29,41],betNum:12.12},
+  {'name':'羊',choose:false,numbers:[4,16,28,40],betNum:12.12},
+  {'name':'猴',choose:false,numbers:[3,15,27,39],betNum:12.12},
+  {'name':'鸡',choose:false,numbers:[2,14,26,38],betNum:12.12},
+  {'name':'狗',choose:false,numbers:[1,13,25,37,49],betNum:12.12},
+  {'name':'猪',choose:false,numbers:[12,24,36,48],betNum:12.12}
+  
+  // {'小':{choose:false,numbers:[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24]}},
+  // {'单':{choose:false,numbers:[1,3,5,7,9,11,13,15,17,19,21,23,25,27,29,31,33,35,37,39,41,43,45,47,49]}},
+  // {'双':{choose:false,numbers:[2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36,38,40,42,44,46,48]}},
+  // {'鼠':{choose:false,numbers:[11,23,35,47]}},
+  // {'牛':{choose:false,numbers:[10,22,34,46]}},
+  // {'虎':{choose:false,numbers:[9,21,33,45]}},
+  // {'兔':{choose:false,numbers:[8,20,32,44]}},
+  // {'龙':{choose:false,numbers:[7,19,31,43]}},
+  // {'蛇':{choose:false,numbers:[6,18,30,42]}},
+  // {'马':{choose:false,numbers:[5,17,29,41]}},
+  // {'羊':{choose:false,numbers:[4,16,28,40]}},
+  // {'猴':{choose:false,numbers:[3,15,27,39]}},
+  // {'鸡':{choose:false,numbers:[2,14,26,38]}},
+  // {'狗':{choose:false,numbers:[1,13,25,37,49]}},
+  // {'猪':{choose:false,numbers:[12,24,36,48]}},
 
 ]
   kinds:any = [];
@@ -104,7 +120,7 @@ allData:any = [
   constructor(public http: HttpClient) {
     console.log('Hello LhcServiceProvider Provider');
     this.banboData = this.banboPlay[this.banbo]
-    this.kinds = this.allData.map(item => Object.keys(item));
+    this.kinds = this.allData.map(item => Object.keys(item)[0]);
     //this.banboData = this.common.copy(this.banboPlay[this.banbo],true)
   }
 
@@ -155,46 +171,65 @@ allData:any = [
     else
        this.hasChoose.splice(this.hasChoose.indexOf(playload.content),1)
 
-    this.allData = this.allData.map(item => {
-       let key = Object.keys(item)[0];
-       let flag = true;
-       for(let i =0;i<item[key].numbers.length;i++){
-           if(!this.hasChoose.includes(item[key].numbers[i])){
-               flag = false
-               break 
-           }
+    // this.allData = this.allData.map(item => {
+    //    let key = Object.keys(item)[0];
+    //    let flag = true;
+    //    for(let i =0;i<item[key].numbers.length;i++){
+    //        if(!this.hasChoose.includes(item[key].numbers[i])){
+    //            flag = false
+    //            break 
+    //        }
               
-       }
-       return {[key]:{choose:flag,numbers:item[key].numbers}}
-    })
+    //    }
+    //    return {[key]:{choose:flag,numbers:item[key].numbers}}
+    // })
 }
 
-switch(item){
-  console.log(item)
+switch(key){
+  //console.log(item[0])
+    let temp = this.allData.filter(item => item.name == key)[0]
+    if(!temp.choose){
+        this.hasChoose = []
+        this.allData = this.allData.map(item => {
+            return {...item,choose:false}
+        })
+    }
+
+    temp.numbers.forEach(ele => {
+      this.toggleChoose(ele)
+    })
+
+            this.allData = this.allData.map(item => {
+                 if(item.name == key)
+                   return {...item,choose:!item.choose}
+                 else
+                   return item  
+            })
+
   //let self = this;
-    this.allData = this.allData.map(element => {
-         console.log(element)
-         return element.hasOwnProperty(item) ? {[item]:{choose:!element[item].choose,numbers:element[item].numbers}}:element
-    });
-    console.log(this.allData);
-    this.allData.forEach(element => {
-         let key = Object.keys(element)[0];
-         let arr = element[key].numbers;
-         if(key == item ){
-              // if(element[key].choose){
-                  for(let i =0;i < arr.length;i++){
-                      this.toggleChoose(arr[i])
-                  }
-         }
+    // this.allData = this.allData.map(element => {
+    //      console.log(element)
+    //      return element.hasOwnProperty(item) ? {[item]:{choose:!element[item].choose,numbers:element[item].numbers}}:element
+    // });
+    // console.log(this.allData);
+    // this.allData.forEach(element => {
+    //      let key = Object.keys(element)[0];
+    //      let arr = element[key].numbers;
+    //      if(key == item ){
+    //           // if(element[key].choose){
+    //               for(let i =0;i < arr.length;i++){
+    //                   this.toggleChoose(arr[i])
+    //               }
+    //      }
          
-    });
+    // });
     console.log(this.hasChoose)
 }
 
 
   checkSort(key){
-    let choose = this.allData.filter(item => Object.keys(item)[0] == key)[0]
-    return choose[key].choose
+    let choose = this.allData.filter(item => item.name == key)[0]
+    return choose.choose
   } 
 
   checkColor(item){
@@ -231,6 +266,10 @@ switch(item){
      }else if(this.gameSort == '特码'){
                 console.log('quit')
                 this.hasChoose = []
+                this.allData = this.allData.map(item => {
+                    return {...item,choose:false}
+                 })
+
      }
   }
 }
