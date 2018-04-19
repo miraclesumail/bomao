@@ -66,15 +66,27 @@ export class LhcPage {
       {'小':{choose:false,numbers:[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24]}},
       {'单':{choose:false,numbers:[1,3,5,7,9,11,13,15,17,19,21,23,25,27,29,31,33,35,37,39,41,43,45,47,49]}},
       {'双':{choose:false,numbers:[2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36,38,40,42,44,46,48]}},
+      {'鼠':{choose:false,numbers:[11,23,35,47]}},
+      {'牛':{choose:false,numbers:[10,22,34,46]}},
+      {'虎':{choose:false,numbers:[9,21,33,45]}},
+      {'兔':{choose:false,numbers:[8,20,32,44]}},
+      {'龙':{choose:false,numbers:[7,19,31,43]}},
+      {'蛇':{choose:false,numbers:[6,18,30,42]}},
+      {'马':{choose:false,numbers:[5,17,29,41]}},
+      {'羊':{choose:false,numbers:[4,16,28,40]}},
+      {'猴':{choose:false,numbers:[3,15,27,39]}},
+      {'鸡':{choose:false,numbers:[2,14,26,38]}},
+      {'狗':{choose:false,numbers:[1,13,25,37,49]}},
+      {'猪':{choose:false,numbers:[12,24,36,48]}},
+
   ]
 
   kinds:any = [];
 
   hasChoose:any = [];
-
+  menus:any =  ['走势图','近期开奖','玩法说明']
   constructor(public navCtrl: NavController, public common:CommonProvider, public lhc:LhcServiceProvider,public http:HttpClientProvider,public modalCtrl: ModalController) {
       this.common.setActiveTheme('lhc');
-      this.record = this.mockData();
       //this.initData();
       this.kinds = this.allData.map(item => Object.keys(item));
       //let aa = async this.http.fetchData('/assets/lhc.json');
@@ -100,63 +112,6 @@ export class LhcPage {
       this.common.small = this.common.data.filter(item => item.name == this.common.method)[0].children;
   }
 
-  switch(item){
-    console.log(item)
-    //let self = this;
-      this.allData = this.allData.map(element => {
-        //    if(element.hasOwnProperty(item)){
-        //        element.choose = !element.choose
-        //        return element
-        //    }else{
-        //        return element
-        //    }
-           console.log(element)
-           //console.log(element[item].numbers)
-           return element.hasOwnProperty(item) ? {[item]:{choose:!element[item].choose,numbers:element[item].numbers}}:element
-      });
-      console.log(this.allData);
-      this.allData.forEach(element => {
-           let key = Object.keys(element)[0];
-           let arr = element[key].numbers;
-           if(key == item ){
-                // if(element[key].choose){
-                    for(let i =0;i < arr.length;i++){
-                        this.toggleChoose(arr[i])
-                    }
-           }
-           
-      });
-      console.log(this.hasChoose)
-  }
-
-  toggleChoose(item){
-      if(this.check(item))
-        this.add_remove({type:'remove',content:item})
-      else
-        this.add_remove({type:'add',content:item})
-  }
-
-  add_remove(playload){
-      console.log(this.hasChoose)
-      if(playload.type == 'add')
-         this.hasChoose.push(playload.content)
-      else
-         this.hasChoose.splice(this.hasChoose.indexOf(playload.content),1)
-
-      this.allData = this.allData.map(item => {
-         let key = Object.keys(item)[0];
-         let flag = true;
-         for(let i =0;i<item[key].numbers.length;i++){
-             if(!this.hasChoose.includes(item[key].numbers[i])){
-                 flag = false
-                 break 
-             }
-                
-         }
-         return {[key]:{choose:flag,numbers:item[key].numbers}}
-      })
-  }
-
   bet(){
     let data = this.hasChoose.map((item,index) => {return {'name':this.common.smallMethod + '' + item}});
     let contactModal = this.modalCtrl.create(BetComponent,{data:data})
@@ -176,51 +131,4 @@ export class LhcPage {
      }   
   }
 
-  check(ii){
-      return this.hasChoose.includes(ii)
-  }
-
-  checkSort(key){
-      let choose = this.allData.filter(item => Object.keys(item)[0] == key)[0]
-      return choose[key].choose
-  }
-
-//   confirm(name){
-//       this.choosen = this.method + name
-//   }
-
-  mockData(){
-      let random = Math.floor(Math.random()*100)
-      let end = random<10 ? '00' + random : '0' + random 
-      let month = new Date().getMonth()<10 ? '0'+new Date().getMonth():new Date().getMonth()
-      let date = new Date().getDate()<10 ? '0'+new Date().getDate():new Date().getDate()
-      console.log(month)
-      let number = new Date().getFullYear().toString().substr(2) 
-       + month + date + end
-       console.log(number)
-             
-      let record = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
-      let result = [0,0,0,0,0,0,0,0].map((ele,index) => {
-          if(index == 6)
-             return '+'
-          let choose = record[Math.floor(Math.random()*(record.length - 1))]
-          record.splice(record.indexOf(choose),1)
-          choose < 10 ? '0' + choose : choose;
-          return choose
-      })
-      console.log(result)
-
-      let axiba = [0,0,0,0,0,0,0,0].map((ele,index) =>{
-          if(index == 6)
-             return ' '
-          let filter = this.zodadic.filter(ele => ele.indexOf(result[index]) != -1)[0]  
-          return this.mark[this.zodadic.indexOf(filter)]
-      })
-      
-      return {
-          result,
-          number,
-          axiba
-      }
-  }
 }

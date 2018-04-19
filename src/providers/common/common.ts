@@ -7,6 +7,7 @@ import { Subject } from 'rxjs/Subject';
 import { Events } from 'ionic-angular';
 import { UtilProvider } from '../util/util'
 import { GlobalShareProvider } from '../global-share/global-share'
+import { LhcServiceProvider } from '../lhc-service/lhc-service'
 /*
   Generated class for the CommonProvider provider.
 
@@ -15,6 +16,8 @@ import { GlobalShareProvider } from '../global-share/global-share'
 */
 @Injectable()
 export class CommonProvider {
+  open:boolean = false
+
   theme: BehaviorSubject<boolean>; 
   pid = new Subject();
   timer:any;
@@ -27,6 +30,7 @@ export class CommonProvider {
     'minutes': '',
     'seconds': ''
   };
+  record:any;
 
   data:any;
   method:string;
@@ -51,12 +55,13 @@ export class CommonProvider {
     {name:"全",flag:false},{name:"大",flag:false},{name:"小",flag:false},{name:"奇",flag:false},{name:"偶",flag:false},{name:"清",flag:false}
   ]
 
-  constructor(public http: HttpClientProvider, public events:Events, public global:GlobalShareProvider) {
+  constructor(public http: HttpClientProvider, public events:Events, public global:GlobalShareProvider, public lhc:LhcServiceProvider) {
     console.log('Hello CommonProvider Provider');
     this.theme = new BehaviorSubject(false);
     this.produce();
     this.pid.subscribe((val:any) =>{
       this.initData(val);
+      this.record = this.mockData()
       
       
 
@@ -132,18 +137,23 @@ export class CommonProvider {
 }
 
   async initData(name){
+    console.log('wcnm')
     this.data = (await this.http.fetchData(name)).list;
     this.gameMethodConfig = this.data;
 
     // let bet_numberArrObj = this.gameMethodConfig[0].children[0].children[0].bet_numberArrObj
     // let arr = []
     // bet_numberArrObj.forEach(ele => arr.push(ele))
-    this.ballData = this.copy(this.gameMethodConfig[0].children[0].children[0].bet_numberArrObj, true)
+    this.small = this.gameMethodConfig[0].children;
+    if(this.small.length)
+       this.ballData = this.copy(this.gameMethodConfig[0].children[0].children[0].bet_numberArrObj, true)
     //this.ballData = arr
     this.method = this.gameMethodConfig[0].name;
     this.bigIndex = 0
-    this.small = this.gameMethodConfig[0].children;
-    this.smallMethod = this.small[0].children[0].name;
+    
+    console.log('wcnm')
+    if(this.small.length)
+       this.smallMethod = this.small[0].children[0].name;
     //this.changeMethod(this.data.list[0].name);
     this.btn = this.ballData.map(ele => [{name:"全",flag:false},{name:"大",flag:false},{name:"小",flag:false},{name:"奇",flag:false},{name:"偶",flag:false},{name:"清",flag:false}])
     console.log(this.ballData)
@@ -183,6 +193,10 @@ export class CommonProvider {
     this.tabVisible = 'visible'
   }
 
+  change(val){
+    console.log(val)
+  }
+
   toggle(){
     this.visible = this.visible == 'invisable' ? 'visable':'invisable'
     this.visible == 'visable' ? $('.body-bg').fadeIn(1000) : $('.body-bg').fadeOut(1000)
@@ -197,7 +211,7 @@ export class CommonProvider {
   }
 
   produce(){
-      this.countDown(Math.floor(Math.random()*60)*1000)
+      this.countDown(Math.floor(Math.random()*30)*1000)
       
   }
 
@@ -206,12 +220,60 @@ export class CommonProvider {
        if(time <1000){
           clearInterval(this.timer)
           this.global.showToast('进入新一期开奖',2000)
+          this.record = this.mockData()
           this.produce()
        } 
        this.countTime = this.getTimeRemaining(time)
        time -= 1000
     },1000)
   }
+
+  mockData(){
+    let random = Math.floor(Math.random()*100)
+    let end = random<10 ? '00' + random : '0' + random 
+    let month = new Date().getMonth()<10 ? '0'+new Date().getMonth():new Date().getMonth()
+    let date = new Date().getDate()<10 ? '0'+new Date().getDate():new Date().getDate()
+    console.log(month)
+    let number = new Date().getFullYear().toString().substr(2) 
+     + month + date + end
+     console.log(number)
+           
+    let record = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
+    let result:Array<any> = [0,0,0,0,0,0,0,0].map((ele,index) => {
+        if(index == 6)
+           return {choose:'+',color:''}
+        let choose = record[Math.floor(Math.random()*(record.length - 1))]
+        record.splice(record.indexOf(choose),1)
+        choose < 10 ? '0' + choose : choose;
+        let color = ''
+        this.lhc.banboColor.forEach((ele,index) => {
+             if(ele.indexOf(choose) != -1){
+                 if(index == 0)
+                    color = 'red'
+                 else if(index == 1)
+                    color = 'purple'
+                 else
+                    color = 'green'
+                 return   
+             }
+
+        })
+        return {choose,color:color}
+    })
+
+    let axiba = [0,0,0,0,0,0,0,0].map((ele,index) =>{
+        if(index == 6)
+           return ' '
+        let filter = this.lhc.zodadic.filter(ele => ele.indexOf(result[index].choose) != -1)[0]  
+        return this.lhc.mark[this.lhc.zodadic.indexOf(filter)]
+    })
+    
+    return {
+        result,
+        number,
+        axiba
+    }
+}
 
   getTimeRemaining(t) {
     let seconds = Math.floor((t / 1000) % 60);

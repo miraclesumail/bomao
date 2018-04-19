@@ -1,4 +1,4 @@
-.active{background: pink}
+.ball-content li.active{background: pink}
 
 // .choose-game{display:flex;flex-direction:column;width:100%;position:fixed;bottom:67px;background:orange;z-index:1200;transition:1s}
 
@@ -20,3 +20,31 @@
 .red li.choose{background:#FF7C48 }
 .blue li.choose{background:#5048FF }
 .green li.choose{background:#4BFF48 }
+
+.single-xiao{margin-right:10px;width:20px;height:20px;border-radius:50%;text-align: center}
+ul.shengxiao{margin-bottom: 5px}
+ul .single-xiao:nth-of-type(7){width:10px;}
+
+
+li.shengxiao-name{margin-right:10px;width:20px;text-align: center}
+
+ul .shengxiao-name:nth-of-type(7){width:10px;}
+.shengxiao li.red{border: 1px solid #FF7C48}
+.shengxiao li.purple{border: 1px solid #5048FF}
+.shengxiao li.green{border: 1px solid #4BFF48}
+ul .single-xiao:nth-of-type(7){width:10px;}
+
+ul .single-xiao:nth-of-type(8).red{background:#FF7C48 }
+ul .single-xiao:nth-of-type(8).purple{background:#5048FF }
+ul .single-xiao:nth-of-type(8).green{background:#4BFF48 }
+
+.ball-content li.red{border: 1px solid #FF7C48}
+.ball-content li.purple{border: 1px solid #5048FF}
+.ball-content li.green{border: 1px solid #4BFF48}
+
+.ball-content li.active.red{background:#FF7C48}
+.ball-content li.active.purple{background:#5048FF}
+.ball-content li.active.green{background:#4BFF48}
+
+div.clear{background:url('/assets/imgs/games/clear.png') center center no-repeat;width:70px;border-right:1px solid #f0f0f0;background-color:#ffffff}
+

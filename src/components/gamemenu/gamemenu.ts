@@ -86,8 +86,20 @@ export class GamemenuComponent {
   setMethodIndex(index){
      this.bigIndex = index
      this.method = this.common.gameMethodConfig[index].name
-     this.small = this.common.gameMethodConfig[index].children
-     this.smallMethod = this.common.gameMethodConfig[index].children[0].children[0].name
+
+     if(this.common.gameMethodConfig[index].children.length){
+        this.small = this.common.gameMethodConfig[index].children
+        this.smallMethod = this.common.gameMethodConfig[index].children[0].children[0].name
+     }else{
+        this.small = this.common.small = []
+        this.smallMethod = this.common.smallMethod = ''
+        this.common.method = this.common.gameMethodConfig[index].name
+        this.lhc.gameSort = this.common.gameMethodConfig[index].name
+        this.common.visible = 'invisable';
+        this.lhc.resetData()
+        $('.body-bg').fadeOut(1000)
+     }
+        
   }
 
   setSmallIndex(j,name){
@@ -95,6 +107,7 @@ export class GamemenuComponent {
       this.common.visible = 'invisable';
       $('.body-bg').fadeOut(1000)
       console.log(name)
+      // 切换小玩法 判断是lhc
       if(this.nav.getActive().name == "LhcPage"){
           this.lhc.resetData()
           this.lhc.setGameKind(name)

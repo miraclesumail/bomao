@@ -1,14 +1,15 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      <div style="float:right;padding:5px" (click)="$event.stopPropagation();open = !open">toggle</div>
             <div class="header-r" #methodName (click)="common.toggle()" style="float:right;margin-right:30px;position:relative;z-index:1200;border:1px solid green;padding:5px">{{common.method}} {{common.smallMethod}}</div>
 
     </ion-title>
+    <div (click)="$event.stopPropagation();common.open = !common.open" style="float:right;margin-right:25px;background:url('/assets/imgs/games/toggle.png') center center no-repeat;width:21px;height:21px"></div>
+    
   </ion-navbar>
 </ion-header>
 
-<rightmenu [menus]="menus" (switch)="change($event)" [open]="open"></rightmenu>
+<rightmenu [menus]="menus" (switch)="common.change($event)" [open]="common.open"></rightmenu>
 <gamemenu> </gamemenu>    
 <div class="body-bg"></div>
 

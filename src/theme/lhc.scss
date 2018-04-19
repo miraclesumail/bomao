@@ -3,8 +3,12 @@
       background-color:#f0f0f0;
     }
 
-    .toolbar-background-md{background: chocolate}
-
+    .toolbar-background-md{background: #4A8CC0}
+    .toolbar-background-ios{background: #4A8CC0}
+    rightmenu ul {
+      background: #4A8CC0;
+      padding: 10px;
+    }
   }
 
   .ssc{
@@ -12,5 +16,10 @@
         background-color:lightcyan;
       }
 
-      .toolbar-background-md{background:pink}
+      .toolbar-background-md{background:#F3361B}
+      .toolbar-background-ios{background:#F3361B;opacity: .5}
+      rightmenu ul {
+        background: #F3361B;
+        padding: 10px;
+      }
   }

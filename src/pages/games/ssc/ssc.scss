@@ -3,6 +3,8 @@
 #bet-statistic{width:calc(100% - 232px);position:relative;display:flex;background:#f0f0f0}
 .balls-data{display:flex;justify-content:space-between;margin-bottom: 20px}
 .balls-data li{width:30px;height:30px;border:1px solid pink;border-radius:50%;text-align:center;line-height:30px}
+
+.balls-data li.active{background: pink}
 #ball{width:20px;height:20px;background:yellow;position:absolute;top:0px;left:50px;border-radius:50%;}
 #bet-statistic.can{background: lightblue}
 div.shadow{background: #f0f0f0}
