@@ -1,3 +1,19 @@
 page-basket {
+    .top-menu{width:30%;padding:3px;background: #ffffff;border:1px solid #f0f0f0;text-align: center}
 
+    .bet-ball{color:#F6374E;margin-right:5px}
+    ul.fandian{transition: all .5s;position:absolute;bottom:0;background:#f5d300;width:100%;border-radius:10px}
+    ul.fandian li{display: block}
+
+    //footer
+    .basket-footer{display:flex;flex-direction:column;height:140px;background:#ffffff;padding-top:10px}
+
+    .mutiple,.trace{float:left;margin-right:5px}
+
+    .mutiple-number,.trace-number{float:left;width:44px;height:26px;text-align:center;line-height:26px;}
+    .up,.down{float:left;width:26px;height:26px;border-radius:50%;background:#ffffff;text-align:center;line-height:20px;font-weight:500;color:red;font-size:3rem}
+
+    .middle-part{display:flex;justify-content:space-between;width:100%;padding:0 10px 10px 10px;border-bottom:1px solid grey;margin-top:10px}
+
+    .fandian-number{float:left;background:#F3F3F3;width:120px;text-align:center;height:30px;line-height:26px;border-radius:30px;padding:2px;position:relative}
 }

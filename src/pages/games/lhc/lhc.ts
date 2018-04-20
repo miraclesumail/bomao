@@ -13,6 +13,7 @@ import * as $ from 'jquery';
  
 })
 export class LhcPage {
+  axiba:any = '快捷投注'
 //   data:any;  
   choosen:string;
 //   method:string;

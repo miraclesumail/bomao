@@ -14,15 +14,94 @@
 
 
 <ion-content padding>
-   <div style="margin-bottom:20px" (click)="basket.randomChoose()">机选1注</div>
+    <div style="text-align:center">
+        距下一期开奖 <span>{{common.countTime.minutes}}</span>:<span>{{common.countTime.seconds}}</span>
+    </div>
+   <div class="top-header" style="display:flex;justify-content:space-between;margin-bottom:10px">
+      <div class="top-menu" (click)="basket.randomChoose(1)">+ 机选1注</div>
+      <div class="top-menu" (click)="basket.randomChoose(5)">+ 机选5注</div>
+      <div class="top-menu" (click)="basket.randomChoose()">继续追号</div>
+  </div> 
+   
    <div>
        <ul>
-          <li *ngFor="let item of basket.betData;let i = index" style="display:block;padding:10px;margin-bottom:10px;background:#f0f0f0">
-              <div> <span *ngFor="let detail of item.betData">{{detail}} |</span></div>
-              <div><span>{{item.gameName}}</span>    共{{item.count}}注 {{item.price}}元
-                 <span style="float:right" (click)="basket.removeByIndex(i)">delete</span>   
+          <li *ngFor="let item of basket.betData;let i = index" style="display:flex;padding:10px;margin-bottom:10px;background:#f0f0f0">
+              <div style="width:15%;display:flex;align-items:center;justify-content:center">
+                <img src="assets/imgs/games/delete.png" alt="" (click)="basket.removeByIndex(i)">
               </div>
+              <div style="display:flex;flex-direction:column;width:80%"> 
+                  <div style="border-bottom:1px solid lightgreen;padding:5px 0 5px 0;margin-bottom:5px">
+                      <span class="bet-ball" *ngFor="let detail of item.betData">{{detail}} |</span>
+                  </div>
+                 <div style="display:flex;justify-content:space-between">
+                    <span>{{item.gameName}}</span>    共{{item.count}}注 {{item.price}}元
+                 </div>
+              </div>
+              <!-- <div><span>{{item.gameName}}</span>    共{{item.count}}注 {{item.price}}元
+                 <span style="float:right" (click)="basket.removeByIndex(i)">delete</span>   
+              </div> -->
           </li>
        </ul>
    </div>
 </ion-content>
+
+<ion-footer class="basket-footer" >
+    <div style="display:flex;justify-content:space-between;width:100%;padding:0 10px 0 10px">
+          <div style="line-height:30px">
+              <div style="float:left">倍数:</div> 
+              <div style="float:left;background:#F3F3F3;width:100px;height:30px;border-radius:30px;padding:2px">
+                <div class="down">
+                    -
+                </div>
+                    <div class="mutiple-number">1</div>
+                  <div class="up" >
+                        +
+                </div>
+              </div> 
+          </div>
+
+          <div style="line-height:30px;">
+              <div class="trace">追号:</div> 
+              <div style="float:left;background:#F3F3F3;width:100px;height:30px;border-radius:30px;padding:2px">
+                <div class="down" >
+                    -
+                </div>
+                    <div class="trace-number">1</div>
+                  <div class="up" >
+                        +
+                </div>
+              </div> 
+          </div>
+    </div>
+
+    <div class="middle-part">
+        <div style="line-height:30px">
+            <div style="float:left;margin-right:5px">返点:</div> 
+            <div class="fandian-number" (click)="toggle()">
+                 1950-0.00% +
+                 <ul class="fandian" [@show]="show" >
+                     <li>1800-7.50%</li>
+                     <li>1800-7.50%</li>
+                     <li>1800-7.50%</li>
+                 </ul>
+               
+            </div> 
+        </div>
+
+       <div>
+          <div style="float:right">中奖后停止追号</div>
+          <input type="checkbox" name="trace" checked="checked" style="float:right">
+       </div>
+  </div>
+
+  <div style="display:flex;justify-content:space-between;height:50px">
+       <div style="padding-left:5px">
+          <div>追号 1 期</div> 
+          <div>余额：¥123</div>
+        </div>
+       <div>共 384 元</div> 
+       <div style="width:100px;background:url('assets/imgs/games/now-bet.png')">
+
+       </div>
+  </div>
+</ion-footer>

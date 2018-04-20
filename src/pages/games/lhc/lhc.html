@@ -30,10 +30,14 @@
        </div>
     </div>
 
+    <ion-segment class="self-auto" [(ngModel)]="lhc.methodChoose" (ionChange)="lhc.changeMethodChoose($event)" style="margin:10px 0 10px 0">
+            <ion-segment-button  value="快捷投注">快捷投注</ion-segment-button>
+            <ion-segment-button  value="自选投注">自选投注</ion-segment-button>
+    </ion-segment>
 
     <div [ngSwitch]="lhc.gameSort" style="margin-top:30px">
             <div *ngSwitchCase="'半波'" class="banbo">
-                    <ion-segment [(ngModel)]="lhc.banbo" (ionChange)="lhc.changeBanbo($event)" style="margin-bottom:10px">
+                    <ion-segment class="bo-choose" [(ngModel)]="lhc.banbo" (ionChange)="lhc.changeBanbo($event)" style="margin-bottom:10px">
                             <ion-segment-button  value="红波">红波</ion-segment-button>
                             <ion-segment-button  value="绿波">绿波</ion-segment-button>
                             <ion-segment-button  value="蓝波">蓝波</ion-segment-button>
@@ -80,20 +84,36 @@
                      </ul>
                  </div> -->
 
-                 <div>
-                    
-                    <ul class="ball-content" *ngFor="let item of lhc.temaData" style="display:flex;justify-content:space-around;width:100%">
-                        <li *ngFor="let ii of item" [class.active]="lhc.check(ii)" [ngClass]="lhc.checkColor(ii)" (click)="lhc.toggleChoose(ii)" style="width:30px;height:30px;text-align:center;line-height:30px;border-radius:50%;margin-bottom:15px">
-                            {{ii}}
-                        </li>
-                    </ul>
-                </div>
-                <div>
-                    <ul class="big-kind" *ngFor="let ii of [0,1,2,3]" style="display:flex;justify-content:space-around;width:100%;margin-bottom:10px">
-                        <li *ngFor="let item of lhc.allData.slice(ii*4, (ii+1)*4)" [class.active]="lhc.checkSort(item.name)" style="width:20%;border:1px solid lightblue;height:20px;text-align:center" (click)="lhc.switch(item.name)">{{item.name}}</li>
-                    </ul>
-                </div>
-                    
+              <div [ngSwitch]="lhc.methodChoose">  
+                    <div *ngSwitchCase="'快捷投注'">
+                            <div>
+                                    
+                                    <ul class="ball-content" *ngFor="let item of lhc.temaData" style="display:flex;justify-content:space-around;width:100%">
+                                        <li *ngFor="let ii of item" [class.active]="lhc.check(ii)" [ngClass]="lhc.checkColor(ii)" (click)="lhc.toggleChoose(ii)" style="width:30px;height:30px;text-align:center;line-height:30px;border-radius:50%;margin-bottom:15px">
+                                            {{ii}}
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <ul class="big-kind" *ngFor="let ii of [0,1,2,3]" style="display:flex;justify-content:space-around;width:100%;margin-bottom:10px">
+                                        <li *ngFor="let item of lhc.allData.slice(ii*4, (ii+1)*4)" [class.active]="lhc.checkSort(item.name)" style="width:20%;border:1px solid lightblue;height:20px;text-align:center" (click)="lhc.switch(item.name)">{{item.name}}</li>
+                                    </ul>
+                            </div>
+                      </div>
+
+                      <div *ngSwitchCase="'自选投注'">
+                            <div>
+                               <ul *ngFor="let ii of [0,1,2,3,4,5,6,7,8,9,10,11]" style="display:flex;width:100%;justify-content:space-between;margin-bottom:10px">
+                                   <li *ngFor="let item of lhc.allNumber.slice(ii*4, (ii+1)*4)" style="width:23%;height:50px">
+                                       <div style="padding-left:8px">{{item}} *48.42</div>
+                                       <div><input type="text" style="width:100%;border:1px solid grey;height:30px;border-radius:5px"></div>
+                                    </li>
+                               </ul>
+                            </div>
+                      </div>
+                        
+            </div>
+             
 
                
             </div>

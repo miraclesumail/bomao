@@ -1,4 +1,5 @@
 gamemenu {
     div.active{color: black}
-    .choose-game{display:flex;flex-direction:column;width:100%;position:fixed;top:67px;background:orange;z-index:1200;transition:.5s;transform-origin:center top}
+    .choose-game{display:flex;flex-direction:column;width:100%;position:fixed;top:48px;background:#ffffff;padding: 10px;
+        z-index:1200;transition:.5s;transform-origin:center top}
 }

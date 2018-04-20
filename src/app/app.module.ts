@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { IonicSwipeAllModule } from 'ionic-swipe-all';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
-
+import { PipesModule } from '../pipes/pipes.module'
 // ngmodel 绑定
 import { FormsModule } from '@angular/forms';
 import { MyApp } from './app.component';
@@ -45,6 +45,7 @@ import { LhcServiceProvider } from '../providers/lhc-service/lhc-service';
     FormsModule,
     HttpClientModule,
     LazyLoadImageModule,
+    PipesModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot()
     

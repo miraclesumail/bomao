@@ -20,6 +20,7 @@ export class HomePage {
   swipeOptions:any;
   index = 0;
   shake:boolean = false;
+  hero:any = 'JJJD'
 
   notification:Array<any> = [
     "qqqqqqqqqqq",

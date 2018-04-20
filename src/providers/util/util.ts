@@ -56,12 +56,12 @@ export class UtilProvider {
     this.common.ballData.forEach(item => {
          let arr = []
          item.value.forEach((ele,index) => {
-              ele == 1 ? arr.push(index):''
+              ele == 1 ? arr.push(('0'+index).slice(-2)):''
          })
-         dataArr.push(arr)
+         dataArr.push(arr.join(' '))
     })
     console.log(dataArr)
-    dataArr = dataArr.map(item => item.join(''))
+    // dataArr = dataArr.map(item => item.join(''))
    
     return {
          betData:dataArr,
@@ -71,10 +71,24 @@ export class UtilProvider {
     }
   }
 
+  generateTwo(number){
+        
+        let arr = [0,1,2,3,4,5,6,7,8,9]
+        let temp = []
+        for(let i = 0;i<number;i++){
+            let index = Math.floor(Math.random()*(arr.length+1))
+            temp.push(arr[index])
+            arr.splice(index,1)
+        }
+        return temp
+  }
+
   // 机选注单
-  randomChoose(){
+  randomChoose(number?){
     this.common.ballData = this.common.ballData.map(item => {
+        // let arr = [0,1,2,3,4,5,6,7,8,9]
         let random = Math.floor(Math.random()*10)
+        //let arr = this.generateTwo(number)
         let balls = item.value.map((ele,index) => index == random ? 1 : 0)
         item.value = balls
         return item
