@@ -4,6 +4,9 @@ import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { IonicSwipeAllModule } from 'ionic-swipe-all';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
 import { PipesModule } from '../pipes/pipes.module'
+
+import { AlertComponent } from '../components/alert/alert'
+
 // ngmodel 绑定
 import { FormsModule } from '@angular/forms';
 import { MyApp } from './app.component';
@@ -35,7 +38,8 @@ import { LhcServiceProvider } from '../providers/lhc-service/lhc-service';
     ContactPage,
     HomePage,
     TabsPage,
-    BetComponent
+    BetComponent,
+    AlertComponent
   ],
   imports: [
     BrowserModule,
@@ -57,7 +61,8 @@ import { LhcServiceProvider } from '../providers/lhc-service/lhc-service';
     ContactPage,
     HomePage,
     TabsPage,
-    BetComponent
+    BetComponent,
+    AlertComponent
   ],
   providers: [
     StatusBar,

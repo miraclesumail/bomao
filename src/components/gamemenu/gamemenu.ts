@@ -64,11 +64,11 @@ export class GamemenuComponent {
   constructor(public common:CommonProvider, public nav:Nav, public lhc:LhcServiceProvider) {
     console.log('Hello GamemenuComponent Component');
     let self = this;
-    $(document).on('click','.body-bg',function(){
-       if(self.common.visible = 'visable'){
-              console.log('fff');self.toggle()
-        }
-    });
+    // $(document).on('click','.body-bg',function(){
+    //    if(self.common.visible = 'visable'){
+    //           console.log('fff');self.toggle()
+    //     }
+    // });
     //this.getSmall()
     this.method = this.common.method
     this.small = this.common.small

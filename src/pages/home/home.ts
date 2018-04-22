@@ -1,9 +1,11 @@
-import { Component, ViewChild } from '@angular/core';
-import { NavController,IonicPage, App} from 'ionic-angular';
+import {
+  Component, ViewChild, ViewContainerRef, ComponentFactory,
+  ComponentRef, ComponentFactoryResolver, OnDestroy
+} from '@angular/core';import { NavController,IonicPage, App} from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import {Observable} from 'rxjs/Observable';
 import { CommonProvider } from "../../providers/common/common";
-
+import { AlertComponent } from '../../components/alert/alert'
 //import {KSSwiperContainer, KSSwiperSlide} from 'angular2-swiper';
 import * as $ from 'jquery'
 declare let Swiper:any;
@@ -11,9 +13,13 @@ declare let Swiper:any;
 @IonicPage()
 @Component({
   selector: 'page-home',
-  templateUrl: 'home.html'
+  templateUrl: 'home.html',
+  providers:[AlertComponent]
 })
 export class HomePage {
+  componentRef: ComponentRef<AlertComponent>;
+  @ViewChild("alertContainer", { read: ViewContainerRef }) container: ViewContainerRef;
+
   latest:string ;
   oSwiper1:any;
   data:Array<number>;
@@ -21,6 +27,8 @@ export class HomePage {
   index = 0;
   shake:boolean = false;
   hero:any = 'JJJD'
+
+  items:any = ['qqqq','sssss','fffff','qqqq','sssss','fffff']
 
   notification:Array<any> = [
     "qqqqqqqqqqq",
@@ -66,7 +74,7 @@ export class HomePage {
   }
 
 
-  constructor(public navCtrl: NavController,public storage: Storage, public common:CommonProvider, public app:App) {
+  constructor(public navCtrl: NavController,public storage: Storage, public common:CommonProvider, public app:App, private resolver: ComponentFactoryResolver) {
      this.updateLate()
      console.log(Swiper)
      this.lottery = this.lotterys[Math.floor(Math.random()*this.lotterys.length)]
@@ -96,6 +104,24 @@ export class HomePage {
         lastX = x;
         lastY = y;
     }.bind(this), false);
+  }
+
+  myHeaderFn(record, recordIndex, records) {
+  if (recordIndex % 2 === 0) {
+    return 'Header ' + recordIndex;
+  }
+  return null;
+}
+
+  createComponent(type:string){
+      this.container.clear()
+      const factory: ComponentFactory<AlertComponent> = this.resolver.resolveComponentFactory(AlertComponent)
+      this.componentRef = this.container.createComponent(factory)
+      this.componentRef.instance.text = type
+  }
+
+  ngOnDestroy() {
+    this.componentRef.destroy()
   }
 
   ionViewDidEnter(){

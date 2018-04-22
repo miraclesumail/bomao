@@ -3,7 +3,10 @@ import { NavController,IonicPage } from 'ionic-angular';
 import { CommonProvider } from "../../../providers/common/common";
 import { HttpClientProvider } from "../../../providers/http-client/http-client";
 import { UtilProvider } from '../../../providers/util/util'
+import { GamemenuComponent } from '../../../components/gamemenu/gamemenu'
 import { BasketDataProvider } from '../../../providers/basket-data/basket-data'
+import { Effect } from '../../baseComponent'
+
 import * as $ from 'jquery'
 import * as Hammer from 'hammerjs';
 
@@ -53,7 +56,7 @@ function easeOutCubic(t, b, c, d) {
   selector: 'ssc',
   templateUrl: 'ssc.html'
 })
-export class SscPage {
+export class SscPage extends Effect{
   data:any;
 
   shadow:boolean = true
@@ -80,7 +83,8 @@ export class SscPage {
      x*2 + 50x
   */
 
-  constructor(public navCtrl: NavController,public common:CommonProvider,public http:HttpClientProvider,public util:UtilProvider,public basket:BasketDataProvider) {
+  constructor(public navCtrl: NavController,public common:CommonProvider,public http:HttpClientProvider,public util:UtilProvider,public basket:BasketDataProvider,public gamemenu:GamemenuComponent) {
+      super(common,gamemenu)
       this.common.setActiveTheme('ssc')
     
       this.util.shakePhone(this.util.randomChoose)

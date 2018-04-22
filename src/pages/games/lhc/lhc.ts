@@ -4,15 +4,17 @@ import { CommonProvider } from "../../../providers/common/common";
 import { HttpClientProvider } from "../../../providers/http-client/http-client";
 import { LhcServiceProvider } from "../../../providers/lhc-service/lhc-service"
 import { BetComponent } from '../../../components/bet/bet';
+import { GamemenuComponent } from '../../../components/gamemenu/gamemenu'
+import { Effect } from '../../baseComponent'
 import * as $ from 'jquery';
 
 @IonicPage()
 @Component({
   selector: 'lhc',
-  templateUrl: 'lhc.html'
- 
+  templateUrl: 'lhc.html',
+  providers:[GamemenuComponent]
 })
-export class LhcPage {
+export class LhcPage extends Effect{
   axiba:any = '快捷投注'
 //   data:any;  
   choosen:string;
@@ -86,7 +88,8 @@ export class LhcPage {
 
   hasChoose:any = [];
   menus:any =  ['走势图','近期开奖','玩法说明']
-  constructor(public navCtrl: NavController, public common:CommonProvider, public lhc:LhcServiceProvider,public http:HttpClientProvider,public modalCtrl: ModalController) {
+  constructor(public navCtrl: NavController, public common:CommonProvider, public lhc:LhcServiceProvider,public http:HttpClientProvider,public modalCtrl: ModalController,public gamemenu:GamemenuComponent) {
+      super(common,gamemenu)
       this.common.setActiveTheme('lhc');
       //this.initData();
       this.kinds = this.allData.map(item => Object.keys(item));
@@ -120,12 +123,21 @@ export class LhcPage {
   }
 
   newBet(){
-     let data:Array<Object> = []
+     let data:Array<any> = []
      if(this.lhc.gameSort == '半波'){
            for(let ii in this.lhc.banboPlay){
                this.lhc.banboPlay[ii].forEach(ele => {
                     ele.allChoose ? data.push({name:ele.name}):''
                })
+           }
+           let contactModal = this.modalCtrl.create(BetComponent,{data:data})
+           contactModal.present()
+     }   
+
+     if(this.lhc.gameSort == '特码'){
+           for(let ii of this.lhc.hasChoose){
+                data.push({name:'特码'+ii})
+               
            }
            let contactModal = this.modalCtrl.create(BetComponent,{data:data})
            contactModal.present()

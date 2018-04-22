@@ -2,13 +2,17 @@
 <div class="choose-game alert-con" [@fading]="common.visible"> 
     <div>
         玩法选择
-        <ul>
-            <li *ngFor="let item of common.data;let i = index" style="width:20%;margin-right:4%;height:30px;display:inline-block;border:1px solid lightblue" [class.active]="method == item.name" (click)="setMethodIndex(i)">{{item.name}}</li>
+        <ul class="big-method" style="border-bottom:1px solid #F1D2BF">
+            <li *ngFor="let item of common.data;let i = index" style="width:21%;height:30px;display:inline-block;border:1px solid lightblue" [class.active]="method == item.name" (click)="setMethodIndex(i)">{{item.name}}</li>
         </ul>
     </div>
     <div style="margin-top:10px">
-        <div *ngFor="let item of small;let j = index">
-            <span>{{item.name}}: </span><div style="display:inline-block;width:20%;" *ngFor="let ele of item.children;let k = index" (click)="setSmallIndex(j,ele.name)">{{ele.name}}</div>
+        <div *ngFor="let item of small;let j = index" style="display:flex">
+            <span>{{item.name}}: </span>
+            <div style="width:75%;padding-left:3%">
+                <div style="display:inline-block;width:30%;margin-right:2%;border-radius:5px;background:#ffffff;text-align:center;padding:3px;margin-bottom:10px" *ngFor="let ele of item.children;let k = index" (click)="setSmallIndex(j,ele.name)">{{ele.name}}</div>
+
+            </div>
                 
         </div>
     </div>

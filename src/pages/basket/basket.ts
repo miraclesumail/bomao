@@ -4,6 +4,7 @@ import { BasketDataProvider } from '../../providers/basket-data/basket-data'
 import { CommonProvider } from "../../providers/common/common";
 import { slideUp } from '../../animations'
 import { trigger ,state,transition,animate,style} from "@angular/animations";
+import { ViewController } from 'ionic-angular';
 
 /**
  * Generated class for the BasketPage page.
@@ -21,7 +22,8 @@ import { trigger ,state,transition,animate,style} from "@angular/animations";
 export class BasketPage {
   show:string = "invisable"
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public basket:BasketDataProvider, public common:CommonProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public basket:BasketDataProvider, public common:CommonProvider, public viewCtrl:ViewController) {
+           this.viewCtrl.willLeave.subscribe(data => console.log(data))
   }
 
   ionViewDidLoad() {
@@ -32,4 +34,7 @@ export class BasketPage {
     this.show = this.show == 'invisable' ? 'visable' : 'invisable'
   }
 
+  change(number){
+    this.basket.statistic.multiple += number
+  }
 }
