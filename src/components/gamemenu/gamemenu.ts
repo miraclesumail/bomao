@@ -100,6 +100,8 @@ export class GamemenuComponent {
         this.smallMethod = this.common.smallMethod = ''
         this.common.method = this.common.gameMethodConfig[index].name
         this.lhc.gameSort = this.common.gameMethodConfig[index].name
+        console.log('wfwfwef')
+        console.log(this.lhc.gameSort)
         this.common.visible = 'invisable';
         this.lhc.resetData()
         $('.body-bg').fadeOut(1000)

@@ -8,7 +8,7 @@ import { Injectable } from '@angular/core';
 */
 @Injectable()
 export class LhcServiceProvider {
-  gameSort:string = "特码";
+  gameSort:string = "总分";
 
   banbo:string = "红波"
   banboData:any;
@@ -119,6 +119,17 @@ allData:any = [
     [1,2,7,8,12,13,18,19,23,24,29,30,34,35,40,45,46],  //红色
     [3,4,9,10,14,15,20,25,26,31,36,37,41,42,47,48],    //紫色
     [5,6,11,16,17,21,22,27,28,32,33,38,39,43,44,49]    //绿色
+  ]
+
+  zongfenData:any = [
+      {betNum:1.99, kind:'大', des:'fwfweg3g43g434'},
+      {betNum:1.99, kind:'小', des:'fwfweg3g43g434'},
+      {betNum:1.99, kind:'单', des:'fwfweg3g43g434'},
+      {betNum:1.99, kind:'双', des:'fwfweg3g43g434'},
+      {betNum:1.99, kind:'大单', des:'fwfweg3g43g434'},
+      {betNum:1.99, kind:'小单', des:'fwfweg3g43g434'},
+      {betNum:1.99, kind:'大双', des:'fwfweg3g43g434'},
+      {betNum:1.99, kind:'小双', des:'fwfweg3g43g434'}
   ]
 
   constructor(public http: HttpClient) {

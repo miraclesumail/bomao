@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { NavController,IonicPage,ModalController } from 'ionic-angular';
+import { Component,ViewChild ,ElementRef,  ViewContainerRef, ComponentFactoryResolver, } from '@angular/core';
+import { NavController,IonicPage,ModalController} from 'ionic-angular';
 import { CommonProvider } from "../../../providers/common/common";
 import { HttpClientProvider } from "../../../providers/http-client/http-client";
 import { LhcServiceProvider } from "../../../providers/lhc-service/lhc-service"
@@ -15,6 +15,9 @@ import * as $ from 'jquery';
   providers:[GamemenuComponent]
 })
 export class LhcPage extends Effect{
+ 
+  @ViewChild("alertContainer", { read: ViewContainerRef }) container: ViewContainerRef;
+  
   axiba:any = '快捷投注'
 //   data:any;  
   choosen:string;
@@ -88,12 +91,13 @@ export class LhcPage extends Effect{
 
   hasChoose:any = [];
   menus:any =  ['走势图','近期开奖','玩法说明']
-  constructor(public navCtrl: NavController, public common:CommonProvider, public lhc:LhcServiceProvider,public http:HttpClientProvider,public modalCtrl: ModalController,public gamemenu:GamemenuComponent) {
-      super(common,gamemenu)
+  constructor(public navCtrl: NavController, public common:CommonProvider, public lhc:LhcServiceProvider,public http:HttpClientProvider,public modalCtrl: ModalController,public gamemenu:GamemenuComponent, public factoryResolver:ComponentFactoryResolver) {
+      super(common,gamemenu,factoryResolver)
       this.common.setActiveTheme('lhc');
       //this.initData();
       this.kinds = this.allData.map(item => Object.keys(item));
-      //let aa = async this.http.fetchData('/assets/lhc.json');
+
+      //this.addDynamicComponent()
   }
 
 //   toggle(){

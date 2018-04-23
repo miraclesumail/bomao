@@ -39,6 +39,7 @@ export class BasketDataProvider {
     });
     _.observe([this.betData,this.statistic],()=> this.calculateTotal())
     //_.observe(this.statistic,()=> console.log('axiba'))
+
   }
 
   calculateTotal(){

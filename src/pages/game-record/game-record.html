@@ -19,21 +19,19 @@
       </ion-segment>
     </div>-->
 <div>
- <ul class="record">
-    <li class="record-li">
+ <ul class="record" style="display:flex">
+    <li class="record-li" style="width:33.33%">
       <ion-list>
         <ion-item>
-          <ion-label>开始时间</ion-label>
           <ion-datetime cancelText="取消" doneText="确定" displayFormat="YYYY-MM-DD" pickerFormat="YYYY-MM-DD"
                         [(ngModel)]="eventOne.timeStarts" (ngModelChange)="say()"></ion-datetime>
         </ion-item>
       </ion-list>
       <i class="iconfont icon-fanhui icon-down"></i>
     </li>
-    <li class="record-li">
+    <li class="record-li" style="width:33.33%">
       <ion-list>
         <ion-item>
-          <ion-label>结束时间</ion-label>
           <ion-datetime cancelText="取消" doneText="确定" displayFormat="YYYY-MM-DD" pickerFormat="YYYY-MM-DD"
                         [(ngModel)]="eventOne.timeEnds" (ngModelChange)="say()">
                         <ion-icon name="arrow-down"></ion-icon>
@@ -42,7 +40,7 @@
       </ion-list>
       
     </li>
-    <li class="record-li">
+    <li class="record-li" style="width:33.33%">
       <ion-list>
         <ion-item>
           <ion-label>全部游戏</ion-label>
@@ -61,6 +59,7 @@
 
 
 <ion-content padding>
+   
 <div *ngFor="let item of gameList" style="display:flex;justify-content:space-between">
     <div>{{item.number}}</div><div>{{item.gameName}}</div><div>{{item.betNum}}</div><div>{{item.price}}</div>
 </div>

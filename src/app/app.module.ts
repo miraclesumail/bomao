@@ -4,6 +4,7 @@ import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { IonicSwipeAllModule } from 'ionic-swipe-all';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
 import { PipesModule } from '../pipes/pipes.module'
+import { LoadingComponent } from '../components/loading/loading';
 
 import { AlertComponent } from '../components/alert/alert'
 
@@ -39,7 +40,8 @@ import { LhcServiceProvider } from '../providers/lhc-service/lhc-service';
     HomePage,
     TabsPage,
     BetComponent,
-    AlertComponent
+    AlertComponent,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,
@@ -62,7 +64,8 @@ import { LhcServiceProvider } from '../providers/lhc-service/lhc-service';
     HomePage,
     TabsPage,
     BetComponent,
-    AlertComponent
+    AlertComponent,
+    LoadingComponent
   ],
   providers: [
     StatusBar,

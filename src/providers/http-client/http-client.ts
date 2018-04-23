@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {Config} from "../../config/config";
 import {GlobalShareProvider} from "../global-share/global-share";
+import { Effect } from '../../pages/baseComponent'
 /*
   Generated class for the HttpClientProvider provider.
 
@@ -18,9 +19,11 @@ export class HttpClientProvider {
 
   public fetchData(url):Promise<any>{
       return new Promise((resolve,reject) => {
-             this.http.get(url).subscribe(data => {
-                  resolve(data)
-             })
+             //this.beforeRequest()
+             this.http.get(url).subscribe((data:any) => {
+                 resolve(data)
+               
+            })
       })
   }
 
@@ -32,8 +35,21 @@ export class HttpClientProvider {
     return this.doSubmitAction(url, data);
   }
 
+  beforeRequest() {
+    // let a = localStorage.expired;
+    // let b = Date.now();
+    // if ((b - a) > 1800000)
+    //  // this.logout();
+    // else
+    //   localStorage.expired = Date.now();
+    // return (b - a) > 1800000;
+    // console.log('few')
+    // this.share.showLoading('fetching data now')
+  }
+
   doSubmitAction(url, data?): Promise<any> {
      return new Promise((resolve, reject) => {
+         this.beforeRequest()
          if(data) {
             return this.http.post(this.baseUrl + url, data).subscribe( (data:any) => {
                  console.log(data)

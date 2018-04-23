@@ -54,9 +54,10 @@ function easeOutCubic(t, b, c, d) {
 @IonicPage()
 @Component({
   selector: 'ssc',
-  templateUrl: 'ssc.html'
+  templateUrl: 'ssc.html',
+  providers:[GamemenuComponent]
 })
-export class SscPage extends Effect{
+export class SscPage{
   data:any;
 
   shadow:boolean = true
@@ -84,7 +85,7 @@ export class SscPage extends Effect{
   */
 
   constructor(public navCtrl: NavController,public common:CommonProvider,public http:HttpClientProvider,public util:UtilProvider,public basket:BasketDataProvider,public gamemenu:GamemenuComponent) {
-      super(common,gamemenu)
+      //super(common,gamemenu)
       this.common.setActiveTheme('ssc')
     
       this.util.shakePhone(this.util.randomChoose)
