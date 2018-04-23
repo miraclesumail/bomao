@@ -14,10 +14,10 @@
 
 
 <ion-content padding>
-   <div style="width:100%;padding:20px;">
+   <div style="width:100%;padding:20px 0 0 0;">
         <div *ngFor="let ii of [0,1,2]" style="display:flex;justify-content:space-between">
-             <div class="move" drag *ngFor="let qq of [0,1,2]" style="width:30%;text-align:center;height:50px;line-height:50px;background:pink;margin-bottom:20px">
-                   ddd
+             <div class="move" drag *ngFor="let qq of arr.slice(ii*3, (ii+1)*3)" style="position:relative;width:30%;text-align:center;height:70px;line-height:50px;background:pink;margin-bottom:20px">
+                   {{qq}}
              </div>
 
         </div>

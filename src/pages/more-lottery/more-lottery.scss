@@ -1,3 +1,6 @@
 page-more-lottery {
     .move{cursor: pointer}
+
+    .move.active{border:1px dashed yellow}
+    .move.mark{z-index:10}
 }

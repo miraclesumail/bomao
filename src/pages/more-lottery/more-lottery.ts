@@ -14,6 +14,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'more-lottery.html',
 })
 export class MoreLotteryPage {
+  arr:any = ['aaa','bbb','ccc','ddd','eee','fff','ggg','hhh','mmm']
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
