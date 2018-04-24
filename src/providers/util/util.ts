@@ -45,6 +45,7 @@ export class UtilProvider {
   
   constructor(public http: HttpClient,public common:CommonProvider) {
     console.log('Hello UtilProvider Provider');
+    this.setData()
 
     this.wuxingData = this.historyNumbers.map((ele,index) => {
         let sum = ele.history.reduce((l,r) => l+r)

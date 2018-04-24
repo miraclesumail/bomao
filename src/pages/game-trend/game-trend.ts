@@ -2,6 +2,8 @@ import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, Slides } from 'ionic-angular';
 import { CommonProvider } from "../../providers/common/common";
 import { UtilProvider } from '../../providers/util/util'
+import { Events } from 'ionic-angular';
+
 declare let Swiper:any;
 
 /**
@@ -24,15 +26,22 @@ export class GameTrendPage {
   // menus: Array<string> ;
   // choose:string;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public util:UtilProvider, public common:CommonProvider) { 
-     
+  constructor(public navCtrl: NavController, public navParams: NavParams, public events:Events,public util:UtilProvider, public common:CommonProvider) { 
+     //this.events.subscribe('changeTrend',(val) => this.drawTrend())
+     this.common.observable.subscribe((data) => setTimeout(() => this.drawTrend(),0))
   }
 
 
 
   ionViewWillEnter(){
-     let containers = document.getElementsByClassName('trend-container')
+      this.drawTrend() 
+  }
 
+
+
+  drawTrend(){
+      let containers = document.getElementsByClassName('trend-container')
+     console.log(containers.length)
      for(let i = 0;i<containers.length;i++){
       let container = document.getElementsByClassName('trend-container')[i]
       let canvas = document.createElement('canvas')
@@ -57,10 +66,6 @@ export class GameTrendPage {
     
   }
 
-  drawTrend(){
-     
-  }
-
   ionViewWillLeave(){
      
   }
@@ -70,6 +75,7 @@ export class GameTrendPage {
   // }
 
   segmentChanged($event){
+    console.log('wcnmb')
     console.log($event.value)
     this.contentSlides.slideTo(this.util.menus.indexOf($event.value))
   }

@@ -17,7 +17,6 @@
     <gamemenu></gamemenu>  
 <div class="segment">
      <ion-segment [(ngModel)]="util.choose" (ionChange)="segmentChanged($event)">
-       
        <ion-segment-button *ngFor="let name of util.menus;let ii = index" value="{{name}}">{{name}}</ion-segment-button>  
      </ion-segment>
 </div>

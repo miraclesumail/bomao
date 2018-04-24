@@ -2,7 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {BehaviorSubject} from "rxjs/BehaviorSubject";
 import { HttpClientProvider } from "../http-client/http-client";
-
+import { Observable } from 'rxjs/Observable';
+import { Observer } from 'rxjs/Observer';
 import * as $ from 'jquery'
 import { Subject } from 'rxjs/Subject';
 import { Events } from 'ionic-angular';
@@ -49,6 +50,8 @@ export class CommonProvider {
   tabYuan:string = "元";
   tabVisible:string = 'invisable'
 
+  observable: Observable<any>;
+  observer: Observer<any>;
   //用于存储现在游戏所有的玩法
   gameMethodConfig:Array<any> = [];
 
@@ -59,7 +62,13 @@ export class CommonProvider {
   constructor(public http: HttpClientProvider, public events:Events, public global:GlobalShareProvider, public lhc:LhcServiceProvider) {
     console.log('Hello CommonProvider Provider');
     this.theme = new BehaviorSubject(false);
-    this.produce();
+    this.produce()
+
+     this.observable = new Observable((observer: Observer<any>) => {
+         this.observer = observer;
+         
+     });
+
     this.pid.subscribe((val:any) =>{
       this.initData(val);
       this.record = this.mockData()
@@ -173,9 +182,12 @@ export class CommonProvider {
     console.log(index)
     console.log(name)
     this.bigIndex = index
+    if(this.method != this.gameMethodConfig[index].name)
+       this.observer.next('')
     this.method = this.gameMethodConfig[index].name
+    
     this.small = this.gameMethodConfig[0].children
-    this.smallMethod = name
+    this.smallMethod = name  
   }
 
   //计算注单

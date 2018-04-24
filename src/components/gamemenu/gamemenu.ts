@@ -81,12 +81,6 @@ export class GamemenuComponent {
     console.log(this.nav.getActive().name)  
   }
 
-  // changeMethod(name){
-  //   this.common.method = name;
-  //   this.common.small = this.common.data.filter(item => item.name == name)[0].children;
-  //   this.common.smallMethod = this.common.small[0].children[0]
-  // }
-
   setMethodIndex(index){
      this.bigIndex = index
      this.method = this.common.gameMethodConfig[index].name
@@ -121,6 +115,10 @@ export class GamemenuComponent {
           this.lhc.resetData()
           this.lhc.setGameKind(name)
       }
+  }
+
+  renderTrend(){
+     
   }
 
   confirm(name){
