@@ -10,6 +10,8 @@ import { Injectable } from '@angular/core';
 export class LhcServiceProvider {
   gameSort:string = "总分";
 
+  statements:any = {'总分':'以特码和生肖为一个投注组合。当开出的特码出现在其投注组合中，即视为中奖'}
+
   banbo:string = "红波"
   banboData:any;
   //快捷 自选玩法
@@ -122,14 +124,14 @@ allData:any = [
   ]
 
   zongfenData:any = [
-      {betNum:1.99, kind:'大', des:'fwfweg3g43g434'},
-      {betNum:1.99, kind:'小', des:'fwfweg3g43g434'},
-      {betNum:1.99, kind:'单', des:'fwfweg3g43g434'},
-      {betNum:1.99, kind:'双', des:'fwfweg3g43g434'},
-      {betNum:1.99, kind:'大单', des:'fwfweg3g43g434'},
-      {betNum:1.99, kind:'小单', des:'fwfweg3g43g434'},
-      {betNum:1.99, kind:'大双', des:'fwfweg3g43g434'},
-      {betNum:1.99, kind:'小双', des:'fwfweg3g43g434'}
+      {betNum:1.99, kind:'大', des:'总分大于等于175的,即视为中奖'},
+      {betNum:1.99, kind:'小', des:'总分大于等于175的,即视为中奖'},
+      {betNum:1.99, kind:'单', des:'总分大于等于175的,即视为中奖'},
+      {betNum:1.99, kind:'双', des:'总分大于等于175的,即视为中奖'},
+      {betNum:1.99, kind:'大单', des:'总分大于等于175的,即视为中奖'},
+      {betNum:1.99, kind:'小单', des:'总分大于等于175的,即视为中奖'},
+      {betNum:1.99, kind:'大双', des:'总分大于等于175的,即视为中奖'},
+      {betNum:1.99, kind:'小双', des:'总分大于等于175的,即视为中奖'}
   ]
 
   constructor(public http: HttpClient) {

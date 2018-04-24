@@ -46,8 +46,8 @@ export class HomePage {
     {name:'日了狗子彩',src:'assets/imgs/lottery4.png',url:'SscPage',number:[1,6,3,4,7],json:"./assets/ssc.json"},
     {name:'鸡吧神马彩',src:'assets/imgs/lottery5.png',url:'SscPage',number:[3,8,7,2,4],json:"./assets/ssc.json"},
     {name:'去你妈逼彩',src:'assets/imgs/lottery6.png',url:'SscPage',number:[9,3,6,1,4],json:"./assets/ssc.json"},
-    {name:'阿西吧的彩',src:'assets/imgs/lottery7.png',url:'SscPage',number:[8,5,2,6,3],json:"./assets/ssc.json"},
-    {name:'么比较死彩',src:'assets/imgs/lottery8.png',url:'SscPage',number:[3,1,7,2,6],json:"./assets/ssc.json"}
+    {name:'阿西吧的彩',src:'assets/imgs/lottery7.png',url:'GameTrendPage',number:[8,5,2,6,3],json:"./assets/ssc.json"},
+    {name:'么比较死彩',src:'assets/imgs/lottery8.png',url:'MoreLotteryPage',number:[3,1,7,2,6],json:"./assets/ssc.json"}
   ]
 
   lottery:any;

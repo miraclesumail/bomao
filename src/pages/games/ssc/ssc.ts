@@ -170,6 +170,8 @@ export class SscPage{
 
   change(val){
     console.log(val)
+    if(val == '走势图')
+      this.navCtrl.push('GameTrendPage')
   }
 
   qqq(number){

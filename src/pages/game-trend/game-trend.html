@@ -7,36 +7,70 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>game-trend</ion-title>
+    <ion-title (click)="common.toggle()">{{common.method}} {{common.smallMethod}}</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content>
+    <gamemenu></gamemenu>  
 <div class="segment">
-     <ion-segment [(ngModel)]="choose" (ionChange)="segmentChanged($event)">
-       <ion-segment-button *ngFor="let name of menus" value="{{name}}">{{name}}</ion-segment-button>  
+     <ion-segment [(ngModel)]="util.choose" (ionChange)="segmentChanged($event)">
+       
+       <ion-segment-button *ngFor="let name of util.menus;let ii = index" value="{{name}}">{{name}}</ion-segment-button>  
      </ion-segment>
 </div>
 
 <ion-slides #contentSlides (ionSlideDidChange)="slideChanged()">
   <ion-slide>
-     <div id="trend-container">
-        <ul *ngFor="let item of util.fakeData" style="display:flex;padding:0 20px 0 20px;justify-content:space-between">
-            <li *ngFor="let ele of item" style="margin-bottom:25px;width:28px;height:28px;border-radius:50%"[class.highlight]="ele.choose">{{ele.number}}</li>
+       
+           <div class="kai-jiang">
+             <div style="width:12.5%">期号</div><div style="width:37.5%">开奖号码</div><div style="width:12.5%">和值</div><div style="width:12.5%">跨度</div>
+             <div style="width:12.5%">大小比</div><div style="width:12.5%">奇偶比</div>
+          </div>
+
+          <div *ngFor ="let item of util.wuxingData" class="kai-jiang-line">
+               <div style="width:12.5%">{{item.number}}</div>
+               <div style="width:37.5%"><span *ngFor="let aa of item.history">{{aa}}</span></div>
+               <div style="width:12.5%">{{item.sum}}</div>
+               <div style="width:12.5%">{{item.gap}}</div>
+               <div style="width:12.5%">{{item.daxiao}}</div>
+               <div style="width:12.5%">{{item.oddeven}}</div>
+          </div>
+       
+  </ion-slide>  
+
+  <ion-slide *ngFor="let ii of util.trendKind[common.method] ">
+      <div class="trend-container">
+          <ul *ngFor="let item of util.fakeData[ii]">
+              <li *ngFor="let ele of item" [class.highlight]="ele.choose">{{ele.number}}</li>
+          </ul>
+  
+       </div>
+  </ion-slide> 
+
+  <!-- <ion-slide>
+     <div class="trend-container">
+        <ul *ngFor="let item of util.fakeData[0]">
+            <li *ngFor="let ele of item" [class.highlight]="ele.choose">{{ele.number}}</li>
         </ul>
 
      </div>
   </ion-slide>
   <ion-slide>
-     <div>www</div>
+      <div class="trend-container">
+          <ul *ngFor="let item of util.fakeData[1]">
+              <li *ngFor="let ele of item" [class.highlight]="ele.choose">{{ele.number}}</li>
+          </ul>
+  
+       </div>
   </ion-slide>
   <ion-slide>
     <div>eee</div>
   </ion-slide>
   <ion-slide>
     <div>fff</div>
-  </ion-slide>
+  </ion-slide> -->
 </ion-slides>
 </ion-content>

@@ -148,6 +148,11 @@ export class DragDirective {
    touchEnd(e){
       //  $(this.el.nativeElement).animate({left:'0px',top:'0px'},600,() => console.log('finish'))
       $('.move').removeClass('active')
+      if(!this.load.length){
+         $(this.el.nativeElement).animate({left:'0px',top:'0px'},600,() => console.log('finish'))
+         return
+      }
+       
       console.log(this.load)
       let choose, max = 0;
 

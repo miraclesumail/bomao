@@ -14,7 +14,7 @@ export class ScrolldownDirective {
   originY:number;
   prev:any;
 
-  @Input("change") chColor: string;
+  //@Input("change") chColor: string;
 
 
   constructor(private el:ElementRef, private renderer:Renderer,@Attribute('author') public author: string,
@@ -45,7 +45,7 @@ export class ScrolldownDirective {
             })
        }) 
       //this.change.emit('ssssssss')
-      console.log(this.chColor)
+     // console.log(this.chColor)
   }
 
   checkStatus(){

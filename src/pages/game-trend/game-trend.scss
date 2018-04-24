@@ -2,6 +2,7 @@ page-game-trend {
  .segment {
       width: 100%;
       height: 44px;
+      background: #FFF9F5
     }
     .swiper-slide {
       background: #fff;
@@ -10,16 +11,30 @@ page-game-trend {
 
     ion-slides {
     background-color: white;
-    
-    div{color:blue};
+    padding: 0 0 20px 0;
+    // div{color:blue};
   }
  
-  .highlight{background: pink}
+  .highlight{background: pink;z-index:5}
 
   canvas{position: absolute;top:0;left:0}
 
-  ion-segment-button.segment-activated{
-      border-bottom: 5px solid #488aff;
-
+  .segment-ios ion-segment-button.segment-activated{
+      border-bottom: 3px solid #F6374E;
   }
+
+  .segment-ios .segment-button.segment-activated{color:#F6374E}
+  .segment-ios .segment-button{border:none}
+
+  .trend-container ul{display:flex;padding:0 20px 0 20px;justify-content:space-between}
+  .trend-container li{margin-bottom:25px;width:28px;height:28px;border-radius:50%;line-height: 28px}
+
+  ion-slides div.kai-jiang{display: flex;color:#666}
+  ion-slides div.kai-jiang div{font-size: 15px;background: #DEE2FF;padding: 5px 0 5px 0}
+  ion-slides div.kai-jiang-line{display: flex;padding: 5px 0 5px 0}
+  ion-slides div.kai-jiang-line:nth-of-type(2n+1){background: #FFFAF7}
+
+  
+
+
 }

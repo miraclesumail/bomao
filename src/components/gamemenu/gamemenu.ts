@@ -3,7 +3,7 @@ import { Nav} from 'ionic-angular';
 import { trigger ,state,transition,animate,style} from "@angular/animations";
 import { CommonProvider } from "../../providers/common/common";
 import { LhcServiceProvider } from '../../providers/lhc-service/lhc-service'
-
+import { UtilProvider } from '../../providers/util/util'
 import * as $ from 'jquery';
 
 /**
@@ -61,7 +61,7 @@ export class GamemenuComponent {
 
   bigIndex:number;
 
-  constructor(public common:CommonProvider, public nav:Nav, public lhc:LhcServiceProvider) {
+  constructor(public common:CommonProvider, public nav:Nav, public lhc:LhcServiceProvider, public util:UtilProvider) {
     console.log('Hello GamemenuComponent Component');
     let self = this;
     // $(document).on('click','.body-bg',function(){
@@ -78,8 +78,7 @@ export class GamemenuComponent {
 
   ngAfterViewInit(){
     console.log('ddwd')
-    console.log(this.nav.getActive().name)
-    
+    console.log(this.nav.getActive().name)  
   }
 
   // changeMethod(name){
@@ -104,13 +103,16 @@ export class GamemenuComponent {
         console.log(this.lhc.gameSort)
         this.common.visible = 'invisable';
         this.lhc.resetData()
+        this.util.setData()
         $('.body-bg').fadeOut(1000)
      }
-        
+    console.log('dddddd')
+    
   }
 
   setSmallIndex(j,name){
       this.common.setGameConfig(this.bigIndex,j,name)
+      this.util.setData()
       this.common.visible = 'invisable';
       $('.body-bg').fadeOut(1000)
       console.log(name)

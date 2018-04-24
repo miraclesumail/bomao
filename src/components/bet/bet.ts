@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavParams } from 'ionic-angular';
+import { NavParams, ViewController } from 'ionic-angular';
 /**
  * Generated class for the BetComponent component.
  *
@@ -16,9 +16,11 @@ export class BetComponent {
   yuan:any = {};
   choosen:string;
   betOrder:any ={};
-  price:number = 0;
+  price:number;
   total:number = 0
   count:number;
+
+  has:any=true
   // get price(){
   //     return this.yuan[this.choosen]
   // }
@@ -29,7 +31,7 @@ export class BetComponent {
   //     this.yuan[this.choosen] = val 
   // }
 
-  constructor(public params: NavParams) {
+  constructor(public params: NavParams, public viewCtrl:ViewController) {
     console.log('Hello BetComponent Component');
     this.betInfo = this.params.get('data')
     this.choosen = this.betInfo[0].name
@@ -63,5 +65,9 @@ export class BetComponent {
     this.choosen = aa.name;
     console.log(this.choosen)
     console.log(this.yuan)
+  }
+
+  close(){
+      this.viewCtrl.dismiss()
   }
 }

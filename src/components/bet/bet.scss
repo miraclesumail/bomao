@@ -1,5 +1,7 @@
 bet {
     padding-top: 10px;
     
-   
+    ul.method-choice li{float:left;width:30%;margin-right: 5%;background: #f0f0f0;margin-bottom:10px;text-align:center}
+    ul.method-choice li:nth-of-type(3n){margin-right:0}
+    
 }

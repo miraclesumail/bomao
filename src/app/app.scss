@@ -56,11 +56,11 @@ ion-slides{padding: 20px 0 20px 0;height: auto}
 @media only screen and (min-width: 150px){
     .modal-wrapper {
       left: calc(50% - (240px/2));
-      top: calc(50% - (240px/2));
+      top: calc(50% - (200px/2));
       position: absolute;
       width: 240px;
-      height: 240px;
-      background: yellowgreen;
+      height: 200px;
+      background: #ffffff;
       border-radius: 8px;
     }
 

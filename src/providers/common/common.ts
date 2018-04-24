@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {BehaviorSubject} from "rxjs/BehaviorSubject";
 import { HttpClientProvider } from "../http-client/http-client";
+
 import * as $ from 'jquery'
 import { Subject } from 'rxjs/Subject';
 import { Events } from 'ionic-angular';
@@ -191,10 +192,6 @@ export class CommonProvider {
   openTab(){
     console.log('asss')
     this.tabVisible = 'visible'
-  }
-
-  change(val){
-    console.log(val)
   }
 
   toggle(){

@@ -7,7 +7,7 @@
       <div (click)="$event.stopPropagation();common.open = !common.open" style="float:right;margin-right:25px;background:url('/assets/imgs/games/toggle.png') center center no-repeat;width:21px;height:21px"></div>
     </ion-navbar>
 </ion-header>
-<rightmenu [menus]="menus" (switch)="common.change($event)" [open]="common.open"></rightmenu>
+<rightmenu [menus]="menus" (switch)="change($event)" [open]="common.open"></rightmenu>
 
   <ion-content padding>
         <ng-template #alertContainer></ng-template>
@@ -36,6 +36,11 @@
             <ion-segment-button  value="快捷投注">快捷投注</ion-segment-button>
             <ion-segment-button  value="自选投注">自选投注</ion-segment-button>
     </ion-segment>
+
+    <div style="display:flex;align-items:center">
+         <img src="/assets/imgs/games/shuomin.png" alt="">
+         <span>{{lhc.statements[lhc.gameSort]}}</span>
+    </div>
 
     <div *ngIf="lhc.gameSort == '半波'">
             <ion-segment class="bo-choose" [(ngModel)]="lhc.banbo" (ionChange)="lhc.changeBanbo($event)" style="margin-bottom:10px">
@@ -110,9 +115,11 @@
             <div [ngSwitch]="lhc.methodChoose">  
                     <div *ngSwitchCase="'快捷投注'" style="background:#ffffff;padding:8px">
                         
-                            <ul *ngFor="let ii of [0,1,2,3]" style="display:flex;justify-content:space-between">
-                                    <li *ngFor="let item of lhc.zongfenData.slice(ii*2, (ii+1)*2)" style="width:45%;height:50px;background:#f0f0f0">
-                                          {{item.kind}}
+                            <ul *ngFor="let ii of [0,1,2,3]" style="display:flex;justify-content:space-between;margin-bottom:10px">
+                                    <li class="zongfen" *ngFor="let item of lhc.zongfenData.slice(ii*2, (ii+1)*2)" style="width:47%;padding:5px;background:#f0f0f0;">
+                                          <div style="color:#f63a50">赔率*{{item.betNum}}</div>
+                                          <div style="color:#333333;font-size:20px">{{item.kind}}</div>
+                                          <div style="color:#666666;font-size:12px">{{item.des}}</div>
                                     </li>
                             </ul> 
                          

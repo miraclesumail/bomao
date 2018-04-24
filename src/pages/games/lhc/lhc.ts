@@ -126,6 +126,12 @@ export class LhcPage extends Effect{
     contactModal.present()
   }
 
+  change(val){
+    console.log(val)
+    if(val == '走势图')
+      this.navCtrl.push('GameTrendPage')
+  }
+
   newBet(){
      let data:Array<any> = []
      if(this.lhc.gameSort == '半波'){

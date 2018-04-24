@@ -9,7 +9,7 @@
   </ion-navbar>
 </ion-header>
 
-<rightmenu [menus]="menus" (switch)="common.change($event)" [open]="common.open"></rightmenu>
+<rightmenu [menus]="menus" (switch)="change($event)" [open]="common.open"></rightmenu>
 <gamemenu> </gamemenu>    
 <div class="body-bg"></div>
 
@@ -34,7 +34,7 @@
       <!-- <button id="qq" [style.display]="over ? 'none' : 'block' "style="width:20%;height:50px;margin:0 auto;text-align:center;border:1px solid blue;">more</button> -->
    </div>
    
-   <div class="inner-content" scrolldown [change]="'jjjjjj'" author="author" style="position:absolute;top:18px;left:16px;width:calc(100% - 32px);background:#f0f0f0;">
+   <div class="inner-content" scrolldown  author="author" style="position:absolute;top:18px;left:16px;width:calc(100% - 32px);background:#f0f0f0;">
      <div id="off" class="none" >收起</div>  
     <div style="text-align:center">
         距下一期开奖 <span>{{common.countTime.minutes}}</span>:<span>{{common.countTime.seconds}}</span>

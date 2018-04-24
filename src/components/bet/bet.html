@@ -6,11 +6,20 @@
   <div><input type="text" [ngModel]="price" (ngModelChange)="valueChange($event)" >元</div>
   <div>{{betOrder.number}}注共 {{betOrder.total}}元</div>-->
   <div >
-    <ul style="min-height:60px">
-      <li *ngFor="let aa of betInfo"  style="width:30%;float:left;margin-left:3%;text-align:center;border:1px solid pink;margin-bottom:10px">{{aa.name}}</li>
-   </ul>
+    <ul style="min-height:40px;width:92%;margin:0 auto" class="method-choice">
+      <li *ngFor="let aa of betInfo">{{aa.name}}</li>
+    </ul>
   </div>
    
-  <div style="margin:0 auto;background:#f0f0f0;width:200px"><input type="text" [ngModel]="price" (ngModelChange)="calculate($event)" placeholder="输入购买金额">元</div>
-  <div style="margin:10px auto;width:100%;background:pink">{{count}}注共 {{total}}元</div>
+  <div style="margin:0 auto;background:#f0f0f0;width:92%;padding:5px"><input type="text" [ngModel]="price" (ngModelChange)="calculate($event)" placeholder="输入购买金额">
+    <span style="float:right">元</span>
+  </div>
+
+  <div *ngIf="total" style="margin:10px auto;width:100%;background:pink">{{count}}注共 {{total}}元</div>
+  <div>余额:198元</div>
+
+  <div style="width:100%;border-top:1px solid #f0f0f0;height:30px;margin:10px auto">
+       <div style="text-align:center;width:49%;display:inline-block;border-right:1px solid #f0f0f0" (click)="close()">取消</div>
+       <div style="text-align:center;width:49%;display:inline-block">下注</div>
+  </div>
 </div>

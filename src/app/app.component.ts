@@ -9,7 +9,7 @@ import { TabsPage } from '../pages/tabs/tabs';
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = 'MoreLotteryPage';
+  rootPage:any = TabsPage;
   theme:any;
 
   constructor(public platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, public common:CommonProvider) {

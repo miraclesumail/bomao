@@ -5,7 +5,6 @@ import { IonicSwipeAllModule } from 'ionic-swipe-all';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
 import { PipesModule } from '../pipes/pipes.module'
 import { LoadingComponent } from '../components/loading/loading';
-
 import { AlertComponent } from '../components/alert/alert'
 
 // ngmodel 绑定
@@ -42,6 +41,7 @@ import { LhcServiceProvider } from '../providers/lhc-service/lhc-service';
     BetComponent,
     AlertComponent,
     LoadingComponent
+
   ],
   imports: [
     BrowserModule,
