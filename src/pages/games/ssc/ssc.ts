@@ -57,8 +57,9 @@ function easeOutCubic(t, b, c, d) {
   templateUrl: 'ssc.html',
   providers:[GamemenuComponent]
 })
-export class SscPage{
+export class SscPage extends Effect{
   data:any;
+  high:number = 0
 
   shadow:boolean = true
   author:string='fwwwgwg';
@@ -74,8 +75,14 @@ export class SscPage{
     {number:23057,balls:'12345',shiwei:'大单',gewei:'小双',housan:'组六'},
     {number:23056,balls:'34567',shiwei:'大单',gewei:'小双',housan:'组六'},
     {number:23057,balls:'12345',shiwei:'大单',gewei:'小双',housan:'组六'},
+    {number:23056,balls:'34567',shiwei:'大单',gewei:'小双',housan:'组六'},
+    {number:23057,balls:'12345',shiwei:'大单',gewei:'小双',housan:'组六'},
     {number:23056,balls:'34567',shiwei:'大单',gewei:'小双',housan:'组六'}
   ]
+
+  loadNumber:any = 0
+  list:any = []
+
   menus:any =  ['走势图','近期开奖','号码统计','玩法说明']
   over:boolean = false;
   open:boolean = false;
@@ -85,9 +92,9 @@ export class SscPage{
   */
 
   constructor(public navCtrl: NavController,public common:CommonProvider,public http:HttpClientProvider,public util:UtilProvider,public basket:BasketDataProvider,public gamemenu:GamemenuComponent) {
-      //super(common,gamemenu)
+      super(common,gamemenu)
       this.common.setActiveTheme('ssc')
-    
+      this.list = this.record.slice(0,2)
       this.util.shakePhone(this.util.randomChoose)
       document.body.addEventListener('click',(e)=>{
          
@@ -101,14 +108,55 @@ export class SscPage{
   }
 
   ionViewDidLoad(){
-    // console.log(document.getElementById('qq'))
-    // let mc = new Hammer(document.getElementById('qq'));
-    // mc.get('swipe').set({ direction: Hammer.DIRECTION_VERTICAL });
-    // mc.on('swipedown',()=>{
-    //   console.log('axiba')
-    //   this.record.push( {number:23056,balls:'34567',shiwei:'大单',gewei:'小双',housan:'组六'})
-    //   this.over = true
-    // })
+    console.log(document.getElementById('qq'))
+    let mc = new Hammer(document.getElementById('qq'));
+    mc.get('swipe').set({ direction: Hammer.DIRECTION_VERTICAL });
+    mc.on('swipedown',()=>{
+      console.log('axiba')
+      //this.record.push( {number:23056,balls:'34567',shiwei:'大单',gewei:'小双',housan:'组六'})
+      if(++this.loadNumber == 2)
+         this.over = true
+      
+      if(this.loadNumber == 1)
+         this.high = 90
+
+      if(this.loadNumber == 2)
+         this.high = 240
+
+      this.list = this.record.slice(0, this.loadNumber*5)
+    
+    })
+
+    let touch = new Hammer(document.getElementById('touch'));
+    touch.get('swipe').set({ direction: Hammer.DIRECTION_VERTICAL });
+    touch.on('swipeup',()=>{
+       if(this.loadNumber == 2){
+        this.loadNumber = 0
+        this.over = false
+        this.high = 0
+
+
+       setTimeout(()=> {
+        let mc = new Hammer(document.getElementById('qq'));
+        mc.get('swipe').set({ direction: Hammer.DIRECTION_VERTICAL });
+        mc.on('swipedown',()=>{
+          console.log('axiba')
+          //this.record.push( {number:23056,balls:'34567',shiwei:'大单',gewei:'小双',housan:'组六'})
+        
+           //this.record.push( {number:23056,balls:'34567',shiwei:'大单',gewei:'小双',housan:'组六'})
+          if(++this.loadNumber == 2)
+              this.over = true
+          
+          if(this.loadNumber == 1)
+              this.high = 60
+
+          if(this.loadNumber == 2)
+              this.high = 160
+        })
+      },0)
+       }
+
+     })
   }
 
   move(){

@@ -6,6 +6,8 @@ import { LazyLoadImageModule } from 'ng-lazyload-image';
 import { PipesModule } from '../pipes/pipes.module'
 import { LoadingComponent } from '../components/loading/loading';
 import { AlertComponent } from '../components/alert/alert'
+import { WuxingComponent } from '../components/gametrend/wuxing/wuxing'
+import { SixingComponent } from '../components/gametrend/sixing/sixing'
 
 // ngmodel 绑定
 import { FormsModule } from '@angular/forms';
@@ -40,8 +42,9 @@ import { LhcServiceProvider } from '../providers/lhc-service/lhc-service';
     TabsPage,
     BetComponent,
     AlertComponent,
-    LoadingComponent
-
+    LoadingComponent,
+    WuxingComponent,
+    SixingComponent
   ],
   imports: [
     BrowserModule,
@@ -65,7 +68,9 @@ import { LhcServiceProvider } from '../providers/lhc-service/lhc-service';
     TabsPage,
     BetComponent,
     AlertComponent,
-    LoadingComponent
+    LoadingComponent,
+    WuxingComponent,
+    SixingComponent
   ],
   providers: [
     StatusBar,

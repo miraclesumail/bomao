@@ -59,7 +59,7 @@ export class CommonProvider {
     {name:"全",flag:false},{name:"大",flag:false},{name:"小",flag:false},{name:"奇",flag:false},{name:"偶",flag:false},{name:"清",flag:false}
   ]
 
-  constructor(public http: HttpClientProvider, public events:Events, public global:GlobalShareProvider, public lhc:LhcServiceProvider) {
+  constructor(public http: HttpClientProvider,public events:Events, public global:GlobalShareProvider, public lhc:LhcServiceProvider) {
     console.log('Hello CommonProvider Provider');
     this.theme = new BehaviorSubject(false);
     this.produce()
@@ -182,8 +182,12 @@ export class CommonProvider {
     console.log(index)
     console.log(name)
     this.bigIndex = index
-    if(this.method != this.gameMethodConfig[index].name)
-       this.observer.next('')
+    if(this.method != this.gameMethodConfig[index].name){
+      // console.log('method change')
+      // this.observer.next('change')
+      this.events.publish('changeTrend')
+    }
+       
     this.method = this.gameMethodConfig[index].name
     
     this.small = this.gameMethodConfig[0].children

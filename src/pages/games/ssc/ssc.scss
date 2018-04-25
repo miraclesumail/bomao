@@ -1,4 +1,13 @@
-.qwe div{display: inline-block}
+.history-number,.history-record{display: flex;padding: 5px 0 5px 0}
+
+.history-number div{text-align: center}
+
+.history-record li{text-align: center}
+
+.shakePhone{background: url('/assets/imgs/games/shake.png') no-repeat;width:110px;height:30px}
+
+.history-record:nth-of-type(2n){background: #FFF9F5}
+.history-record:nth-of-type(2n+1){background: #ffffff}
 
 #bet-statistic{width:calc(100% - 232px);position:relative;display:flex;background:#f0f0f0}
 .balls-data{display:flex;justify-content:space-between;margin-bottom: 20px}

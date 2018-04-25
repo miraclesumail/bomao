@@ -16,7 +16,7 @@ export class UtilProvider {
   trendKind = {
      '五星':['万位走势','千位走势','百位走势','十位走势','个位走势'],
      '四星':['万位走势','千位走势','百位走势','十位走势'],
-     '三星':['万位走势','千位走势','百位走势']
+     '前三':['万位走势','千位走势','百位走势']
   }
 
   menus: Array<string> 
@@ -39,6 +39,8 @@ export class UtilProvider {
   //五星玩法
   wuxingData = []
 
+  sixingData = []
+
   fakeTrend:Array<any> = [[5,3,9,8,6,2,9,1,8,6,4],[7,3,6,5,3,2,8,3,5,6,9],[7,3,6,5,3,2,8,3,5,6,9],[5,8,9,1,2,4,5,7,8,3,2],[7,5,5,3,2,4,5,6,8,1,6]]
   fakeData:any = {}
 
@@ -59,7 +61,35 @@ export class UtilProvider {
         return {...ele, sum,gap, daxiao, oddeven}
     })
 
+    this.sixingData = this.historyNumbers.map((ele,index) => {
+      // let sum = ele.history.reduce((l,r) => l+r)
+      // let max = Math.max(...ele.history)
+      // let min = Math.min(...ele.history)
+      // let gap = max - min
+      // let da = ele.history.filter(el => el >= 5).length
+      // let daxiao = da + ':' + (5 - da)
+      // let odd = ele.history.filter(el => el%2 != 0).length
+      // let oddeven = odd + ':' + (5 -odd)
+      let qianwei,baiwei,shiwei,gewei;
+      qianwei = this.judgeKind(ele.history[1])
+      baiwei = this.judgeKind(ele.history[2])
+      shiwei = this.judgeKind(ele.history[3])
+      gewei = this.judgeKind(ele.history[4])
+      return {...ele, qianwei, baiwei, shiwei, gewei}
+  })
+
     this.generateFake()
+  }
+
+  judgeKind(number){
+     if(number%2 == 0 && number >=5)
+        return '大双'
+     if(number%2 == 0 && number < 5)
+        return '小双'
+     if(number%2 != 0 && number >= 5)
+        return '大单'
+     if(number%2 != 0 && number < 5)
+        return '小单'
   }
 
   setData(){
@@ -67,10 +97,12 @@ export class UtilProvider {
     console.log(this.common.method);
 
     this.menus = ['开奖']
-    this.trendKind[this.common.method].forEach(ele => {
-      this.menus.push(ele)
-    })
-    this.choose = this.menus[0]
+    if(this.common.method){
+      this.trendKind[this.common.method].forEach(ele => {
+        this.menus.push(ele)
+      })
+      this.choose = this.menus[0]
+    }   
   }
 
   generateFake(){

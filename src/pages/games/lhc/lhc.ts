@@ -92,7 +92,7 @@ export class LhcPage extends Effect{
   hasChoose:any = [];
   menus:any =  ['走势图','近期开奖','玩法说明']
   constructor(public navCtrl: NavController, public common:CommonProvider, public lhc:LhcServiceProvider,public http:HttpClientProvider,public modalCtrl: ModalController,public gamemenu:GamemenuComponent, public factoryResolver:ComponentFactoryResolver) {
-      super(common,gamemenu,factoryResolver)
+      super(common,gamemenu)
       this.common.setActiveTheme('lhc');
       //this.initData();
       this.kinds = this.allData.map(item => Object.keys(item));

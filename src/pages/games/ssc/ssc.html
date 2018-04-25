@@ -13,7 +13,7 @@
 <gamemenu> </gamemenu>    
 <div class="body-bg"></div>
 
-<ion-content padding>
+<ion-content>
   <!-- <div [ngSwitch]="content">
        <div *ngSwitchCase="history">
          
@@ -22,27 +22,32 @@
            
        </div> 
   </div> -->
-  
-  <div class="qwe" [class.shadow]="shadow">
-      <div style="width:22%;">期次</div><div style="width:30%">开奖号码</div>
-      <div style="width:13%">十位</div><div style="width:13%">个位</div><div style="width:13%">后三</div>
-      
-      <ul *ngFor="let item of record">
-         <li>{{item.number}}</li><li>{{item.balls}}</li><li>{{item.shiwei}}</li><li>{{item.gewei}}</li><li>{{item.housan}}</li>
-      </ul>
- 
-      <!-- <button id="qq" [style.display]="over ? 'none' : 'block' "style="width:20%;height:50px;margin:0 auto;text-align:center;border:1px solid blue;">more</button> -->
-   </div>
-   
-   <div class="inner-content" scrolldown  author="author" style="position:absolute;top:18px;left:16px;width:calc(100% - 32px);background:#f0f0f0;">
-     <div id="off" class="none" >收起</div>  
-    <div style="text-align:center">
+  <div style="text-align:center;border-bottom:1px solid #f0f0f0">
         距下一期开奖 <span>{{common.countTime.minutes}}</span>:<span>{{common.countTime.seconds}}</span>
     </div>
-
+  
+  <div [class.shadow]="shadow" id="touch" [ngStyle]="{'height':(90 + high) + 'px'}" style="box-shadow:0 1px 2px 0 #B6B6B6;overflow:hidden;margin-bottom:10px;transition:all .5s ease-in">
+      <div class="history-number">
+            <div style="width:22%;">期次</div><div style="width:30%">开奖号码</div>
+            <div style="width:16%">十位</div><div style="width:16%">个位</div><div style="width:16%">后三</div>
+      </div>
+            
+      
+      <ul class="history-record" *ngFor="let item of list" (click)="goToTrend()">
+         <li style="width:22%;">{{item.number}}</li> <li style="width:30%">{{item.balls}}</li>
+         <li style="width:16%">{{item.shiwei}}</li> <li style="width:16%">{{item.gewei}}</li><li style="width:16%">{{item.housan}}</li>
+      </ul>
+   
+      <!-- <button id="qq" [style.display]="over ? 'none' : 'block' "style="width:20%;height:50px;margin:0 auto;text-align:center;border:1px solid blue;">more</button> -->
+   </div>
+   <div *ngIf="over" style="margin:0 auto;text-align:center"><img src="/assets/imgs/games/notice.png" alt=""> 点击以上开奖号码可以查看更多</div>
+   <div id="qq" *ngIf="!over" style="margin:0 auto;width:50px;height:30px;border-radius:5px;text-align:center;border:1px solid #666">load more</div>
+   
+   <div class="shakePhone"></div>
+   <div class="inner-content" scrolldown  author="author" style="width:100%;background:#f0f0f0;">
+     <div id="off" class="none" >收起</div>  
     
-    <div (click)="goToTrend()">摇一摇选号</div>
-    <div *ngFor="let data of common.ballData;let ii = index" style="display:flex;margin-top:20px">
+    <div *ngFor="let data of common.ballData;let ii = index" style="display:flex;padding:10px">
         <div style="width:20%">
               {{data.key}}
         </div>

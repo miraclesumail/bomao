@@ -10,7 +10,7 @@ import { LoadingComponent } from '../components/loading/loading'
 export class Effect{
  
 
-    constructor(public common:CommonProvider, public gamemenu:GamemenuComponent,public factoryResolver:ComponentFactoryResolver){
+    constructor(public common:CommonProvider, public gamemenu:GamemenuComponent){
          let self = this;
          $(document).on('click','.body-bg',function(){
          if(self.common.visible = 'visable'){
