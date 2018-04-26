@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CommonProvider } from '../common/common'
 import {Observable} from 'rxjs/Observable';
-
+import { Events } from 'ionic-angular';
 /*
   Generated class for the UtilProvider provider.
 
@@ -41,14 +41,15 @@ export class UtilProvider {
 
   sixingData = []
 
+  qiansanData = []
+
   fakeTrend:Array<any> = [[5,3,9,8,6,2,9,1,8,6,4],[7,3,6,5,3,2,8,3,5,6,9],[7,3,6,5,3,2,8,3,5,6,9],[5,8,9,1,2,4,5,7,8,3,2],[7,5,5,3,2,4,5,6,8,1,6]]
   fakeData:any = {}
 
   
-  constructor(public http: HttpClient,public common:CommonProvider) {
+  constructor(public http: HttpClient,public common:CommonProvider, public events:Events) {
     console.log('Hello UtilProvider Provider');
-    this.setData()
-
+  
     this.wuxingData = this.historyNumbers.map((ele,index) => {
         let sum = ele.history.reduce((l,r) => l+r)
         let max = Math.max(...ele.history)
@@ -62,20 +63,21 @@ export class UtilProvider {
     })
 
     this.sixingData = this.historyNumbers.map((ele,index) => {
-      // let sum = ele.history.reduce((l,r) => l+r)
-      // let max = Math.max(...ele.history)
-      // let min = Math.min(...ele.history)
-      // let gap = max - min
-      // let da = ele.history.filter(el => el >= 5).length
-      // let daxiao = da + ':' + (5 - da)
-      // let odd = ele.history.filter(el => el%2 != 0).length
-      // let oddeven = odd + ':' + (5 -odd)
       let qianwei,baiwei,shiwei,gewei;
       qianwei = this.judgeKind(ele.history[1])
       baiwei = this.judgeKind(ele.history[2])
       shiwei = this.judgeKind(ele.history[3])
       gewei = this.judgeKind(ele.history[4])
       return {...ele, qianwei, baiwei, shiwei, gewei}
+  })
+
+    this.qiansanData = this.historyNumbers.map((ele,index) => {
+      let wanwei,qianwei,baiwei,xingtai;
+      wanwei = this.judgeKind(ele.history[0])
+      qianwei = this.judgeKind(ele.history[1])
+      baiwei = this.judgeKind(ele.history[2])
+      xingtai = ['豹子', '组六', '组三'][Math.floor(Math.random()*3)]
+      return {...ele, wanwei, qianwei, baiwei, xingtai}
   })
 
     this.generateFake()
@@ -111,6 +113,7 @@ export class UtilProvider {
       let arr = []
       for(let i = 1; i<=tempData.length; i++){
         let inner = []
+       // inner.push({number:this.historyNumbers[i-1].number, choose:false})
         for(let j = 0; j<=9;j++){
             if(j == tempData[i-1]){
                inner.push({number:tempData[i-1], choose:true})
@@ -126,8 +129,13 @@ export class UtilProvider {
                }
             }  
         }  
+        
         arr.push(inner)
        }
+       for(let i=0;i<arr.length;i++){
+           arr[i].unshift({number:this.historyNumbers[i].number, choose:false})
+       }
+
        console.log(this.deal(k))
        console.log(arr)
       // this.fakeData.push({[this.deal(k)]:arr})

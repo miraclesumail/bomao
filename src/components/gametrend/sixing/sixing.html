@@ -1,16 +1,16 @@
 <!-- Generated template for the SixingComponent component -->
 <div>
     <div class="kai-jiang">
-        <div style="width:12.5%">期号</div><div style="width:37.5%">开奖号码</div><div style="width:12.5%">千位</div><div style="width:12.5%">百位</div>
-        <div style="width:12.5%">十位</div><div style="width:12.5%">个位</div>
+        <div >期号</div><div >开奖号码</div><div >千位</div><div >百位</div>
+        <div >十位</div><div >个位</div>
      </div>
 
      <div *ngFor ="let item of historyRecord" class="kai-jiang-line">
-          <div style="width:12.5%">{{item.number}}</div>
-          <div style="width:37.5%"><span *ngFor="let aa of item.history">{{aa}}</span></div>
-          <div style="width:12.5%">{{item.qianwei}}</div>
-          <div style="width:12.5%">{{item.baiwei}}</div>
-          <div style="width:12.5%">{{item.shiwei}}</div>
-          <div style="width:12.5%">{{item.gewei}}</div>
+          <div >{{item.number}}</div>
+          <div ><span *ngFor="let aa of item.history">{{aa}}</span></div>
+          <div >{{item.qianwei}}</div>
+          <div >{{item.baiwei}}</div>
+          <div >{{item.shiwei}}</div>
+          <div >{{item.gewei}}</div>
      </div>
 </div>  

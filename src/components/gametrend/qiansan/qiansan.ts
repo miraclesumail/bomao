@@ -12,11 +12,11 @@ import { Component } from '@angular/core';
 })
 export class QiansanComponent {
 
-  text: string;
+  historyRecord: any;
 
   constructor() {
     console.log('Hello QiansanComponent Component');
-    this.text = 'Hello World';
+    //this.text = 'Hello World';
   }
 
 }

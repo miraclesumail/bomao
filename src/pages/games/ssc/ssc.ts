@@ -94,6 +94,7 @@ export class SscPage extends Effect{
   constructor(public navCtrl: NavController,public common:CommonProvider,public http:HttpClientProvider,public util:UtilProvider,public basket:BasketDataProvider,public gamemenu:GamemenuComponent) {
       super(common,gamemenu)
       this.common.setActiveTheme('ssc')
+      this.util.setData()
       this.list = this.record.slice(0,2)
       this.util.shakePhone(this.util.randomChoose)
       document.body.addEventListener('click',(e)=>{
@@ -148,10 +149,10 @@ export class SscPage extends Effect{
               this.over = true
           
           if(this.loadNumber == 1)
-              this.high = 60
+              this.high = 90
 
           if(this.loadNumber == 2)
-              this.high = 160
+              this.high = 240
         })
       },0)
        }

@@ -6,22 +6,21 @@ import { RightmenuComponent } from './rightmenu/rightmenu';
 import { GamemenuComponent } from './gamemenu/gamemenu';
 import { TabYuanComponent } from './tab-yuan/tab-yuan';
 import { AaaComponent } from './aaa/aaa';
-import { QiansanComponent } from './qiansan/qiansan';
 @NgModule({
 	declarations: [
     RightmenuComponent,
     GamemenuComponent,
     TabYuanComponent,
-    AaaComponent,
-    QiansanComponent
+    AaaComponent
+   
     ],
 	imports: [CommonModule],
 	exports: [
     RightmenuComponent,
     GamemenuComponent,
     TabYuanComponent,
-    AaaComponent,
-    QiansanComponent
+    AaaComponent
+   
     ]
 })
 export class ComponentsModule {}

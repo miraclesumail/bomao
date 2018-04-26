@@ -1,4 +1,16 @@
 <!-- Generated template for the QiansanComponent component -->
 <div>
-  {{text}}
-</div>
+    <div class="kai-jiang">
+        <div >期号</div><div >开奖号码</div><div >万位</div><div >千位</div>
+        <div >百位</div><div >前三形态</div>
+     </div>
+
+     <div *ngFor ="let item of historyRecord" class="kai-jiang-line">
+          <div >{{item.number}}</div>
+          <div ><span *ngFor="let aa of item.history">{{aa}}</span></div>
+          <div >{{item.wanwei}}</div>
+          <div >{{item.qianwei}}</div>
+          <div >{{item.baiwei}}</div>
+          <div >{{item.xingtai}}</div>
+     </div>
+</div> 

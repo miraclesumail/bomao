@@ -8,7 +8,8 @@ import { LoadingComponent } from '../components/loading/loading';
 import { AlertComponent } from '../components/alert/alert'
 import { WuxingComponent } from '../components/gametrend/wuxing/wuxing'
 import { SixingComponent } from '../components/gametrend/sixing/sixing'
-
+import { QiansanComponent } from '../components/gametrend/qiansan/qiansan'
+import { TrendHeadComponent } from '../components/gametrend/trend-head/trend-head'
 // ngmodel 绑定
 import { FormsModule } from '@angular/forms';
 import { MyApp } from './app.component';
@@ -44,7 +45,9 @@ import { LhcServiceProvider } from '../providers/lhc-service/lhc-service';
     AlertComponent,
     LoadingComponent,
     WuxingComponent,
-    SixingComponent
+    SixingComponent,
+    QiansanComponent
+    
   ],
   imports: [
     BrowserModule,
@@ -70,7 +73,9 @@ import { LhcServiceProvider } from '../providers/lhc-service/lhc-service';
     AlertComponent,
     LoadingComponent,
     WuxingComponent,
-    SixingComponent
+    SixingComponent,
+    QiansanComponent,
+    //TrendHeadComponent
   ],
   providers: [
     StatusBar,

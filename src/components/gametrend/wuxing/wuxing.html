@@ -1,16 +1,16 @@
 <!-- Generated template for the WuxingComponent component -->
  <div>
             <div class="kai-jiang">
-                <div style="width:12.5%">期号</div><div style="width:37.5%">开奖号码</div><div style="width:12.5%">和值</div><div style="width:12.5%">跨度</div>
-                <div style="width:12.5%">大小比</div><div style="width:12.5%">奇偶比</div>
+                <div >期号</div><div >开奖号码</div><div >和值</div><div >跨度</div>
+                <div >大小比</div><div >奇偶比</div>
              </div>
    
              <div *ngFor ="let item of historyRecord" class="kai-jiang-line">
-                  <div style="width:12.5%">{{item.number}}</div>
-                  <div style="width:37.5%"><span *ngFor="let aa of item.history">{{aa}}</span></div>
-                  <div style="width:12.5%">{{item.sum}}</div>
-                  <div style="width:12.5%">{{item.gap}}</div>
-                  <div style="width:12.5%">{{item.daxiao}}</div>
-                  <div style="width:12.5%">{{item.oddeven}}</div>
+                  <div >{{item.number}}</div>
+                  <div ><span *ngFor="let aa of item.history">{{aa}}</span></div>
+                  <div >{{item.sum}}</div>
+                  <div >{{item.gap}}</div>
+                  <div >{{item.daxiao}}</div>
+                  <div >{{item.oddeven}}</div>
              </div>
 </div>   

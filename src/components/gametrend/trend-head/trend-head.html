@@ -1,0 +1,6 @@
+<!-- Generated template for the TrendHeadComponent component -->
+<div class="segment">
+    <ion-segment [(ngModel)]="util.choose" (ionChange)="ionChange($event)">
+      <ion-segment-button *ngFor="let name of util.menus;let ii = index" value="{{name}}">{{name}}</ion-segment-button>  
+    </ion-segment>
+</div>

@@ -71,6 +71,7 @@ export class CommonProvider {
 
     this.pid.subscribe((val:any) =>{
       this.initData(val);
+
       this.record = this.mockData()
       
       
@@ -161,7 +162,6 @@ export class CommonProvider {
     this.method = this.gameMethodConfig[0].name;
     this.bigIndex = 0
     
-    console.log('wcnm')
     if(this.small.length)
        this.smallMethod = this.small[0].children[0].name;
     //this.changeMethod(this.data.list[0].name);

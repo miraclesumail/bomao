@@ -8,6 +8,8 @@ import { UtilProvider } from '../../providers/util/util'
 import { Events } from 'ionic-angular';
 import { WuxingComponent } from '../../components/gametrend/wuxing/wuxing'
 import { SixingComponent } from '../../components/gametrend/sixing/sixing'
+import { QiansanComponent } from '../../components/gametrend/qiansan/qiansan'
+import { TrendHeadComponent } from '../../components/gametrend/trend-head/trend-head'
 declare let Swiper:any;
 
 /**
@@ -27,6 +29,7 @@ export class GameTrendPage {
   swiper:any;
   @ViewChild('contentSlides') contentSlides: Slides;
   @ViewChild("alertContainer", { read: ViewContainerRef }) container: ViewContainerRef;
+  @ViewChild("headContainer", { read: ViewContainerRef }) head: ViewContainerRef;
 
   // menus: Array<string> ;
   // choose:string;
@@ -40,14 +43,10 @@ export class GameTrendPage {
           },0)
      })
 
-
-    //  this.common.observable.subscribe((data) => {
-         
-         
-    //  })
+     this.events.subscribe('changeIndex', (val) => {
+          this.segmentChanged(val)
+     })
   }
-
-
 
   ionViewWillEnter(){
       this.drawTrend() 
@@ -56,6 +55,10 @@ export class GameTrendPage {
 
   drawTrend(){
       this.container.clear()
+      this.head.clear()
+      const factory: ComponentFactory<TrendHeadComponent> = this.resolver.resolveComponentFactory(TrendHeadComponent)
+      this.componentRef = this.head.createComponent(factory)
+
       if(this.common.method == '五星'){
         const factory: ComponentFactory<WuxingComponent> = this.resolver.resolveComponentFactory(WuxingComponent)
         this.componentRef = this.container.createComponent(factory)
@@ -67,6 +70,13 @@ export class GameTrendPage {
         const factory: ComponentFactory<SixingComponent> = this.resolver.resolveComponentFactory(SixingComponent)
         this.componentRef = this.container.createComponent(factory)
         this.componentRef.instance.historyRecord = this.util.sixingData
+      }
+
+      if(this.common.method == '前三'){
+        this.container.clear()
+        const factory: ComponentFactory<QiansanComponent> = this.resolver.resolveComponentFactory(QiansanComponent)
+        this.componentRef = this.container.createComponent(factory)
+        this.componentRef.instance.historyRecord = this.util.qiansanData
       }
 
    
@@ -99,11 +109,7 @@ export class GameTrendPage {
   ionViewWillLeave(){
      
   }
-
-  // selectPageMenu($event, index) {
-  //   this.contentSlides.slideTo(index);
-  // }
-
+  
   segmentChanged($event){
     console.log('wcnmb')
     console.log($event.value)
