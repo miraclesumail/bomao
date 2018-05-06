@@ -39,6 +39,10 @@ export class CommonProvider {
   smallMethod:string;
   small:any;
   bigIndex:number;
+  
+  //gametrend  zhixuan zuxuan
+  zhixuan:boolean = true
+
   visible:string = 'invisable';
 
   ballData = [];
@@ -170,6 +174,7 @@ export class CommonProvider {
     console.log(this.btn)
   }
 
+  // xiao wan fa qiehuan
   setGameConfig(index,index2,name){
     if(this.bigIndex!=index || name!=this.smallMethod){
       this.ballData = this.copy(this.gameMethodConfig[index].children[index2].children.filter(ele => ele.name == name)[0].bet_numberArrObj, true)
@@ -181,6 +186,14 @@ export class CommonProvider {
     }
     console.log(index)
     console.log(name)
+
+    console.log(this.gameMethodConfig[index].children[index2].name)
+
+    if(this.gameMethodConfig[index].children[index2].name == '直选')
+       this.zhixuan = true
+    else
+       this.zhixuan = false   
+
     this.bigIndex = index
     if(this.method != this.gameMethodConfig[index].name){
       // console.log('method change')

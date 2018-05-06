@@ -14,7 +14,11 @@ page-game-trend {
     padding: 0 0 20px 0;
     // div{color:blue};
   }
- 
+ ion-infinite-scroll-content {height:20px;min-height: 20px}
+
+ ion-slides {
+  min-height: 100%;}
+
   .highlight{background: pink;z-index:5}
 
   canvas{position: absolute;top:0;left:0}
@@ -44,4 +48,6 @@ page-game-trend {
 
   ul.ball-line{background: #ffffff}
   ul.ball-line:nth-of-type(2n){background: #FFFAF7}
+
+  #confirm.active{background: pink}
 }

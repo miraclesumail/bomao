@@ -33,6 +33,7 @@ import { GlobalShareProvider } from '../providers/global-share/global-share';
 import { LoginServiceProvider } from '../providers/login-service/login-service';
 import { HomeServiceProvider } from '../providers/home-service/home-service';
 import { LhcServiceProvider } from '../providers/lhc-service/lhc-service';
+import { SscServiceProvider } from '../providers/ssc-service/ssc-service';
 
 @NgModule({
   declarations: [
@@ -88,7 +89,8 @@ import { LhcServiceProvider } from '../providers/lhc-service/lhc-service';
     GlobalShareProvider,
     LoginServiceProvider,
     HomeServiceProvider,
-    LhcServiceProvider
+    LhcServiceProvider,
+    SscServiceProvider
   ]
 })
 export class AppModule {}

@@ -3,6 +3,9 @@ import { Injectable } from '@angular/core';
 import { CommonProvider } from '../common/common'
 import {Observable} from 'rxjs/Observable';
 import { Events } from 'ionic-angular';
+
+import {observe} from "../../tools/observe";
+let _ = new observe();
 /*
   Generated class for the UtilProvider provider.
 
@@ -33,6 +36,28 @@ export class UtilProvider {
     {number:'08期', history:[4,5,7,1,5]},
     {number:'09期', history:[3,5,6,8,2]},
     {number:'10期', history:[7,5,3,9,3]},
+    {number:'11期', history:[6,5,5,1,4]},
+    {number:'01期', history:[5,7,7,5,7]},
+    {number:'02期', history:[3,3,3,8,5]},
+    {number:'03期', history:[9,6,6,9,5]},
+    {number:'04期', history:[6,3,3,2,2]},
+    {number:'05期', history:[8,5,5,1,3]},
+    {number:'06期', history:[2,2,2,4,4]},
+    {number:'07期', history:[9,8,3,5,7]},
+    {number:'08期', history:[4,5,7,1,5]},
+    {number:'09期', history:[3,5,6,8,2]},
+    {number:'10期', history:[7,5,3,9,3]},
+    {number:'11期', history:[6,5,5,1,4]},
+    {number:'01期', history:[5,7,7,5,7]},
+    {number:'02期', history:[3,3,3,8,5]},
+    {number:'03期', history:[9,6,6,9,5]},
+    {number:'04期', history:[6,3,3,2,2]},
+    {number:'05期', history:[8,5,5,1,3]},
+    {number:'06期', history:[2,2,2,4,4]},
+    {number:'07期', history:[9,8,3,5,7]},
+    {number:'08期', history:[4,5,7,1,5]},
+    {number:'09期', history:[3,5,6,8,2]},
+    {number:'10期', history:[7,5,3,9,3]},
     {number:'11期', history:[6,5,5,1,4]}
   ]
 
@@ -44,23 +69,28 @@ export class UtilProvider {
   qiansanData = []
 
   fakeTrend:Array<any> = [[5,3,9,8,6,2,9,1,8,6,4],[7,3,6,5,3,2,8,3,5,6,9],[7,3,6,5,3,2,8,3,5,6,9],[5,8,9,1,2,4,5,7,8,3,2],[7,5,5,3,2,4,5,6,8,1,6]]
+  fakeTrend1:Array<any> = [[5,3,9,8,6,2,9,1,8,6,4],[7,3,6,5,3,2,8,3,5,6,9],[7,3,6,5,3,2,8,3,5,6,9],[5,8,9,1,2,4,5,7,8,3,2],[7,5,5,3,2,4,5,6,8,1,6]]
   fakeData:any = {}
 
   
   constructor(public http: HttpClient,public common:CommonProvider, public events:Events) {
     console.log('Hello UtilProvider Provider');
-  
-    this.wuxingData = this.historyNumbers.map((ele,index) => {
-        let sum = ele.history.reduce((l,r) => l+r)
-        let max = Math.max(...ele.history)
-        let min = Math.min(...ele.history)
-        let gap = max - min
-        let da = ele.history.filter(el => el >= 5).length
-        let daxiao = da + ':' + (5 - da)
-        let odd = ele.history.filter(el => el%2 != 0).length
-        let oddeven = odd + ':' + (5 -odd)
-        return {...ele, sum,gap, daxiao, oddeven}
+
+   // _.observe(this.historyNumbers,()=> this.generateFake())
+    this.events.subscribe('changeHistory',(val) => {
+        console.log(this.historyNumbers)
+        if(val > 3) return
+       // this.fakeTrend.push(...this.fakeTrend1)
+        this.fakeTrend = this.fakeTrend.map((item,index) => {
+            let temp = item.concat(this.fakeTrend1[index])
+            console.log(temp)
+            return temp
+        })
+        console.log(this.fakeTrend)
+        this.generateFake()
     })
+
+  
 
     this.sixingData = this.historyNumbers.map((ele,index) => {
       let qianwei,baiwei,shiwei,gewei;
@@ -107,7 +137,9 @@ export class UtilProvider {
     }   
   }
 
+  // produce data for canvas trend
   generateFake(){
+    console.log('fake')
     for(let k = 0; k<this.fakeTrend.length;k++){
       let tempData = this.fakeTrend[k]
       let arr = []
@@ -132,6 +164,9 @@ export class UtilProvider {
         
         arr.push(inner)
        }
+       console.log(arr)
+
+
        for(let i=0;i<arr.length;i++){
            arr[i].unshift({number:this.historyNumbers[i].number, choose:false})
        }

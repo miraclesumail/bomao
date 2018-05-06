@@ -1,7 +1,7 @@
 import {
   Component, ViewChild, ViewContainerRef, ComponentFactory,
   ComponentRef, ComponentFactoryResolver, OnDestroy
-} from '@angular/core';import { NavController,IonicPage, App} from 'ionic-angular';
+} from '@angular/core';import { NavController,ToastController,IonicPage, App} from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import {Observable} from 'rxjs/Observable';
 import { CommonProvider } from "../../providers/common/common";
@@ -74,12 +74,19 @@ export class HomePage {
   }
 
 
-  constructor(public navCtrl: NavController,public storage: Storage, public common:CommonProvider, public app:App, private resolver: ComponentFactoryResolver) {
+  constructor(public navCtrl: NavController,public storage: Storage, public common:CommonProvider, public app:App, private resolver: ComponentFactoryResolver,public toastCtrl:ToastController) {
      this.updateLate()
      console.log(Swiper)
      this.lottery = this.lotterys[Math.floor(Math.random()*this.lotterys.length)]
      //$('body').append('<audio id="betsvoice1"><source src="/assets/betsvoice.mp3" type="audio/mpeg"/></audio>')
     
+     let toast = this.toastCtrl.create({
+         message: '<div>User was added successfully</div><div>User was added successfully</div> ',
+         duration: 3000,
+         position: 'middle'
+     })
+     toast.present()
+
     var speed = 15;    // 用来判定的加速度阈值，太大了则很难触发
     var x, y, z, lastX, lastY, lastZ;
     x = y = z = lastX = lastY = lastZ = 0;

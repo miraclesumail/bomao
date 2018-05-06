@@ -1,11 +1,21 @@
 <!-- Generated template for the WuxingComponent component -->
- <div>
+<div class="segment">
+    <ion-segment [(ngModel)]="choose" (ionChange)="ionChange($event)">
+      <ion-segment-button *ngFor="let name of menus;let ii = index" value="{{name}}">{{name}}</ion-segment-button>  
+    </ion-segment>
+</div>
+
+<ion-slides #contentSlides (ionSlideDidChange)="slideChanged()">
+
+  <ion-slide>
+        <!--<ng-template #alertContainer></ng-template>-->
+        <div>
             <div class="kai-jiang">
                 <div >期号</div><div >开奖号码</div><div >和值</div><div >跨度</div>
                 <div >大小比</div><div >奇偶比</div>
              </div>
    
-             <div *ngFor ="let item of historyRecord" class="kai-jiang-line">
+             <div *ngFor ="let item of kaijiangData" class="kai-jiang-line">
                   <div >{{item.number}}</div>
                   <div ><span *ngFor="let aa of item.history">{{aa}}</span></div>
                   <div >{{item.sum}}</div>
@@ -13,4 +23,67 @@
                   <div >{{item.daxiao}}</div>
                   <div >{{item.oddeven}}</div>
              </div>
-</div>   
+
+              <ion-infinite-scroll *ngIf="!finish" (ionInfinite)="doInfinite($event)" immediate-check="false" >
+            <ion-infinite-scroll-content
+                loadingSpinner="bubbles"
+                loadingText="加载更多。。。。">
+            </ion-infinite-scroll-content>
+          </ion-infinite-scroll>
+       </div>   
+  </ion-slide>  
+
+  <ion-slide *ngFor="let ii of util.trendKind[common.method];let i = index " style="min-height:100%">
+      <div class="trend-container">
+          <ul style="display:flex">
+              <li class="head-num" style="width:17%">期号</li>
+              <li class="head-num" style="width:8.5%">0</li>
+              <li class="head-num" style="width:8.5%">1</li>
+              <li class="head-num" style="width:8.5%">2</li>
+              <li class="head-num" style="width:8.5%">3</li>
+              <li class="head-num" style="width:8.5%">4</li>
+              <li class="head-num" style="width:8.5%">5</li>
+              <li class="head-num" style="width:8.5%">6</li>
+              <li class="head-num" style="width:8.5%">7</li>
+              <li class="head-num" style="width:8.5%">8</li>
+              <li class="head-num" style="width:8.5%">9</li>
+          </ul>
+          <ul *ngFor="let item of util.fakeData[ii]" class="ball-line">
+              <li *ngFor="let ele of item.slice(0,1)" style="line-height:30px;font-size:15px">
+                  {{ele.number}}
+               </li>
+              <li *ngFor="let ele of item.slice(1)" style="display:flex;align-items:center;justify-content:center;border-left:1px solid #f0f0f0">
+                 <span [class.highlight]="ele.choose" style="width:20px;height:20px;border-radius:50%;text-align:center;line-height:20px"> {{ele.number}}</span>
+              </li>
+          </ul>
+            </div>
+       <ion-infinite-scroll  (ionInfinite)="doInfinite($event)" immediate-check="false" >
+            <ion-infinite-scroll-content
+                loadingSpinner="bubbles"
+                loadingText="加载更多。。。。">
+            </ion-infinite-scroll-content>
+          </ion-infinite-scroll>
+      
+            <ul style="bottom:0" style="display:flex" *ngIf="common.zhixuan">
+                <li class="head-num" style="width:17%">{{ii}}</li>
+                <li class="head-num" style="width:8.5%" [ngStyle]="item == 1? {'background':'pink'} : '' " *ngFor="let item of common.ballData[i].value;let j=index" (click)="toggle(i,j)">
+                    {{item}}
+                </li>
+            </ul>
+
+            <div style="bottom:0" *ngIf="!common.zhixuan">
+                <ul style="display:flex" *ngFor="let item of common.ballData;let row=index">
+                    <li class="head-num" style="width:17%">{{item.key}}</li>
+                    <li class="head-num" style="width:8.5%" [ngStyle]="item == 1? {'background':'pink'} : '' " *ngFor="let item of item.value;let column=index" (click)="toggle(row,column)">
+                        {{item}}
+                    </li>
+                </ul>
+            </div>
+  </ion-slide> 
+</ion-slides>
+
+
+
+
+
+ 
