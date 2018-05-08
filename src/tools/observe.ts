@@ -334,3 +334,40 @@ export class observe {
     _.extend(this, _);
   }
 }
+
+/**
+ * Created by sumail on 2018/5/7.
+ */
+var total = []
+function qwe(m,n,b){
+    // var total = []
+    //var copy = m
+    if(n == 0){
+        //console.log(b)
+        //total.push(b)
+        var qq = b.reduce(function(a,b){
+            return a + b
+        })
+        if(qq == 8)
+           total.push(b)
+        return
+
+    }
+
+    for(var i = 0;i<=m;i++){
+        var arr = [i]
+
+        qwe(m-i,n-1,arr.concat(b))
+
+    }
+
+   // return total
+}
+[[3,4,5],[1,2,3],[3,4,5],[2,3,4],[5,6,7]]
+
+
+qwe(8,4,[])
+console.log(total)
+
+
+
