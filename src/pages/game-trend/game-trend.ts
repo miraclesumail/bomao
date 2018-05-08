@@ -59,7 +59,7 @@ export class GameTrendPage {
 
      this.events.subscribe('changeTrend',(val) => {
           setTimeout(() => {
-         
+            console.log('wcnnvmfmf')
             this.drawTrend()
 
           },0)
@@ -132,28 +132,18 @@ export class GameTrendPage {
   drawTrend(){
       this.container.clear()
       this.observer.next(this.create(this.common.method))
-       
-        //this.componentRef.instance.historyRecord = this.util.wuxingData
-
       
-
       // if(this.common.method == '四星'){
       //   this.container.clear()
       //   const factory: ComponentFactory<SixingComponent> = this.resolver.resolveComponentFactory(SixingComponent)
       //   this.componentRef = this.container.createComponent(factory)
       //   this.componentRef.instance.historyRecord = this.util.sixingData
       // }
-
-      // if(this.common.method == '前三'){
-      //   this.container.clear()
-      //   const factory: ComponentFactory<QiansanComponent> = this.resolver.resolveComponentFactory(QiansanComponent)
-      //   this.componentRef = this.container.createComponent(factory)
-      //   this.componentRef.instance.historyRecord = this.util.qiansanData
-      // }
-
   }
 
-  
+  goBasket(){
+    this.navCtrl.push('BasketPage',{qq:this.componentRef})
+  }
 
   getCtxColor(i){
      switch(this.util.trendKind[this.common.method][i]) {

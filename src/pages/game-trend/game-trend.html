@@ -72,7 +72,8 @@
 </ion-slides>-->
   <div style="position:fixed;bottom:0;z-index:100;background:pink;display:flex;justify-content:space-between;width:100%">
        <div>距下期开奖还剩12s</div>
+        <div (click)="goBasket()">go</div>
+
        <div style="width:80px;height:30px" id="confirm" [class.active]="common.count > 0" (click)="goSsc()">确定</div>
   </div>
-
 </ion-content>

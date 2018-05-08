@@ -24,6 +24,10 @@ export class BasketPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public basket:BasketDataProvider, public common:CommonProvider, public viewCtrl:ViewController) {
            this.viewCtrl.willLeave.subscribe(data => console.log(data))
+
+           if(this.navParams.get('qq')){
+              this.navParams.get('qq').instance.say()
+           }
   }
 
   ionViewDidLoad() {

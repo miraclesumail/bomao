@@ -6,7 +6,7 @@ import { UtilProvider } from '../../../providers/util/util'
 import { GamemenuComponent } from '../../../components/gamemenu/gamemenu'
 import { BasketDataProvider } from '../../../providers/basket-data/basket-data'
 import { Effect } from '../../baseComponent'
-
+import { config } from '../../../components/gameTrend.config'
 import * as $ from 'jquery'
 import * as Hammer from 'hammerjs';
 
@@ -105,7 +105,30 @@ export class SscPage extends Effect{
           this.open = !this.open
           console.log('ddff')
       },false)
-      
+       
+      //  setTimeout(()=>{
+      //      console.log(config['五星'])
+      //  },1000)
+  }
+
+  static changeToggle(row,column){
+      console.log('wcnmbg')
+      this.common.ballData = this.common.ballData.map((item,index) => {
+           if(index == row){
+               item.value = item.value.map((ele,index) => {
+                    if(index == column){
+                       return ele == 1 ? 0 : 1
+                    }else{
+                       return ele
+                    }
+               })
+               return item
+           }else{
+               return item
+           }
+      })  
+
+      this.common.calculate()
   }
 
   ionViewDidLoad(){

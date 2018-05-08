@@ -53,11 +53,11 @@
         </div>
         <div style="width:80%">
               <ul class="balls-data">
-                  <li *ngFor="let item of data.value.slice(0,5);let i = index" [class.active]="item == 1" (touchstart)="util.changeToggle(ii,i)">{{i}}</li>
+                  <li *ngFor="let item of data.value.slice(0,5);let i = index" [class.active]="item == 1" (touchstart)="changeToggle(ii,i)">{{i}}</li>
               </ul>
 
               <ul class="balls-data">
-                  <li *ngFor="let item of data.value.slice(-5);let i = index" [class.active]="item == 1" (touchstart)="util.changeToggle(ii,i+5)">{{qqq(i)}}</li>
+                  <li *ngFor="let item of data.value.slice(-5);let i = index" [class.active]="item == 1" (touchstart)="changeToggle(ii,i+5)">{{qqq(i)}}</li>
               </ul>
               <ul class="choose-kind">
                   <li *ngFor="let detail of common.btn[ii];let j = index" [class.active]="detail.flag" style="margin-right:30px" (touchstart)="util.changeActive(ii,j,detail.name)">{{detail.name}}</li>

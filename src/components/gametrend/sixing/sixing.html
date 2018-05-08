@@ -14,7 +14,7 @@
                 <div >十位</div><div >个位</div>
             </div>
 
-            <div *ngFor ="let item of historyRecord" class="kai-jiang-line">
+            <div *ngFor ="let item of kaijiangData" class="kai-jiang-line">
                 <div >{{item.number}}</div>
                 <div ><span *ngFor="let aa of item.history">{{aa}}</span></div>
                 <div >{{item.qianwei}}</div>

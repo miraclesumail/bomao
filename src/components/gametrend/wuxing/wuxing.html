@@ -57,7 +57,7 @@
               </li>
           </ul>
             </div>
-       <ion-infinite-scroll  (ionInfinite)="doInfinite($event)" immediate-check="false" >
+       <ion-infinite-scroll  *ngIf="!finish" (ionInfinite)="doInfinite($event)" immediate-check="false" >
             <ion-infinite-scroll-content
                 loadingSpinner="bubbles"
                 loadingText="加载更多。。。。">

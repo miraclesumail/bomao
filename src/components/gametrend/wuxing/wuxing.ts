@@ -4,7 +4,7 @@ import { CommonProvider } from "../../../providers/common/common";
 import { SscServiceProvider } from "../../../providers/ssc-service/ssc-service"
 import { Slides } from 'ionic-angular';
 import { Events } from 'ionic-angular';
-
+import { baseTrend} from '../baseTrend'
 /**
  * Generated class for the WuxingComponent component.
  *
@@ -15,7 +15,7 @@ import { Events } from 'ionic-angular';
   selector: 'wuxing',
   templateUrl: 'wuxing.html'
 })
-export class WuxingComponent {
+export class WuxingComponent extends baseTrend{
   @ViewChild('contentSlides') contentSlides: Slides;
   @Output() output = new EventEmitter();
 
@@ -34,10 +34,10 @@ export class WuxingComponent {
   finish:boolean = false
 
   constructor(public common:CommonProvider,public util:UtilProvider, public ssc:SscServiceProvider, public event:Events) {
+    super(util)
     console.log('Hello WuxingComponent Component');
-    this.historyRecord = this.util.historyNumbers.slice(0,this.page*11)
-    //this.text = 'Hello World';
-    this.getKaijiang()
+    // this.historyRecord = this.util.historyNumbers.slice(0,this.page*11)
+    // this.getKaijiang()
   }
 
   //huoqu kaijiang
@@ -55,16 +55,16 @@ export class WuxingComponent {
     })
   }
 
-  ionChange($event){
-     console.log('wcnmb')
-     console.log($event.value)
-     this.contentSlides.slideTo(this.menus.indexOf($event.value))
-  }
+  // ionChange($event){
+  //    console.log('wcnmb')
+  //    console.log($event.value)
+  //    this.contentSlides.slideTo(this.menus.indexOf($event.value))
+  // }
    
-  slideChanged(){
-      let index = this.contentSlides.getActiveIndex()
-      this.choose = this.menus[index]
-  }
+  // slideChanged(){
+  //     let index = this.contentSlides.getActiveIndex()
+  //     this.choose = this.menus[index]
+  // }
 
   doInfinite(infiniteScroll){
     if(this.load ) {
@@ -104,7 +104,7 @@ export class WuxingComponent {
         //     this.finish = true
            
         //  }
-      },1000)
+      },600)
     
    
      
@@ -115,6 +115,9 @@ export class WuxingComponent {
          this.ssc.changeToggle(row,column)
          this.ssc.wuxingfushi()
   }
-
+  
+  say(){
+    console.log('wuxing')
+  }
 
 }
