@@ -392,4 +392,42 @@ export class UtilProvider {
         lastY = y;
     }, false);
   }
+
+//   let asd = [[3,4,5],[5,6,7],[2,2,3],[4,5,6]]
+// let totals = []
+// function check(arr,num){
+//    let total = 0
+//    for(let i =0;i<arr.length;i++){
+//         if(arr[i] == num)
+//            total++
+//    }
+//    return total
+// }
+
+
+
+// for(let i =0;i<asd.length;i++){
+//     let arr = []
+//     for(let j =0;j<=9;j++){
+//         if(check(asd[i],j)){
+//           arr.push({number:j,choose:check(asd[i],j)})
+
+//         }else{
+//            if(i == 0 ){
+//                  arr.push({number:1,choose:0})
+//              }else{
+//                  if(totals[i-1][j].choose > 0){
+//                     arr.push({number:1,choose:0})
+//                  }else{
+//                     arr.push({number:totals[i-1][j].number + 1, choose:0})
+
+//                  }
+                 
+//               }
+
+//         }
+// }   
+//    totals.push(arr)
+
+// }
 }

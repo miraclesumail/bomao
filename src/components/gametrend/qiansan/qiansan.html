@@ -1,4 +1,14 @@
 <!-- Generated template for the QiansanComponent component -->
+<div class="segment">
+    <ion-segment [(ngModel)]="choose" (ionChange)="ionChange($event)">
+      <ion-segment-button *ngFor="let name of menus;let ii = index" value="{{name}}">{{name}}</ion-segment-button>  
+    </ion-segment>
+</div>
+
+<ion-slides #contentSlides (ionSlideDidChange)="slideChanged()">
+
+</ion-slides>    
+
 <div>
     <div class="kai-jiang">
         <div >期号</div><div >开奖号码</div><div >万位</div><div >千位</div>
