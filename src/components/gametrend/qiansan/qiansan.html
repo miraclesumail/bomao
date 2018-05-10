@@ -1,15 +1,34 @@
 <!-- Generated template for the QiansanComponent component -->
 <div class="segment">
-    <ion-segment [(ngModel)]="choose" (ionChange)="ionChange($event)">
+    <ion-segment [(ngModel)]="choose" >
       <ion-segment-button *ngFor="let name of menus;let ii = index" value="{{name}}">{{name}}</ion-segment-button>  
     </ion-segment>
 </div>
 
-<ion-slides #contentSlides (ionSlideDidChange)="slideChanged()">
+<ion-slides #contentSlides >
+    <ion-slide>
+         <div style="display:flex;width:255%" >
+             <div style="width:6.7%;height:100px;position:relative;line-height:30px;z-index:100;">期号</div>
 
+            <div style="width:93.3%;position:relative;overflow:hidden">
+                   <ul #drag class="head-part" style="width:100%;position:relative" [ngStyle]="{'transform': 'translateX(' + gap + 'px)'}">
+                 <li *ngFor="let item of numbers" style="width:3.57%;height:100px;line-height:100px;display:inline-block">{{item}}</li>
+             </ul>
+
+
+            </div>
+
+            
+         </div>
+    </ion-slide>
+
+
+    <ion-slide>
+         <div>qtwtreyere</div>
+    </ion-slide>
 </ion-slides>    
 
-<div>
+<!--<div>
     <div class="kai-jiang">
         <div >期号</div><div >开奖号码</div><div >万位</div><div >千位</div>
         <div >百位</div><div >前三形态</div>
@@ -23,4 +42,4 @@
           <div >{{item.baiwei}}</div>
           <div >{{item.xingtai}}</div>
      </div>
-</div> 
+</div> -->
